@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=11819&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国慈善组织合规通 - 一站式慈善合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<div class="container mx-auto px-4 py-8">
+    <nav class="mb-6 text-sm">
+        <a href="/" class="text-gray-500 hover:text-primary">首页</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="/cases/" class="text-gray-500 hover:text-primary">案例库</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="text-neutral">教育类基金会创新资助模式实践与启示</span>
+    </nav>
+    
+    <div class="bg-white rounded-md border border-darkGray overflow-hidden">
+        <div class="relative">
+            <img src="https://picsum.photos/seed/%e6%95%99%e8%82%b2%e7%b1%bb%e5%9f%ba%e9%87%91%e4%bc%9a%e5%88%9b%e6%96%b0%e8%b5%84%e5%8a%a9%e6%a8%a1%e5%bc%8f%e5%ae%9e%e8%b7%b5%e4%b8%8e%e5%90%af%e7%a4%ba/1200/400" alt="教育类基金会创新资助模式实践与启示" class="w-full h-64 md:h-96 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <div class="text-center text-white px-4">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">教育类基金会创新资助模式实践与启示</h1>
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        
+                        
+                        <span class="bg-green-500 text-white text-sm px-3 py-1 rounded-full">合规成功案例</span>
+                        
+                        
+                    </div>
+                    <div class="text-white opacity-90">
+                        <i class="fa fa-calendar mr-2"></i> 2023年06月10日
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6 md:p-10 bg-gradient-to-br from-white to-gray-50">
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8 md:p-10">
+                <h2 id="案例背景">案例背景</h2>
+<p>某教育类基金会自2018年以来，积极探索教育资助新模式，建立了完善的资助评估体系和跟踪机制，确保资助资金使用效益最大化。该基金会的创新实践已成为行业标杆，为其他慈善组织提供了宝贵经验。</p>
+<h2 id="创新实践">创新实践</h2>
+<h3 id="资助评估体系">资助评估体系</h3>
+<ol>
+<li><strong>需求评估</strong>：通过实地调研和数据分析，准确识别教育资助需求</li>
+<li><strong>能力评估</strong>：评估受助对象的自我发展能力，制定个性化资助方案</li>
+<li><strong>效果评估</strong>：建立科学的资助效果评估指标体系，定期评估资助效果</li>
+</ol>
+<h3 id="跟踪机制">跟踪机制</h3>
+<ol>
+<li><strong>过程跟踪</strong>：对资助项目实施全过程跟踪，及时发现问题并调整</li>
+<li><strong>效果跟踪</strong>：对资助效果进行长期跟踪，评估资助的长期影响</li>
+<li><strong>反馈跟踪</strong>：建立受助对象反馈机制，不断改进资助方式</li>
+</ol>
+<h3 id="创新特点">创新特点</h3>
+<ol>
+<li><strong>精准资助</strong>：根据受助对象的实际需求，提供精准化、个性化资助</li>
+<li><strong>全程参与</strong>：从需求识别到效果评估，全程参与资助过程</li>
+<li><strong>多方协同</strong>：联合政府、企业、学校等多方力量，形成资助合力</li>
+</ol>
+<h2 id="成效分析">成效分析</h2>
+<h3 id="资助效益">资助效益</h3>
+<ol>
+<li><strong>资金使用效益</strong>：资助资金使用效益提高30%以上</li>
+<li><strong>受助对象满意度</strong>：受助对象满意度达到95%以上</li>
+<li><strong>社会影响力</strong>：项目社会影响力显著提升，获得社会广泛认可</li>
+</ol>
+<h3 id="管理水平">管理水平</h3>
+<ol>
+<li><strong>规范化程度</strong>：资助管理规范化程度显著提高</li>
+<li><strong>专业化水平</strong>：资助管理专业化水平明显提升</li>
+<li><strong>信息化水平</strong>：资助管理信息化水平大幅提高</li>
+</ol>
+<h2 id="经验启示">经验启示</h2>
+<h3 id="对慈善组织的启示">对慈善组织的启示</h3>
+<ol>
+<li><strong>创新思维</strong>：慈善组织应当具有创新思维，不断探索新的资助模式</li>
+<li><strong>科学管理</strong>：建立科学的资助管理体系，提高资助管理水平</li>
+<li><strong>效果导向</strong>：以资助效果为导向，确保资助资金使用效益最大化</li>
+</ol>
+<h3 id="对行业的借鉴">对行业的借鉴</h3>
+<ol>
+<li><strong>模式创新</strong>：行业组织可以推广创新资助模式，提高行业整体水平</li>
+<li><strong>标准制定</strong>：制定行业标准和规范，引导行业健康发展</li>
+<li><strong>经验分享</strong>：建立经验分享机制，促进行业交流合作</li>
+</ol>
+<h2 id="合规建议">合规建议</h2>
+<ol>
+<li><strong>遵守法律法规</strong>：创新资助模式应当遵守相关法律法规</li>
+<li><strong>加强风险管理</strong>：建立完善的风险管理体系，防范创新风险</li>
+<li><strong>注重信息披露</strong>：加强信息披露，提高组织透明度</li>
+<li><strong>建立评估机制</strong>：建立科学的评估机制，不断改进资助方式</li>
+</ol>
+<h2 id="结语">结语</h2>
+<p>教育资助是慈善组织的重要业务领域，也是促进教育公平的重要手段。慈善组织应当积极探索教育资助新模式，建立科学的资助管理体系，确保资助资金使用效益最大化，为促进教育公平作出更大贡献。</p>
+
+                
+                <div class="mt-10 pt-8 border-t border-darkGray">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold text-neutral">相关案例</h3>
+                        <a href="/cases/" class="text-primary hover:text-red-700 font-medium flex items-center">
+                            查看更多案例 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        
+                        
+                        
+                        <div class="bg-white border border-darkGray rounded-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/66%e5%9f%ba%e9%87%91%e4%bc%9a%e8%bf%9d%e8%a7%84%e5%8b%9f%e6%8d%90%e5%8f%8a%e8%b4%a2%e5%8a%a1%e6%8a%ab%e9%9c%b2%e4%b8%8d%e8%a7%84%e8%8c%83%e6%a1%88%e4%be%8b/600/400" alt="66基金会违规募捐及财务披露不规范案例" class="w-full h-40 object-cover">
+                                
+                                
+                                
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">66基金会违规募捐及财务披露不规范案例</h4>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">2023年8月，某省级慈善基金会因通过互联网平台开展公开募捐活动，未依法取得公开募捐资格，且财务信息披露不完整，被民政部门处以警告并责令整改。此案例为慈善组织募捐活动合规管理提供了重要警示。</p>
+                                <a href="http://localhost:11819/cases/2025-11-19-66%E5%9F%BA%E9%87%91%E4%BC%9A%E8%BF%9D%E8%A7%84%E5%8B%9F%E6%8D%90%E5%8F%8A%E8%B4%A2%E5%8A%A1%E6%8A%AB%E9%9C%B2%E4%B8%8D%E8%A7%84%E8%8C%83%E6%A1%88%E4%BE%8B/" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                    查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-darkGray rounded-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/5%e5%9f%ba%e9%87%91%e4%bc%9a%e8%bf%9d%e8%a7%84%e5%8b%9f%e6%8d%90%e5%8f%8a%e8%b4%a2%e5%8a%a1%e6%8a%ab%e9%9c%b2%e4%b8%8d%e8%a7%84%e8%8c%83%e6%a1%88%e4%be%8b%e5%88%86%e6%9e%90/600/400" alt="5基金会违规募捐及财务披露不规范案例分析" class="w-full h-40 object-cover">
+                                
+                                
+                                
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">5基金会违规募捐及财务披露不规范案例分析</h4>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">5基金会通过互联网平台开展公开募捐活动，未依法取得公开募捐资格，且财务信息披露不完整，被民政部门处以警告并责令整改</p>
+                                <a href="http://localhost:11819/cases/detail-punishment-6/" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                    查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-darkGray rounded-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/charity-program-management/600/400" alt="某慈善基金会项目管理合规案例分析" class="w-full h-40 object-cover">
+                                
+                                
+                                
+                                
+                                
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">某慈善基金会项目管理合规案例分析</h4>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">本案例详细分析了一家慈善基金会如何通过建立健全的项目管理制度，有效规避合规风险，提升项目透明度和社会公信力。</p>
+                                <a href="http://localhost:11819/cases/charity-program-management/" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                    查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-between">
+                    <a href="/cases/" class="inline-flex items-center px-4 py-2 border border-darkGray text-sm font-medium rounded-md text-neutral bg-white hover:bg-gray-50">
+                        <i class="fa fa-arrow-left mr-2"></i> 返回案例列表
+                    </a>
+                    <button onclick="window.print()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-red-700">
+                        <i class="fa fa-print mr-2"></i> 打印案例
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+    }
+    
+     
+    .max-w-4xl.mx-auto {
+        line-height: 1.6;
+        color: #333;
+    }
+    
+     
+    .max-w-4xl.mx-auto h1 {
+        color: #2c3e50;
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    
+    .max-w-4xl.mx-auto h2 {
+        color: #34495e;
+        font-size: 1.8rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1.2rem;
+        font-weight: 600;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 0.5rem;
+    }
+    
+    .max-w-4xl.mx-auto h3 {
+        color: #34495e;
+        font-size: 1.4rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    
+     
+    .max-w-4xl.mx-auto p {
+        margin-bottom: 1.2rem;
+        text-align: justify;
+        color: #555;
+    }
+    
+     
+        .max-w-4xl.mx-auto p:first-of-type {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #444;
+        }
+        
+         
+        .max-w-4xl.mx-auto ul,
+        .max-w-4xl.mx-auto ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .max-w-4xl.mx-auto ul li {
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        
+        .max-w-4xl.mx-auto ul li::before {
+            content: "•";
+            color: #007bff;
+            font-weight: bold;
+            position: absolute;
+            left: -1.2rem;
+            font-size: 1.2em;
+        }
+        
+        .max-w-4xl.mx-auto ol li {
+            margin-bottom: 0.6rem;
+        }
+        
+         
+        .max-w-4xl.mx-auto blockquote {
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            border-left: 4px solid #007bff;
+            background-color: #f8f9fa;
+            font-style: italic;
+            color: #555;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .max-w-4xl.mx-auto blockquote p {
+            margin: 0;
+        }
+        
+         
+        .max-w-4xl.mx-auto table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .max-w-4xl.mx-auto th,
+        .max-w-4xl.mx-auto td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .max-w-4xl.mx-auto th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .max-w-4xl.mx-auto tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .max-w-4xl.mx-auto tr:hover {
+            background-color: #f0f0f0;
+        }
+</style>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    中国慈善组织合规通是专业的慈善组织合规服务平台，致力于为各类慈善组织提供政策解读、合规指导、风险管理等全方位服务，助力慈善事业健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市海淀区中关村南大街5号</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>400-888-9999</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>contact@hegui.org.cn</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP备案号：京ICP备12345678号</li>
+                    <li>公安备案号：京公网安备11010802020123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 中国慈善组织合规通 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

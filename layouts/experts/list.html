@@ -1,0 +1,303 @@
+{{ define "main" }}
+<style>
+    .expert-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .expert-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<div class="bg-primary text-white py-6">
+    <div class="container mx-auto px-4">
+        <h1 class="text-3xl font-bold">专家库</h1>
+        <p class="mt-2">汇聚各领域顶尖专家，提供专业咨询服务</p>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 py-8">
+    <!-- 首席专家 -->
+    <section id="chief-expert" class="mb-12">
+        <div class="border-l-4 border-primary pl-4 mb-6">
+            <h2 class="text-2xl font-semibold text-neutral">首席专家</h2>
+        </div>
+        <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
+                <div class="flex justify-center">
+                    <img src="https://picsum.photos/seed/zhangming/300/400" alt="张明教授" class="w-48 h-48 object-cover rounded-full shadow-md border-4 border-red-600">
+                </div>
+                <div class="md:col-span-2">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-primary">张明 教授</h3>
+                        <span class="bg-primary text-white px-3 py-1 rounded-full text-sm">首席专家</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">清华大学公共管理学院教授，中国慈善法研究中心主任，全国人大常委会法制工作委员会慈善法立法顾问。</p>
+                    <div class="space-y-3">
+                        <div class="flex items-start">
+                            <i class="fa fa-graduation-cap text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-neutral">教育背景</h4>
+                                <p class="text-gray-600 text-sm">北京大学法学博士，哈佛大学访问学者</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-briefcase text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-neutral">专业领域</h4>
+                                <p class="text-gray-600 text-sm">慈善法、非营利组织管理、公益诉讼</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <i class="fa fa-book text-primary mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-neutral">代表著作</h4>
+                                <p class="text-gray-600 text-sm">《中国慈善法研究》《非营利组织法律规制》《公益诉讼理论与实践》</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 法律专家 -->
+    <section id="legal-experts" class="mb-12">
+        <div class="border-l-4 border-primary pl-4 mb-6">
+            <h3 class="text-2xl font-semibold text-neutral">法律专家</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 法律专家1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/legal1/400/400" alt="李明律师" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">李明 律师</h4>
+                        <span class="bg-secondary text-white px-2 py-1 rounded text-xs">法律专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">金杜律师事务所高级合伙人，专注于公益法律服务和慈善组织法律事务。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 慈善组织设立与合规</p>
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 公益捐赠与税收</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 法律专家2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/legal2/400/400" alt="王芳律师" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">王芳 律师</h4>
+                        <span class="bg-secondary text-white px-2 py-1 rounded text-xs">法律专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">德恒律师事务所高级合伙人，前民政部政策法规司副司长。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 非营利组织监管</p>
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 慈善信托</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 法律专家3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/legal3/400/400" alt="赵强律师" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">赵强 律师</h4>
+                        <span class="bg-secondary text-white px-2 py-1 rounded text-xs">法律专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">君合律师事务所合伙人，专注于公益诉讼与法律风险防范。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 公益诉讼</p>
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 法律风险防控</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 法律专家4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/legal4/400/400" alt="陈静律师" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">陈静 律师</h4>
+                        <span class="bg-secondary text-white px-2 py-1 rounded text-xs">法律专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">中伦律师事务所合伙人，慈善税法专家，注册税务师。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 慈善税收</p>
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 财务合规</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 法律专家5 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/legal5/400/400" alt="刘建国律师" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">刘建国 律师</h4>
+                        <span class="bg-secondary text-white px-2 py-1 rounded text-xs">法律专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">环球律师事务所合伙人，国际公益法专家，有丰富的国际NGO合作经验。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 国际公益合作</p>
+                        <p class="text-sm"><i class="fa fa-tag text-secondary mr-2"></i> 境外资金管理</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 查看更多法律专家卡片 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card flex flex-col items-center justify-center p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="w-32 h-32 rounded-full bg-red-100 flex items-center justify-center border-4 border-red-600">
+                        <i class="fa fa-user-plus text-4xl text-red-600"></i>
+                    </div>
+                </div>
+                <h4 class="text-lg font-bold text-neutral mb-3">查看更多法律专家</h4>
+                <p class="text-gray-600 text-sm mb-4">我们还有更多专业法律专家为您提供支持</p>
+                <a href="#" class="inline-block border border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-colors px-6 py-2 rounded-md font-medium">
+                    浏览全部 <i class="fa fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社工专家 -->
+    <section id="social-work-experts" class="mb-12">
+        <div class="border-l-4 border-green-600 pl-4 mb-6">
+            <h3 class="text-2xl font-semibold text-neutral">社工专家</h3>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 社工专家1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/social1/400/400" alt="周敏教授" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">周敏 教授</h4>
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs">社工专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">中国人民大学社会工作系主任，中国社会工作教育协会副会长。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 社会组织管理</p>
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 社会工作评估</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社工专家2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/social2/400/400" alt="吴亮主任" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">吴亮 主任</h4>
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs">社工专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">上海社会工作协会会长，前上海市民政局社会组织管理局局长。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 社会组织培育</p>
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 公益项目管理</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社工专家3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/social3/400/400" alt="郑秀华教授" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">郑秀华 教授</h4>
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs">社工专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">中山大学社会学与人类学学院教授，公益项目评估专家。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 项目评估</p>
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 社会影响力评价</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社工专家4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/social4/400/400" alt="孙大勇博士" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">孙大勇 博士</h4>
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs">社工专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">清华大学公益慈善研究院研究员，专注于慈善筹款策略研究。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 慈善筹款</p>
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 公益营销</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 社工专家5 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card">
+                <div class="flex justify-center pt-6">
+                    <img src="https://picsum.photos/seed/social5/400/400" alt="林小燕总监" class="w-32 h-32 object-cover rounded-full border-4 border-red-600 shadow-lg">
+                </div>
+                <div class="p-6 pt-2">
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="text-lg font-bold text-neutral">林小燕 总监</h4>
+                        <span class="bg-green-600 text-white px-2 py-1 rounded text-xs">社工专家</span>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-4">腾讯公益慈善基金会项目总监，有丰富的互联网公益项目运营经验。</p>
+                    <div class="space-y-2">
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 互联网公益</p>
+                        <p class="text-sm"><i class="fa fa-tag text-green-600 mr-2"></i> 数字化运营</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 查看更多社工专家卡片 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden expert-card flex flex-col items-center justify-center p-6 text-center">
+                <div class="flex justify-center mb-4">
+                    <div class="w-32 h-32 rounded-full bg-green-100 flex items-center justify-center border-4 border-green-600">
+                        <i class="fa fa-user-plus text-4xl text-green-600"></i>
+                    </div>
+                </div>
+                <h4 class="text-lg font-bold text-neutral mb-3">查看更多社工专家</h4>
+                <p class="text-gray-600 text-sm mb-4">我们还有更多专业社工专家为您提供支持</p>
+                <a href="#" class="inline-block border border-green-600 text-green-600 hover:bg-green-600 hover:text-white transition-colors px-6 py-2 rounded-md font-medium">
+                    浏览全部 <i class="fa fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 查看更多按钮点击事件
+    const viewMoreButtons = document.querySelectorAll('a');
+    viewMoreButtons.forEach(button => {
+        if (button.textContent.includes('浏览全部')) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const expertType = this.closest('section').id === 'legal-experts' ? '法律专家' : '社工专家';
+                alert(`更多${expertType}信息正在完善中，敬请期待！`);
+            });
+        }
+    });
+});
+</script>
+{{ end }}

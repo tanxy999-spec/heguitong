@@ -1,0 +1,8 @@
+{
+  "frontMatter.framework": "hugo",
+  "frontMatter.content.rootFolder": "h:\\hugo-site-copy",
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "frontMatter.content.defaultFolder": "content/regulations",
+  "frontMatter.content.filePrefix": "{{date:YYYY-MM-DD}}-"
+}

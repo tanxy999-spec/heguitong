@@ -1,0 +1,206 @@
+{{ define "main" }}
+<style>
+    .timeline-item {
+        position: relative;
+        padding-left: 2rem;
+    }
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.5rem;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 50%;
+        background-color: #C62828;
+    }
+    .timeline-container {
+        border-left: 2px solid #e5e7eb;
+        padding-left: 1rem;
+        margin-left: 0.5rem;
+    }
+</style>
+
+<!-- Banner区域 -->
+<div class="relative bg-primary rounded-md overflow-hidden mb-8">
+    <div class="absolute inset-0 flex items-center justify-center">
+        <img src="https://picsum.photos/seed/about/1200/300" alt="背景" class="w-full h-64 object-cover opacity-20">
+    </div>
+    <div class="relative z-10 p-8 text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">关于我们</h2>
+        <p class="text-white text-opacity-90 max-w-3xl mx-auto">中国慈善组织合规通平台介绍与发展历程</p>
+    </div>
+</div>
+
+<!-- 平台介绍 -->
+<section class="mb-12 bg-white rounded-lg shadow-md p-6">
+    <div class="border-l-4 border-primary pl-4 mb-6">
+        <h3 class="text-2xl font-semibold text-neutral">平台介绍</h3>
+    </div>
+    <div class="prose max-w-none">
+        <p class="text-gray-700 mb-4">中国慈善组织合规通是国内领先的慈善组织合规服务平台，致力于为各类慈善组织、社会组织提供专业的合规指导、政策解读和法律咨询服务。</p>
+        <p class="text-gray-700 mb-4">平台汇集了来自法律、社工、公益等多个领域的顶尖专家，通过整合资源、搭建桥梁，帮助慈善组织更好地理解和遵守相关法律法规，提升组织治理水平和社会公信力。</p>
+        <p class="text-gray-700">我们的愿景是成为中国慈善事业健康发展的重要支撑力量，推动慈善行业规范化、专业化、透明化发展。</p>
+    </div>
+</section>
+
+<!-- 发展历程 -->
+<section class="mb-12 bg-white rounded-lg shadow-md p-6">
+    <div class="border-l-4 border-secondary pl-4 mb-6">
+        <h3 class="text-2xl font-semibold text-neutral">发展历程</h3>
+    </div>
+    <div class="timeline-container space-y-6">
+        <div class="timeline-item">
+            <h4 class="text-lg font-bold text-neutral">2020年 - 平台成立</h4>
+            <p class="text-gray-700">中国慈善组织合规通平台正式成立，致力于为慈善组织提供专业合规服务。</p>
+        </div>
+        <div class="timeline-item">
+            <h4 class="text-lg font-bold text-neutral">2021年 - 专家团队扩充</h4>
+            <p class="text-gray-700">平台专家库建立，吸引了一批来自法律界、学术界和公益领域的顶尖专家加入。</p>
+        </div>
+        <div class="timeline-item">
+            <h4 class="text-lg font-bold text-neutral">2022年 - 服务体系完善</h4>
+            <p class="text-gray-700">建立了完整的合规服务体系，包括法规政策解读、合规指南编写、培训课程开发等。</p>
+        </div>
+        <div class="timeline-item">
+            <h4 class="text-lg font-bold text-neutral">2023年 - 案例库上线</h4>
+            <p class="text-gray-700">典型案例库正式上线，为慈善组织提供参考学习的实践案例。</p>
+        </div>
+        <div class="timeline-item">
+            <h4 class="text-lg font-bold text-neutral">2024年 - 线上咨询服务启动</h4>
+            <p class="text-gray-700">推出专家一对一在线咨询服务，为慈善组织提供更便捷的专业支持。</p>
+        </div>
+    </div>
+</section>
+
+<!-- 核心优势 -->
+<section class="mb-12">
+    <div class="border-l-4 border-primary pl-4 mb-6">
+        <h3 class="text-2xl font-semibold text-neutral">核心优势</h3>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 优势卡片1 -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+            <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                <i class="fa fa-users text-3xl text-primary"></i>
+            </div>
+            <h4 class="text-xl font-bold text-neutral mb-3">专家团队</h4>
+            <p class="text-gray-600">汇聚法律、社工、财务等多领域专家，提供专业、全面的合规指导。</p>
+        </div>
+        
+        <!-- 优势卡片2 -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+            <div class="w-16 h-16 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                <i class="fa fa-book text-3xl text-secondary"></i>
+            </div>
+            <h4 class="text-xl font-bold text-neutral mb-3">资源丰富</h4>
+            <p class="text-gray-600">拥有完善的法规库、案例库和知识库，为组织提供全方位的参考资源。</p>
+        </div>
+        
+        <!-- 优势卡片3 -->
+        <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+            <div class="w-16 h-16 bg-green-600 bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                <i class="fa fa-handshake-o text-3xl text-green-600"></i>
+            </div>
+            <h4 class="text-xl font-bold text-neutral mb-3">专业服务</h4>
+            <p class="text-gray-600">提供个性化的合规解决方案，助力慈善组织健康、可持续发展。</p>
+        </div>
+    </div>
+</section>
+
+<!-- 联系方式 -->
+<section class="mb-12 bg-white rounded-lg shadow-md p-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- 左侧联系方式 -->
+        <div>
+            <div class="border-l-4 border-secondary pl-4 mb-6">
+                <h3 class="text-2xl font-semibold text-neutral">联系方式</h3>
+            </div>
+            <ul class="space-y-4">
+                <li class="flex items-start">
+                    <i class="fa fa-map-marker text-primary mt-1 mr-4 text-xl"></i>
+                    <div>
+                        <h5 class="font-semibold text-neutral">办公地址</h5>
+                        <p class="text-gray-600">北京市朝阳区建国路88号慈善大厦15层</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fa fa-phone text-primary mt-1 mr-4 text-xl"></i>
+                    <div>
+                        <h5 class="font-semibold text-neutral">联系电话</h5>
+                        <p class="text-gray-600">400-888-9999</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fa fa-envelope text-primary mt-1 mr-4 text-xl"></i>
+                    <div>
+                        <h5 class="font-semibold text-neutral">电子邮箱</h5>
+                        <p class="text-gray-600">contact@charity-compliance.cn</p>
+                    </div>
+                </li>
+                <li class="flex items-start">
+                    <i class="fa fa-clock-o text-primary mt-1 mr-4 text-xl"></i>
+                    <div>
+                        <h5 class="font-semibold text-neutral">工作时间</h5>
+                        <p class="text-gray-600">周一至周五 9:00-17:30</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="mt-8">
+                <h5 class="font-semibold text-neutral mb-4">关注我们</h5>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300">
+                        <i class="fa fa-weixin"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300">
+                        <i class="fa fa-weibo"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-red-700 transition-colors duration-300">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧留言咨询 -->
+        <div>
+            <div class="border-l-4 border-secondary pl-4 mb-6">
+                <h3 class="text-2xl font-semibold text-neutral">留言咨询</h3>
+            </div>
+            <div class="border border-gray-200 rounded-lg p-6">
+                <form id="contactForm">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 mb-2">姓名</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-gray-700 mb-2">邮箱</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label for="subject" class="block text-gray-700 mb-2">主题</label>
+                        <input type="text" id="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="block text-gray-700 mb-2">留言内容</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-red-700 transition-colors duration-300">
+                        提交留言
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 表单提交处理
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('留言已提交，感谢您的咨询！');
+        this.reset();
+    });
+});
+</script>
+{{ end }}

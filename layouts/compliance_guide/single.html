@@ -1,0 +1,220 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/styles.css">
+<!-- 面包屑导航 -->
+<div class="breadcrumb bg-lightGray py-3 px-4 mb-0">
+    <div class="container mx-auto">
+        <a href="/" class="text-gray-600 hover:text-primary transition-colors duration-300">首页</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <a href="/compliance_guide/" class="text-gray-600 hover:text-primary transition-colors duration-300">合规指南</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <span class="text-gray-900">{{ .Title }}</span>
+    </div>
+</div>
+
+<!-- 页面头部区域 - 增强视觉吸引力 -->
+<div class="guide-header bg-gradient-to-r from-primary/90 to-primary text-white py-12 md:py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">{{ .Title }}</h1>
+            <p class="text-white/90 text-lg md:text-xl mb-6">{{ .Description }}</p>
+            <!-- 日期信息已移除，保留在frontmatter中但不在页面显示 -->
+        </div>
+    </div>
+</div>
+
+<!-- 主要内容区域 - 修改为通栏布局 -->
+<main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- 文章内容 - 增强阅读体验 -->
+        <article class="guide-content bg-white rounded-lg shadow-md p-6 md:p-8 mb-8 transform transition-all duration-300 hover:shadow-lg">
+            <!-- 内容目录 - 提升导航体验 -->
+            <div class="toc-container mb-8 bg-lightGray rounded-lg p-4 md:p-6">
+                <h3 class="text-lg font-semibold text-neutral mb-3 flex items-center">
+                    <i class="fa fa-list-ul mr-2 text-primary"></i>
+                    目录
+                </h3>
+                <nav class="toc">
+                    {{ .TableOfContents }}
+                </nav>
+            </div>
+            
+            <!-- 内容样式优化 -->
+            <div class="content-body">
+                {{ .Content }}
+            </div>
+            
+            <!-- 文章尾部装饰 -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="flex justify-center">
+                    <span class="text-primary text-2xl">
+                        <i class="fa fa-check-circle"></i>
+                    </span>
+                </div>
+            </div>
+        </article>
+        
+        <!-- 相关指南推荐 - 提升设计感 -->
+        {{ if gt (len (where (where .Site.RegularPages "Section" "compliance_guide") "Title" "!=" .Title)) 0 }}
+        <section class="related-guides bg-gradient-to-r from-lightGray to-white rounded-xl p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+                <i class="fa fa-bookmark-o mr-3 text-primary"></i>
+                相关指南推荐
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                {{ range first 4 (where (where .Site.RegularPages "Section" "compliance_guide") "Title" "!=" .Title) }}
+                <a href="{{ .RelPermalink }}" class="group">
+                    <div class="flex items-start bg-white rounded-lg p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                        <div class="text-primary text-2xl mr-4 mt-1 flex-shrink-0">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-semibold text-neutral mb-2 group-hover:text-primary transition-colors duration-300">{{ .Title }}</h4>
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ .Description | truncate 120 }}</p>
+                            <span class="inline-flex items-center text-primary text-sm font-medium">
+                                查看详情
+                                <i class="fa fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                {{ end }}
+            </div>
+        </section>
+        {{ end }}
+        <!-- 返回列表按钮 - 美化按钮样式 -->
+        <div class="text-center mb-8">
+            <a href="/compliance_guide/" class="inline-flex items-center px-8 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                <i class="fa fa-arrow-left mr-2"></i>
+                <span>返回合规指南列表</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- 自定义详情页CSS -->
+<style>
+    /* 内容正文样式优化 */
+    .guide-content .content-body h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--neutral);
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid var(--primary);
+    }
+    
+    .guide-content .content-body h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--neutral);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .guide-content .content-body p {
+        margin-bottom: 1.25rem;
+        line-height: 1.8;
+        color: var(--text-color);
+        text-align: justify;
+        font-size: 16px;
+    }
+    
+    .guide-content .content-body ul, 
+    .guide-content .content-body ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+    
+    .guide-content .content-body li {
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+    }
+    
+    .guide-content .content-body ul li {
+        list-style-type: disc;
+    }
+    
+    .guide-content .content-body ol li {
+        list-style-type: decimal;
+    }
+    
+    .guide-content .content-body a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .guide-content .content-body a:hover {
+        text-decoration: underline;
+        color: #b91c1c;
+    }
+    
+    /* 目录样式 */
+    .toc-container .toc {
+        font-size: 14px;
+    }
+    
+    .toc-container .toc ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+    
+    .toc-container .toc li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .toc-container .toc a {
+        color: var(--neutral);
+        text-decoration: none;
+        display: block;
+        padding: 4px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .toc-container .toc a:hover {
+        color: var(--primary);
+        padding-left: 5px;
+    }
+    
+    .toc-container .toc ul ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 1024px) {
+        .guide-header {
+            padding: 100px 0;
+        }
+        
+        .guide-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .max-w-4xl {
+            max-width: 100%;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .guide-header {
+            padding: 80px 0;
+        }
+        
+        .guide-header h1 {
+            font-size: 2rem;
+        }
+        
+        .guide-header p {
+            font-size: 1rem;
+        }
+        
+        .guide-content {
+            padding: 20px;
+        }
+    }
+</style>
+{{ end }}

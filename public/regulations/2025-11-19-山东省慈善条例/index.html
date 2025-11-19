@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=12147&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国慈善组织合规通 - 一站式慈善合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<link rel="stylesheet" href="/css/styles.css">
+
+
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 space-y-6">
+            
+            <div class="relative bg-gradient-to-r from-primary to-red-800 text-white rounded-md p-6 overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-2">法规政策</h2>
+                    <p class="text-white text-opacity-90">全面收录慈善领域相关法规政策，助力组织合规运营</p>
+                </div>
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa fa-book" style="font-size: 120px;"></i>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-4">
+                    <h1 class="text-2xl font-bold text-neutral">山东省慈善条例</h1>
+                    <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+                        <span><i class="fa fa-calendar mr-1"></i> 发布日期：2025年11月19日</span>
+                        
+                        <span class="inline-flex items-center">
+                            <i class="fa fa-tag mr-1"></i>
+                            分类：
+                            
+                                
+                                
+                                    
+                                        
+                                    
+                                    
+                                        <span class="ml-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-sm">地方政策</span>
+                                    
+                                
+                            
+                        </span>
+                        
+                        <span><i class="fa fa-eye mr-1"></i> 浏览次数：0</span>
+                    </div>
+                </div>
+                
+                
+                <div class="p-6 bg-lightGray">
+                    <p>(2021年3月24日山东省第十三届人民代表大会常务委员会第二十七次会议通过)</p>
+<p>目  录</p>
+<p>第一章  总则</p>
+<p>第二章  慈善组织与慈善财产</p>
+<p>第三章  慈善募捐</p>
+<p>第四章  慈善捐赠与慈善服务</p>
+<p>第五章  慈善信托</p>
+<p>第六章  促进措施</p>
+<p>第七章  信息公开与监督管理</p>
+<p>第八章  法律责任</p>
+<p>第九章  附则</p>
+<p>第一章  总则</p>
+<p>第一条  为了规范慈善活动，保护慈善组织、捐赠人、志愿者、受益人等慈善活动参与者的合法权益，促进慈善事业健康发展和社会进步，完善共建共治共享的社会治理制度，根据《中华人民共和国慈善法》等有关法律、行政法规，结合本省实际，制定本条例。</p>
+<p>第二条  自然人、法人和其他组织在本省行政区域内从事慈善活动以及与慈善有关的其他活动，适用本条例。</p>
+<p>第三条  开展慈善活动应当依法进行，遵循自愿、诚信、非营利的原则，不得危害国家安全，不得违背公序良俗、损害社会公共利益和他人合法权益。</p>
+<p>第四条  鼓励和支持自然人、法人和其他组织践行社会主义核心价值观，弘扬中华民族传统美德和慈善文化，通过多种方式依法参与、支持、开展慈善活动。</p>
+<p>第五条  县级以上人民政府应当将慈善事业纳入国民经济和社会发展规划，建立健全慈善工作协调机制，优化慈善事业发展环境，引导和扶持慈善事业发展。</p>
+<p>第六条  县级以上人民政府民政部门主管本行政区域内的慈善工作，其他有关部门在各自职责范围内做好相关工作。</p>
+<p>工会、共产主义青年团、妇女联合会、残疾人联合会、归国华侨联合会、工商业联合会、红十字会等团体，应当发挥各自优势，协同做好相关慈善工作。</p>
+<p>第二章  慈善组织与慈善财产</p>
+<p>第七条  设立或者认定慈善组织应当符合《中华人民共和国慈善法》规定的条件和程序。县级以上人民政府民政部门或者其他负责登记的部门在办理基金会、社会团体、社会服务机构等非营利性组织设立登记时，对符合慈善组织条件的，应当告知其可以同步登记为慈善组织。</p>
+<p>申请登记或者认定慈善组织，应当如实提供相关材料。县级以上人民政府民政部门或者其他负责登记的部门应当依法为申请人提供简化手续、缩短审批时限等便利。</p>
+<p>第八条  县级以上人民政府民政部门或者其他负责登记的部门应当依法将慈善组织的登记或者认定信息与财政、税务等有关部门实现信息共享，为慈善组织依法获取非营利性组织免税资格、公益性捐赠税前扣除资格提供便利。</p>
+<p>慈善组织获取非营利性组织免税资格和公益性捐赠税前扣除资格，应当符合国家规定的条件，经有关部门确认并予以公告。</p>
+<p>第九条  慈善组织应当依照法律、法规和章程规定，建立健全内部治理结构，明确决策、执行、监督等方面的职责权限，完善管理制度，提高慈善组织的公信力。</p>
+<p>慈善组织应当依照法律、法规规定，就章程修改、重大投资方案、关联交易、捐赠财产用途变更等重大事项的决策程序作出明确规定。</p>
+<p>自然人具有法律、行政法规规定禁止担任慈善组织负责人情形的，不得担任理事长（会长）、副理事长（副会长）、秘书长。</p>
+<p>第十条  慈善组织应当加强财产管理，建立健全财产接受使用、保值增值、项目管理、专项基金、剩余资产处置、年度慈善活动支出和管理费用等各项制度并严格执行。</p>
+<p>慈善组织的财务和资产管理制度以及重大投资方案应当经决策机构组成人员三分之二以上同意。</p>
+<p>第十一条  慈善组织的财产应当按照章程和捐赠协议的规定全部用于慈善目的，不得在发起人、捐赠人以及慈善组织成员中分配。</p>
+<p>任何组织和个人不得私分、挪用、截留或者侵占慈善财产。</p>
+<p>慈善组织不得为保证人。</p>
+<p>第十二条  慈善组织的发起人、主要捐赠人以及管理人员，不得利用其关联关系损害慈善组织、受益人的利益和社会公共利益。</p>
+<p>慈善组织的发起人、主要捐赠人以及管理人员与慈善组织发生交易行为的，不得参与慈善组织有关该交易行为的决策，有关交易情况应当向社会公开。</p>
+<p>第十三条  慈善组织在确保年度慈善活动支出符合法定要求和捐赠财产及时足额拨付的前提下，可以依法开展投资活动。</p>
+<p>慈善组织开展投资活动应当遵循合法、安全、有效的原则，及时回收到期的本金和收益，投资取得的收益应当全部用于慈善目的。</p>
+<p>慈善组织用于投资的财产范围应当符合国家有关规定。政府资助的财产和捐赠协议约定不得投资的财产，不得用于投资。慈善组织的负责人和其他工作人员不得在慈善组织投资的企业兼职或者领取报酬。</p>
+<p>第十四条  慈善组织应当按照募捐方案、捐赠协议约定的用途使用捐赠财产，不得擅自改变用途。</p>
+<p>出现捐赠目的不复存在、捐赠财产有剩余或者无法按照约定使用捐赠财产等情形，慈善组织确需变更公开募捐方案规定的捐赠财产用途的，应当按照重大事项决策程序作出决定，报县级以上人民政府民政部门备案并向社会公开；慈善组织确需变更捐赠协议约定的捐赠财产用途的，应当事先征得捐赠人的同意。</p>
+<p>第十五条  慈善组织应当合理设计慈善项目，建立项目管理制度，优化实施流程，降低运行成本并对项目实施情况进行跟踪监督，提高慈善财产使用效益。</p>
+<p>第十六条  慈善组织应当根据不同慈善项目的设立目的，按照公开、公平、公正的原则确定慈善受益人；不得指定慈善组织管理人员的利害关系人作为慈善受益人。</p>
+<p>慈善受益人应当珍惜慈善资助，不得采取虚报、隐瞒、伪造等手段，骗取慈善财产或者慈善服务。</p>
+<p>第十七条  慈善组织应当执行国家统一的会计制度，依法进行会计核算，建立健全会计监督制度。</p>
+<p>慈善组织应当建立健全档案管理制度，按照国家有关规定做好会计档案、慈善活动档案等资料的收集、整理、保管和使用工作。</p>
+<p>第十八条  慈善组织具有《中华人民共和国慈善法》第十七条规定情形的，应当终止并依法进行清算和注销登记。</p>
+<p>慈善组织申请注销登记，应当提供财产清算的相关资料。</p>
+<p>慈善组织清算后的剩余财产，不得向发起人、捐赠人或者会员分配。剩余财产应当按照慈善组织章程的规定或者决策机构的决议用于公益目的；无法按照章程的规定或者决策机构的决议处理的，由县级以上人民政府民政部门主持转给宗旨相同或者相近的慈善组织，并向社会公告。</p>
+<p>第十九条  鼓励、支持慈善组织依法成立慈善联合会等行业组织。</p>
+<p>慈善行业组织应当健全行业规范，加强行业自律，指导成员依法开展慈善活动，维护成员的合法权益，反映行业诉求，推动慈善领域的交流与合作，提高慈善行业公信力。</p>
+<p>第三章  慈善募捐</p>
+<p>第二十条  慈善募捐是指慈善组织基于慈善宗旨募集财产的活动，包括面向社会公众的公开募捐和面向特定对象的定向募捐。</p>
+<p>慈善组织依法取得公开募捐资格证书后，方可面向社会公众开展公开募捐。不具有公开募捐资格的组织和个人不得开展公开募捐。</p>
+<p>慈善组织自登记或者认定之日起可以在发起人、理事会成员和会员等特定对象范围内开展定向募捐。开展定向募捐应当及时向捐赠人告知募捐情况、募得款物的管理使用情况，不得采取或者变相采取公开募捐的方式。</p>
+<p>第二十一条  慈善组织开展公开募捐活动应当符合本组织章程载明的宗旨和业务范围，并使用本组织账户。</p>
+<p>慈善组织开展公开募捐应当制定募捐方案，确定募捐目的、接受捐赠方式、募得款物用途等内容，并在开展公开募捐活动十日前，将募捐方案报其登记的县级以上人民政府民政部门备案。对于募捐方案内容不齐备的，民政部门应当即时告知慈善组织在十日内予以补正；募捐方案有关事项发生变化的，慈善组织应当在事项发生变化之日起十日内向其备案的民政部门补正，并说明理由。</p>
+<p>慈善组织为应对突发事件，无法在开展公开募捐前报备募捐方案的，应当在募捐活动开始后十日内补办备案手续。</p>
+<p>慈善组织在其登记的民政部门管辖区域外，以在公共场所设置募捐箱或者举办面向社会公众的义演、义赛、义卖、义展、义拍、慈善晚会等方式开展公开募捐的，还应当同时向其开展募捐活动所在地的县级以上人民政府民政部门备案。</p>
+<p>第二十二条  鼓励慈善组织运用大数据、云计算、区块链等技术，创新公开募捐活动的载体和形式；鼓励社会公众以电子支付或者其他合法的形式进行捐赠。</p>
+<p>第二十三条  不具有公开募捐资格的组织或者个人基于慈善目的，可以与具有公开募捐资格的慈善组织合作，由该慈善组织开展公开募捐活动，全部收支纳入该慈善组织账户核算和管理；合作双方应当依法签订书面协议，明确募捐方案、募捐成本分担、违约责任、争议解决方式等内容。</p>
+<p>具有公开募捐资格的慈善组织应当对与其合作募捐的组织或者个人的财产、信用等情况进行评估，并向社会公开相关信息。</p>
+<p>第二十四条  发生重大自然灾害、事故灾难和公共卫生事件等突发事件，需要迅速开展慈善募捐时，有关人民政府应当建立协调机制，提供需求信息，及时有序引导开展慈善募捐和救助活动，并协调做好捐赠物资通关、运输以及接受、调配等工作。</p>
+<p>慈善组织应当按照有关人民政府的统一部署，依法开展慈善募捐活动，简化捐赠程序，建立捐赠款物接受、发放快速便捷通道，确保捐赠款物及时到位。</p>
+<p>鼓励、支持慈善组织与有服务专长的组织开展合作，提高款物募集和使用效益。</p>
+<p>第二十五条  具有公开募捐资格的慈善组织放弃公开募捐资格的，可以向其登记的民政部门或者其他部门申请注销公开募捐资格。</p>
+<p>慈善组织被注销公开募捐资格后，负责登记的民政部门或者其他部门应当收回公开募捐资格证书，并向社会公告。</p>
+<p>第二十六条  慈善组织开展募捐活动，应当尊重和维护募捐对象的合法权益，不得通过虚构事实等方式欺骗、诱导募捐对象实施捐赠；不得摊派或者变相摊派，不得妨碍公共秩序、企业生产经营和居民生活。</p>
+<p>第二十七条  个人为了解决本人或者家庭的特殊困难，可以向慈善组织或者所在单位、城乡社区组织求助，也可以向社会求助。</p>
+<p>求助人应当对提供的身份信息、具体求助事项等求助信息的真实性负责，不得虚构事实骗取他人捐赠，不得以“慈善募捐”等名义募集款物。</p>
+<p>求助人通过广播、电视、报刊以及互联网信息服务提供者、电信运营商等信息发布平台向社会发布求助信息的，信息发布平台应当健全审核机制，对求助信息的真实性进行核实，在显著位置向社会公众进行风险防范提示；发现求助人有虚构事实等违法行为的，应当停止提供服务，并向公安、民政等有关部门报告，协助调查处理。</p>
+<p>第二十八条  鼓励城乡社区组织、单位在本社区、单位内部开展群众性互助互济活动。开展群众性互助互济活动的，可以依法委托慈善组织进行财产和项目管理或者依法设立慈善信托。</p>
+<p>第二十九条  县级以上人民政府民政部门应当建立慈善与社会救助工作衔接机制，推动民政部门与其他社会救助管理部门之间的信息共享以及与慈善组织之间的信息互通，促进慈善资源的合理配置。</p>
+<p>第四章  慈善捐赠与慈善服务</p>
+<p>第三十条  捐赠人捐赠的财产应当是其有权处分的合法财产，包括货币、实物、房屋、有价证券、股权、保险、知识产权等有形财产和无形财产。</p>
+<p>捐赠人捐赠的实物应当具有使用价值，符合安全、卫生、环保等标准；捐赠人捐赠本企业产品的，应当依法承担产品质量责任和义务。</p>
+<p>第三十一条  慈善组织接受捐赠，应当向捐赠人开具由财政部门统一监（印）制的捐赠票据。捐赠人匿名或者放弃接受捐赠票据的，慈善组织应当做好相关记录。</p>
+<p>货币性资产捐赠按照实际收到金额开具票据；非货币性捐赠以捐赠人提供的发票、报关单、捐赠协议等有关凭据上标明的金额开具票据，没有提供凭据或者提供的凭据上标明的金额与受赠资产公允价值相差较大的，应当以其公允价值作为计价依据。</p>
+<p>捐赠财产需要评估的，应当由专业评估机构进行评估。</p>
+<p>第三十二条  慈善组织接受捐赠，捐赠人要求签订书面捐赠协议的，慈善组织应当与捐赠人签订书面捐赠协议。</p>
+<p>捐赠人未要求签订书面捐赠协议，或者因特别重大、重大突发事件应急等特殊情况无法签订书面捐赠协议的，慈善组织应当采取适当方式，与捐赠人就捐赠财产的种类、数量、质量、用途、交付以及双方权利义务等内容达成一致。</p>
+<p>第三十三条  县级以上人民政府及其有关部门应当采取措施拓宽捐赠渠道和方式，支持慈善组织依法单独或者与基层群众性自治组织和有关单位合作设立慈善捐赠站点，方便社会公众经常性捐赠。</p>
+<p>第三十四条  捐赠人向慈善组织捐赠财产设立专项基金的，慈善组织应当与捐赠人签订协议，明确专项基金的设立目的、冠名方式、财产使用与保值增值方式、各方权利义务、终止条件和剩余财产的处理等内容。</p>
+<p>专项基金收支应当纳入慈善组织账户，不得开设独立账户和刻制印章。</p>
+<p>慈善组织不得利用专项基金再设立专项基金。</p>
+<p>第三十五条  自然人以遗嘱方式将个人财产捐赠给慈善组织的，可以明确捐赠清单、捐赠方式、交付时间等事项。</p>
+<p>遗赠生效后，接受遗赠财产的慈善组织应当按照捐赠人的意愿将遗赠财产用于慈善目的，无正当理由不履行约定义务的，利害关系人或者有关组织可以依法请求人民法院取消慈善组织接受遗赠财产的权利。</p>
+<p>第三十六条  慈善捐赠不得附加违反法律、法规强制性规定或者违背公序良俗的条件。</p>
+<p>捐赠人与慈善组织约定捐赠财产的用途和受益人时，不得指定捐赠人的利害关系人作为受益人。</p>
+<p>第三十七条  慈善组织可以自己提供或者招募志愿者提供慈善服务，也可以委托有服务专长的其他组织提供专业化慈善服务。</p>
+<p>慈善组织安排志愿者参与慈善服务，应当与志愿者的年龄、文化程度、技能和身体状况相适应，提供必要工作保障，并根据需要开展相关教育培训。</p>
+<p>鼓励、支持慈善组织与社会工作服务机构、志愿服务组织以及社会工作者、志愿者加强协作，共同开展慈善服务。</p>
+<p>第三十八条  慈善组织招募志愿者参与慈善服务，应当真实、准确、完整地公示慈善服务的有关信息，告知可能存在的风险；安排志愿者参与可能发生人身危险的慈善服务前，应当为志愿者购买相应的人身意外伤害保险。</p>
+<p>慈善组织根据需要可以与志愿者签订协议，明确双方权利义务，约定服务内容、方式、时间、地点、工作条件和安全保障措施等事项。</p>
+<p>第三十九条  慈善组织应当对志愿者实名登记，记录志愿者的服务时间、内容、培训、表彰奖励、评价等信息。根据志愿者的要求，慈善组织应当以志愿服务记录信息为依据，无偿、如实出具志愿服务记录证明。</p>
+<p>第五章  慈善信托</p>
+<p>第四十条  设立慈善信托，应当有确定的、合法所有的信托财产，采取信托合同、书面遗嘱或者法律、行政法规规定的其他书面形式。</p>
+<p>第四十一条  慈善信托的受托人，可以由委托人确定其信赖的慈善组织或者信托公司担任。</p>
+<p>慈善信托的委托人可以根据需要确定监察人，对受托人的行为进行监督，依法维护委托人和受益人的权益。</p>
+<p>慈善信托的委托人不得指定或者变相指定与委托人、受托人具有利害关系的人作为受益人。</p>
+<p>第四十二条  设立慈善信托，受托人应当按照国家有关规定将信托财产合法性声明、信托文件、信托财产交付证明等材料向受托人所在地县级以上人民政府民政部门备案；未按照规定备案的，不享受税收优惠。</p>
+<p>第四十三条  慈善信托财产及其收益应当用于慈善目的。</p>
+<p>慈善信托受托人应当按照信托目的，履行诚信、谨慎、有效管理的义务，不得利用慈善信托财产为自己谋取利益，不得将慈善信托财产转为其固有财产。</p>
+<p>第四十四条  根据慈善信托文件的约定或者经委托人同意，慈善信托可以变更受托人、增加新的委托人、增加信托财产或者变更信托受益人范围等事项，并按照国家有关规定向县级以上人民政府民政部门备案。</p>
+<p>受托人违反信托义务或者出现依法解散、法定资格丧失、被依法撤销、被宣告破产或者其他无法履行职责情形的，委托人可以变更受托人。</p>
+<p>第四十五条  有下列情形之一的，慈善信托终止：</p>
+<p>（一）信托文件规定的终止事由出现；</p>
+<p>（二）信托的存续违反信托目的；</p>
+<p>（三）信托目的已经实现或者不能实现；</p>
+<p>（四）信托当事人协商同意终止；</p>
+<p>（五）信托被撤销；</p>
+<p>（六）信托被解除。</p>
+<p>慈善信托终止，受托人应当按照国家有关规定办理备案、清算、公告等手续。</p>
+<p>第四十六条  慈善信托终止后有剩余财产，没有信托财产权利归属人或者信托财产权利归属人是不特定社会公众的，经县级以上人民政府民政部门批准，受托人应当将信托财产用于与原慈善目的相近似的目的，或者将信托财产转移给具有近似目的的其他慈善信托或者慈善组织。</p>
+<p>第六章  促进措施</p>
+<p>第四十七条  县级以上人民政府应当制定促进慈善事业发展的政策和措施，鼓励自然人、法人或者其他组织依法从事慈善活动，有关部门和社会组织应当为慈善活动提供指导、帮助和便利。</p>
+<p>第四十八条  县级以上人民政府和社会力量可以通过公益创投、孵化培育、人员培训、项目指导等方式，为初创期慈善组织提供资金支持和能力建设服务。</p>
+<p>第四十九条  县级以上人民政府及其有关部门应当积极培育发展不同类型的慈善组织，优先培育扶贫、济困、扶老、救孤等慈善组织，并支持、引导联合型、行业性慈善组织承接政府委托或者转移的职能。</p>
+<p>第五十条  慈善组织及其取得的收入，受益人接受慈善捐赠，自然人、法人和其他组织捐赠财产用于慈善活动的，按照规定享受税收优惠和行政事业性收费减免。</p>
+<p>第五十一条  鼓励企业和个人通过慈善项目冠名、工程留名等方式开展慈善活动，支持其依法设立冠名基金。</p>
+<p>鼓励慈善组织和其他社会力量兴办公益性医疗、教育、养老服务、残障康复等机构和设施。</p>
+<p>鼓励会展场所、体育场馆、车站、机场、公园、商场等公共场所、经营场所的经营者、管理者，为开展慈善活动提供场所和其他便利条件。</p>
+<p>第五十二条  鼓励金融机构进行慈善类金融产品创新，为慈善财产提供保值增值服务和保险保障，优化服务方式和流程，为慈善捐赠提供便捷服务。</p>
+<p>第五十三条  县级以上人民政府及其有关部门应当支持符合条件的慈善组织向社会提供服务，并将适合政府购买服务的慈善项目纳入政府购买服务目录。</p>
+<p>第五十四条  鼓励、支持慈善文化平台建设，扶持弘扬慈善文化的文学艺术创作和活动，加强慈善文化传承、研究和创新，打造具有山东特色的慈善文化品牌。</p>
+<p>鼓励、支持高等学校和科研机构开展慈善理论和慈善文化研究，培养慈善专业人才。</p>
+<p>第五十五条  广播、电视、报刊、互联网等媒体应当积极开展慈善公益宣传，按照国家规定刊播慈善公益广告，普及慈善知识，传播慈善文化，宣传慈善典型，引导社会公众关心、支持、参与慈善活动。</p>
+<p>第五十六条  县级以上人民政府、省人民政府有关部门应当按照国家和省有关规定，对在慈善事业发展中做出突出贡献的自然人、法人和其他组织给予表彰。</p>
+<p>省人民政府民政部门定期组织评选“山东慈善奖”，并给予表彰。</p>
+<p>第五十七条  县级以上人民政府和有关单位应当建立健全慈善服务激励机制。有良好慈善服务记录的志愿者及其家庭遭遇困难时，有关单位、慈善组织可以在同等条件下优先给予救助。</p>
+<p>鼓励用人单位招用有良好慈善服务记录的志愿者。</p>
+<p>第七章  信息公开与监督管理</p>
+<p>第五十八条  县级以上人民政府应当建立健全慈善信息统计和发布制度，将慈善信息统计和发布纳入统计管理体系。</p>
+<p>县级以上人民政府民政部门应当在统一信息平台向社会公开慈善信息，并免费提供慈善信息发布服务。慈善组织和慈善信托的受托人应当在统一信息平台依法向社会公开慈善信息，并对信息的真实性负责；慈善组织在其他渠道公开的信息，应当与其在统一信息平台上公开的信息一致。</p>
+<p>县级以上人民政府其他有关部门应当依照法律、法规规定的范围、时限、方式，向社会公开慈善信息。</p>
+<p>第五十九条  慈善组织应当依法履行信息公开义务，不得以新闻发布、广告推广等形式代替应当履行的信息公开义务。</p>
+<p>慈善组织应当依法向社会公开下列信息：</p>
+<p>（一）组织章程和决策、执行、监督机构成员等基本信息；</p>
+<p>（二）年度工作报告和财务会计报告；</p>
+<p>（三）公开募捐情况；</p>
+<p>（四）慈善项目有关情况；</p>
+<p>（五）慈善信托有关情况；</p>
+<p>（六）重大资产变动与投资、重大交换交易与资金往来、关联交易行为等情况；</p>
+<p>（七）法律、法规要求公开的其他信息。</p>
+<p>具有公开募捐资格的慈善组织应当委托社会审计机构对财务会计报告进行审计，并同时公开财务会计报告和审计报告。</p>
+<p>捐赠人有权查询、复制其捐赠财产管理使用的有关资料，慈善组织应当及时主动向捐赠人反馈有关情况，运用现代信息技术为捐赠人提供捐赠款物使用等情况的跟踪查询服务。</p>
+<p>第六十条  具有公开募捐资格的慈善组织应当通过统一信息平台定期向社会公开募捐情况和慈善项目实施情况，公开募捐周期或者慈善项目实施周期超过六个月的，至少每三个月公开一次募捐或者项目实施情况，公开募捐活动或者项目结束后三个月内应当全面公开相关情况。</p>
+<p>突发事件应急期间，慈善组织应当根据应急管理需要和募捐情况及时公开相关信息，并接受社会监督。</p>
+<p>第六十一条  慈善信托受托人应当向社会公开下列信息：</p>
+<p>（一）慈善信托设立情况；</p>
+<p>（二）慈善信托事务处理情况报告、财产状况报告；</p>
+<p>（三）慈善信托变更、终止情况；</p>
+<p>（四）需要公开的其他信息。</p>
+<p>第六十二条  县级以上人民政府民政部门应当建立日常监督检查制度和专项检查制度，并会同有关部门建立监督管理协作机制，加强对慈善活动的监督检查和服务管理。</p>
+<p>县级以上人民政府有关部门和单位应当加强慈善捐赠领域信用体系建设，按照国家有关规定对慈善捐赠领域相关主体实施守信联合激励和失信联合惩戒。</p>
+<p>第六十三条  县级以上人民政府民政部门应当加强慈善信托备案和相关监督管理工作。金融监督管理机构应当根据职责，加强信托公司慈善信托业务和商业银行慈善信托账户资金保管业务的监督管理工作。</p>
+<p>第六十四条  县级以上人民政府民政部门对涉嫌违反本条例规定的慈善组织，有权采取下列措施：</p>
+<p>（一）对慈善组织的住所和慈善活动发生地进行现场检查；</p>
+<p>（二）要求慈善组织作出说明，查阅、复制有关资料；</p>
+<p>（三）向与慈善活动有关的单位和个人调查与监督管理有关的情况；</p>
+<p>（四）经本级人民政府批准，查询慈善组织的金融账户；</p>
+<p>（五）法律、行政法规规定的其他措施。</p>
+<p>第六十五条  任何组织和个人发现慈善组织、慈善活动有违法行为的，可以向县级以上人民政府民政部门、其他有关部门或者慈善行业组织投诉、举报。</p>
+<p>县级以上人民政府民政部门和其他有关部门在接到投诉、举报或者新闻媒体提供的线索后，应当及时核实有关情况并依法处理。</p>
+<p>慈善行业组织应当依据行业自律规则，在职责范围内及时协调处理投诉事宜。</p>
+<p>第八章  法律责任</p>
+<p>第六十六条  违反本条例规定的行为，法律、行政法规已经规定法律责任的，适用其规定。</p>
+<p>第六十七条  违反本条例规定，提供虚假材料骗取登记或者认定为慈善组织的，由原登记、认定的部门撤销登记或者认定，并向社会公布。</p>
+<p>第六十八条  违反本条例规定，慈善组织有下列情形之一的，由县级以上人民政府民政部门责令限期改正，予以警告；逾期不改正的，责令限期停止活动：</p>
+<p>（一）指定或者变相指定其管理人员的利害关系人作为受益人的；</p>
+<p>（二）未将专项基金纳入慈善组织账户的；</p>
+<p>（三）将专项基金开设独立账户、刻制印章的；</p>
+<p>（四）利用专项基金再设立专项基金的。</p>
+<p>第六十九条  违反本条例规定，慈善信托的受托人利用信托财产为自己谋取利益或者将信托财产转为其固有财产的，由县级以上人民政府民政部门责令限期改正，予以警告；有违法所得的，没收违法所得；对直接负责的主管人员和其他直接责任人员处以二万元以上二十万元以下罚款。</p>
+<p>第七十条  违反本条例规定，个人虚构求助信息骗取财产的，由公安机关依法查处。</p>
+<p>第七十一条  县级以上人民政府民政部门和其他有关部门及其工作人员有下列情形之一的，由上级机关或者监察机关责令改正；依法应当给予处分的，由任免机关或者监察机关对直接负责的主管人员和其他直接责任人员给予处分；构成犯罪的，依法追究刑事责任：</p>
+<p>（一）违法办理慈善组织登记或者认定的；</p>
+<p>（二）未依法履行监督管理职责的；</p>
+<p>（三）私分、挪用、截留或者侵占慈善财产的；</p>
+<p>（四）未依法履行信息公开义务的；</p>
+<p>（五）未依法处理慈善违法行为投诉举报事项的；</p>
+<p>（六）其他滥用职权、玩忽职守、徇私舞弊的行为。</p>
+<p>第九章  附则</p>
+<p>第七十二条  本条例自2021年7月1日起施行。</p>
+
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex space-x-4 mb-4 md:mb-0">
+                        <a href="#" class="inline-flex items-center text-primary hover:text-red-700">
+                            <i class="fa fa-print mr-2"></i> 打印法规
+                        </a>
+                    </div>
+                    <div class="flex space-x-4">
+                        <span class="text-sm text-gray-500">分享到：</span>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weixin"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weibo"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-qq"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="space-y-6">
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">法规搜索</h3>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <div class="relative">
+                            <input type="text" placeholder="输入关键词搜索法规..." 
+                                class="w-full px-4 py-2 border border-darkGray rounded-md focus:outline-none focus:border-primary">
+                            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            慈善法
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            信息公开
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            税收优惠
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            等级评估
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            募捐管理
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">热门法规</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">1</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《中华人民共和国慈善法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">2</span>
+                            <a href="/regulations/charity-info-disclosure-detail/" class="text-neutral hover:text-primary line-clamp-2">《慈善组织信息公开办法》2025修订版</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">3</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《慈善组织保值增值投资活动管理暂行办法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-gray-300 text-gray-700 w-5 h-5 flex items-center justify-center rounded-full text-xs">4</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《慈善组织认定办法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-gray-300 text-gray-700 w-5 h-5 flex items-center justify-center rounded-full text-xs">5</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《社会组织评估管理办法》</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="bg-lightGray border border-darkGray rounded-md">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-neutral mb-4">法规咨询</h3>
+                    <p class="text-gray-600 text-sm mb-4">对法规政策有疑问？我们的专业团队为您提供一对一解答</p>
+                    <button class="w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors">
+                        立即咨询
+                    </button>
+                    <div class="text-center mt-4 text-sm text-gray-500">
+                        <i class="fa fa-phone mr-1"></i> 400-888-9999
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+  
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('法规详情页加载完成，准备更新法规列表');
+      
+      
+      const regulationInfo = {
+        title: document.title,
+        description: document.querySelector('meta[name="description"]') ? 
+          document.querySelector('meta[name="description"]').content : 
+          '法规详情页面',
+        category: 'national',
+        url: window.location.href,
+        date: '2025-11-19'
+      };
+      
+      console.log('获取到的法规信息:', regulationInfo);
+      
+      
+      function hasRegulationBeenAdded() {
+        try {
+          const addedRegulations = localStorage.getItem('addedRegulations') || '[]';
+          const regulations = JSON.parse(addedRegulations);
+          return regulations.includes(window.location.href);
+        } catch (e) {
+          console.error('检查已添加法规时出错:', e);
+          return false;
+        }
+      }
+      
+      
+      function markRegulationAsAdded() {
+        try {
+          const addedRegulations = localStorage.getItem('addedRegulations') || '[]';
+          const regulations = JSON.parse(addedRegulations);
+          if (!regulations.includes(window.location.href)) {
+            regulations.push(window.location.href);
+            localStorage.setItem('addedRegulations', JSON.stringify(regulations));
+            console.log('已标记法规为已添加');
+          }
+        } catch (e) {
+          console.error('标记法规为已添加时出错:', e);
+        }
+      }
+      
+      
+      function addToRegulationList() {
+        
+        if (document.referrer && document.referrer.includes('regulations.html')) {
+          console.log('从法规列表页面跳转而来，跳过自动添加');
+          return;
+        }
+        
+        
+        if (hasRegulationBeenAdded()) {
+          console.log('该法规已存在于列表中，跳过添加');
+          return;
+        }
+        
+        console.log('准备添加法规到列表');
+        
+        
+        try {
+          localStorage.setItem('pendingRegulation', JSON.stringify(regulationInfo));
+          console.log('已存储法规信息到localStorage');
+          
+          
+          markRegulationAsAdded();
+          
+          
+          console.log('法规信息已保存，下次访问法规列表页时将自动添加');
+        } catch (e) {
+          console.error('存储法规信息时出错:', e);
+          
+          
+          const addToListButton = document.createElement('button');
+          addToListButton.className = 'fixed bottom-4 right-4 bg-primary text-white px-4 py-2 rounded shadow-lg z-50';
+          addToListButton.innerHTML = '<i class="fa fa-plus mr-1"></i> 添加到法规列表';
+          addToListButton.onclick = function() {
+            
+            const encodedData = encodeURIComponent(JSON.stringify(regulationInfo));
+            window.location.href = '/regulations/?newRegulation=' + encodedData;
+          };
+          document.body.appendChild(addToListButton);
+          console.log('已添加手动添加按钮');
+        }
+      }
+      
+      
+      addToRegulationList();
+    });
+  </script>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    中国慈善组织合规通是专业的慈善组织合规服务平台，致力于为各类慈善组织提供政策解读、合规指导、风险管理等全方位服务，助力慈善事业健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市海淀区中关村南大街5号</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>400-888-9999</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>contact@hegui.org.cn</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP备案号：京ICP备12345678号</li>
+                    <li>公安备案号：京公网安备11010802020123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 中国慈善组织合规通 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

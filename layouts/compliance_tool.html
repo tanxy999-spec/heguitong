@@ -1,0 +1,3077 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慈善组织合规自检工具 - 中国慈善组织合规通</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', // 红色 - 代表专业
+                        secondary: '#1565C0', // 蓝色 - 体现慈善属性
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        :root {
+            --primary: #C62828;
+            --secondary: #1565C0;
+            --neutral: #333333;
+            --lightGray: #F5F5F5;
+            --darkGray: #E0E0E0;
+            --primary-light: rgba(198, 40, 40, 0.1);
+            --border-radius: 8px;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .border-primary {
+            border-color: var(--primary);
+        }
+        
+        .hover\:bg-primary:hover {
+            background-color: var(--primary);
+        }
+        
+        .text-neutral {
+            color: var(--neutral);
+        }
+        
+        .bg-lightGray {
+            background-color: var(--lightGray);
+        }
+        
+        .border-darkGray {
+            border-color: var(--darkGray);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            border-color: #e0e0e0;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: center;
+            margin: 0 1rem;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--lightGray);
+            color: var(--darkGray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .step.active .step-number {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .step-line {
+            width: 80px;
+            height: 2px;
+            background-color: var(--lightGray);
+            margin: 0 0.5rem;
+        }
+        
+        .step.completed .step-line {
+            background-color: #4CAF50;
+        }
+        
+        .question-card {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--darkGray);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        
+        .question-header {
+            background-color: var(--lightGray);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .question-content {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .question-card.active .question-content {
+            display: block;
+        }
+        
+        .option {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .option:hover {
+            background-color: var(--primary-light);
+        }
+        
+        .option.selected {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .risk-level {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        .risk-high {
+            background-color: #FFEBEE;
+            color: #C62828;
+        }
+        
+        .risk-medium {
+            background-color: #FFF8E1;
+            color: #FF8F00;
+        }
+        
+        .risk-low {
+            background-color: #E8F5E9;
+            color: #2E7D32;
+        }
+        
+        .radar-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background-color: var(--lightGray);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .error-border {
+            border: 2px solid #F44336 !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- 引入与主页相同的header -->
+    {{ partial "header.html" . }}
+
+    <!-- 核心内容区 -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- 页面标题和步骤指示器 -->
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="mb-4">
+                <div class="banner-container bg-gradient-to-r from-primary to-red-600 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">慈善组织合规自检工具</h1>
+                        <p class="text-lg opacity-90">一键自查6大模块，生成风险报告</p>
+                    </div>
+                    <button id="clearDataBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded text-sm backdrop-blur-sm">
+                        <i class="fas fa-trash-alt mr-2"></i>清除数据
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 步骤指示器 -->
+            <div class="step-indicator mt-8">
+                <div class="step active" id="step-indicator-1">
+                    <div class="step-number">1</div>
+                    <span>入口</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-2">
+                    <div class="step-number">2</div>
+                    <span>问卷</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-3">
+                    <div class="step-number">3</div>
+                    <span>报告</span>
+                </div>
+            </div>
+        </div>
+        <!-- 入口页 -->
+        <div id="entry-page" class="fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <div class="text-center mb-8">
+                    <i class="fas fa-shield-alt text-6xl text-primary mb-4"></i>
+                    <h2 class="text-3xl font-bold text-neutral mb-4">慈善组织合规自检工具</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        本工具基于《慈善法》《非营利组织会计制度》等法规，帮助慈善组织进行全面的合规风险自查。
+                        通过6大模块的专业评估，快速识别潜在风险点，获取针对性改进建议。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-registered"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">登记注册模块</h3>
+                        <p class="text-gray-600 text-sm">检查组织登记、年度报告等基础合规情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">财务管理模块</h3>
+                        <p class="text-gray-600 text-sm">评估财务制度、资金使用、审计报告等合规性</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">信息公开模块</h3>
+                        <p class="text-gray-600 text-sm">检查信息披露、年报公示等信息公开情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">项目实施模块</h3>
+                        <p class="text-gray-600 text-sm">评估项目管理、执行效果、资金使用等合规性</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">税务合规模块</h3>
+                        <p class="text-gray-600 text-sm">检查税务申报、票据开具、税收优惠等合规情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">内部治理模块</h3>
+                        <p class="text-gray-600 text-sm">评估组织架构、决策机制、内部制度等合规性</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="startBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                        <i class="fas fa-play-circle mr-2"></i>开始自检
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>隐私声明：</strong>本工具所有数据仅存储在您的本地浏览器中，不会上传至服务器，不收集任何个人信息。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 问卷页 -->
+        <div id="questionnaire-page" class="hidden fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-neutral mb-2">合规自检问卷</h2>
+                    <p class="text-gray-600">请根据您的组织实际情况，回答以下问题。所有问题均为必填项。</p>
+                </div>
+                
+                <!-- 登记注册模块 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-registered mr-2"></i>登记注册模块
+                    </h3>
+                    
+                    <!-- 问题1 -->
+                    <div class="question-card" data-question-id="1">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题1：</span>
+                                <span>慈善组织完成登记注册后，应在多少日内向民政部门申请公开募捐资格？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="A" class="mr-2">
+                                        <span>A. 30日</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="B" class="mr-2">
+                                        <span>B. 60日</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="C" class="mr-2">
+                                        <span>C. 90日</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="D" class="mr-2">
+                                        <span>D. 无需申请</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题2 -->
+                    <div class="question-card" data-question-id="2">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题2：</span>
+                                <span>慈善组织章程必须载明以下哪项内容？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="A" class="mr-2">
+                                        <span>A. 注册资金</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="B" class="mr-2">
+                                        <span>B. 组织形式</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="C" class="mr-2">
+                                        <span>C. 发起人名单</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="D" class="mr-2">
+                                        <span>D. 办公场所面积</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题3 -->
+                    <div class="question-card" data-question-id="3">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题3：</span>
+                                <span>以下哪种情形会导致慈善组织被吊销登记证书？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="A" class="mr-2">
+                                        <span>A. 连续2年未开展慈善活动</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="B" class="mr-2">
+                                        <span>B. 未公开年度工作报告</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="C" class="mr-2">
+                                        <span>C. 接受附加违法条件的捐赠</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="D" class="mr-2">
+                                        <span>D. 以上均是</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 财务管理模块 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-coins mr-2"></i>财务管理模块
+                    </h3>
+                    
+                    <!-- 问题4 -->
+                    <div class="question-card" data-question-id="4">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题4：</span>
+                                <span>慈善组织年度管理费用不得超过当年总支出的多少？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="A" class="mr-2">
+                                        <span>A. 5%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="B" class="mr-2">
+                                        <span>B. 10%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="C" class="mr-2">
+                                        <span>C. 15%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="D" class="mr-2">
+                                        <span>D. 20%</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题5 -->
+                    <div class="question-card" data-question-id="5">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题5：</span>
+                                <span>以下哪项支出不可计入业务活动成本？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="A" class="mr-2">
+                                        <span>A. 项目执行差旅费</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="B" class="mr-2">
+                                        <span>B. 理事会会议场地租赁费</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="C" class="mr-2">
+                                        <span>C. 志愿者培训材料费</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="D" class="mr-2">
+                                        <span>D. 理事个人旅游费用</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题6 -->
+                    <div class="question-card" data-question-id="6">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题6：</span>
+                                <span>慈善组织接受政府购买服务收入是否需要缴纳企业所得税？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="A" class="mr-2">
+                                        <span>A. 需要</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="B" class="mr-2">
+                                        <span>B. 免除</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="C" class="mr-2">
+                                        <span>C. 部分免除</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="D" class="mr-2">
+                                        <span>D. 视金额而定</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 运营管理模块 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-cogs mr-2"></i>运营管理模块
+                    </h3>
+                    
+                    <!-- 问题7 -->
+                    <div class="question-card" data-question-id="7">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题7：</span>
+                                <span>慈善组织重大投资方案需经多少比例决策机构成员同意？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="A" class="mr-2">
+                                        <span>A. 二分之一</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="B" class="mr-2">
+                                        <span>B. 三分之二</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="C" class="mr-2">
+                                        <span>C. 四分之三</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="D" class="mr-2">
+                                        <span>D. 全体一致</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题8 -->
+                    <div class="question-card" data-question-id="8">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题8：</span>
+                                <span>慈善组织负责人能否在关联企业兼职？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="A" class="mr-2">
+                                        <span>A. 可以</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="B" class="mr-2">
+                                        <span>B. 禁止</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="C" class="mr-2">
+                                        <span>C. 需民政部门批准</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="D" class="mr-2">
+                                        <span>D. 无限制</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题9 -->
+                    <div class="question-card" data-question-id="9">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题9：</span>
+                                <span>慈善组织与关联方交易需遵循的原则是？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="A" class="mr-2">
+                                        <span>A. 互利共赢</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="B" class="mr-2">
+                                        <span>B. 公平公允</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="C" class="mr-2">
+                                        <span>C. 利润最大化</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="D" class="mr-2">
+                                        <span>D. 方便快捷</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 项目实施模块 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-project-diagram mr-2"></i>项目实施模块
+                    </h3>
+                    
+                    <!-- 问题10 -->
+                    <div class="question-card" data-question-id="10">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题10：</span>
+                                <span>慈善项目资金临时用于弥补行政开支缺口的处理方式是？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="A" class="mr-2">
+                                        <span>A. 直接挪用</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="B" class="mr-2">
+                                        <span>B. 提交理事会审议后使用</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="C" class="mr-2">
+                                        <span>C. 禁止使用</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="D" class="mr-2">
+                                        <span>D. 向捐赠人说明后使用</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题11 -->
+                    <div class="question-card" data-question-id="11">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题11：</span>
+                                <span>慈善项目终止后剩余财产应如何处理？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="A" class="mr-2">
+                                        <span>A. 转入发起人账户</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="B" class="mr-2">
+                                        <span>B. 按捐赠协议处理</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="C" class="mr-2">
+                                        <span>C. 私分给理事</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="D" class="mr-2">
+                                        <span>D. 随意处置</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题12 -->
+                    <div class="question-card" data-question-id="12">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题12：</span>
+                                <span>慈善项目周期超过6个月时，需至少多久公开一次进展？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="A" class="mr-2">
+                                        <span>A. 每月</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="B" class="mr-2">
+                                        <span>B. 每季度</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="C" class="mr-2">
+                                        <span>C. 每半年</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="D" class="mr-2">
+                                        <span>D. 每年</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 信息披露模块 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-info-circle mr-2"></i>信息披露模块
+                    </h3>
+                    
+                    <!-- 问题13 -->
+                    <div class="question-card" data-question-id="13">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题13：</span>
+                                <span>慈善组织需在哪个平台公开年度工作报告？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="A" class="mr-2">
+                                        <span>A. 自建官网</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="B" class="mr-2">
+                                        <span>B. 民政部指定平台（如慈善中国）</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="C" class="mr-2">
+                                        <span>C. 微信公众号</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="D" class="mr-2">
+                                        <span>D. 无需公开</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题14 -->
+                    <div class="question-card" data-question-id="14">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题14：</span>
+                                <span>以下哪项信息不属于必须公开的范畴？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="A" class="mr-2">
+                                        <span>A. 年度财务报告</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="B" class="mr-2">
+                                        <span>B. 决策机构成员信息</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="C" class="mr-2">
+                                        <span>C. 内部管理制度</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="D" class="mr-2">
+                                        <span>D. 受益人名单</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题15 -->
+                    <div class="question-card" data-question-id="15">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题15：</span>
+                                <span>慈善组织发生重大资产变动后需在多少日内公开？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="A" class="mr-2">
+                                        <span>A. 10日</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="B" class="mr-2">
+                                        <span>B. 15日</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="C" class="mr-2">
+                                        <span>C. 30日</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="D" class="mr-2">
+                                        <span>D. 60日</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 税务合规模块 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-balance-scale mr-2"></i>税务合规模块
+                    </h3>
+                    
+                    <!-- 问题16 -->
+                    <div class="question-card" data-question-id="16">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题16：</span>
+                                <span>企业通过公益性社会组织捐赠可享受的所得税扣除比例是？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="A" class="mr-2">
+                                        <span>A. 8%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="B" class="mr-2">
+                                        <span>B. 12%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="C" class="mr-2">
+                                        <span>C. 15%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="D" class="mr-2">
+                                        <span>D. 20%</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题17 -->
+                    <div class="question-card" data-question-id="17">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题17：</span>
+                                <span>慈善组织接受股权捐赠时需缴纳的税费是？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="A" class="mr-2">
+                                        <span>A. 增值税</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="B" class="mr-2">
+                                        <span>B. 个人所得税</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="C" class="mr-2">
+                                        <span>C. 企业所得税</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="D" class="mr-2">
+                                        <span>D. 无需缴纳</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 问题18 -->
+                    <div class="question-card" data-question-id="18">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题18：</span>
+                                <span>慈善组织清算后的剩余财产应如何处理？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案：</p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="A" class="mr-2">
+                                        <span>A. 分配给理事</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="B" class="mr-2">
+                                        <span>B. 转给宗旨相近的慈善组织</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="C" class="mr-2">
+                                        <span>C. 捐赠给政府</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="D" class="mr-2">
+                                        <span>D. 随意处置</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between mt-8">
+                    <button id="backToEntryBtn" class="bg-lightGray hover:bg-gray-200 text-neutral font-bold py-2 px-6 rounded">
+                        <i class="fas fa-arrow-left mr-2"></i>返回入口
+                    </button>
+                    <button id="generateReportBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+                        <i class="fas fa-chart-bar mr-2"></i>生成报告
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 报告页 -->
+        <div id="report-page" class="hidden fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-neutral mb-2">合规自检报告</h2>
+                    <p class="text-gray-600">基于您的回答生成的合规风险评估报告</p>
+                </div>
+                
+                <!-- 总分和风险等级 -->
+                <div class="bg-lightGray rounded-lg p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">总分</h3>
+                            <div class="text-4xl font-bold text-primary" id="totalScore">78/100</div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">风险等级</h3>
+                            <div class="text-2xl font-bold">
+                                <span id="riskLevel" class="risk-level risk-medium">黄色（中风险）</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">完成时间</h3>
+                            <div class="text-xl" id="completionTime">2025-06-18</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 问卷答案提示 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">问卷答案提示</h3>
+                    <div id="wrongAnswersContainer">
+                        <!-- 错误答案将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+
+                
+
+                
+                <!-- 改进建议 -->
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">改进建议</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">立即登录 <a href="https://cszg.mca.gov.cn/补录年度报告" target="_blank" class="text-primary underline">https://cszg.mca.gov.cn/补录年度报告</a></p>
+                                <p class="text-sm text-gray-600 mt-1">补录缺失的年度工作报告，确保信息公开合规</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">联系第三方审计机构完成年度财务审计</p>
+                                <p class="text-sm text-gray-600 mt-1">选择有资质的会计师事务所进行财务审计，并按规定公示审计报告</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">建立内部合规管理制度</p>
+                                <p class="text-sm text-gray-600 mt-1">制定详细的合规管理流程，定期开展内部合规自查</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 操作按钮 -->
+                <div class="flex justify-between mt-8">
+                    <button id="backToQuestionnaireBtn" class="bg-lightGray hover:bg-gray-200 text-neutral font-bold py-2 px-6 rounded">
+                        <i class="fas fa-arrow-left mr-2"></i>返回修改
+                    </button>
+                    <button id="downloadPDFBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+                        <i class="fas fa-print mr-2"></i>打印报告
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 进度条 -->
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+    </div>
+    
+    <!-- 引入与主页相同的footer -->
+    {{ partial "footer.html" . }}
+
+    <script>
+        // 全局变量
+        let currentPage = 1; // 1: 入口页, 2: 问卷页, 3: 报告页
+        let answers = {};
+        let radarChart = null;
+        
+        // 正确答案
+        const correctAnswers = {
+            // 登记注册模块
+            '1': 'B',
+            '2': 'B',
+            '3': 'D',
+            // 财务管理模块
+            '4': 'B',
+            '5': 'D',
+            '6': 'B',
+            // 运营管理模块
+            '7': 'B',
+            '8': 'B',
+            '9': 'B',
+            // 项目实施模块
+            '10': 'C',
+            '11': 'B',
+            '12': 'B',
+            // 信息披露模块
+            '13': 'B',
+            '14': 'C',
+            '15': 'C',
+            // 税务合规模块
+            '16': 'B',
+            '17': 'D',
+            '18': 'B'
+        };
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            loadSavedData();
+        });
+        
+        // 初始化应用
+        function initializeApp() {
+            // 绑定按钮事件
+            document.getElementById('startBtn').addEventListener('click', function() {
+                navigateToPage(2);
+            });
+            
+            document.getElementById('backToEntryBtn').addEventListener('click', function() {
+                navigateToPage(1);
+            });
+            
+            document.getElementById('generateReportBtn').addEventListener('click', function() {
+                if (validateQuestionnaire()) {
+                    navigateToPage(3);
+                    // 使用setTimeout确保页面切换完成后再生成报告
+                    setTimeout(() => {
+                        generateReport();
+                    }, 500);
+                } else {
+                    alert('请回答所有问题后再生成报告');
+                }
+            });
+            
+            document.getElementById('backToQuestionnaireBtn').addEventListener('click', function() {
+                navigateToPage(2);
+            });
+            
+            document.getElementById('downloadPDFBtn').addEventListener('click', function() {
+                downloadPDF();
+            });
+            
+            document.getElementById('clearDataBtn').addEventListener('click', function() {
+                clearAllData();
+            });
+            
+            // 绑定问题卡片点击事件
+            const questionCards = document.querySelectorAll('.question-card');
+            questionCards.forEach(card => {
+                const header = card.querySelector('.question-header');
+                header.addEventListener('click', function() {
+                    toggleQuestionCard(card);
+                });
+            });
+            
+            // 绑定选项点击事件
+            const options = document.querySelectorAll('.option');
+            options.forEach(option => {
+                option.addEventListener('click', function() {
+                    selectOption(option);
+                });
+            });
+            
+            // 更新进度条
+            updateProgressBar();
+        }
+        
+        // 切换问题卡片展开/收起
+        function toggleQuestionCard(card) {
+            const isActive = card.classList.contains('active');
+            
+            // 收起所有卡片
+            document.querySelectorAll('.question-card').forEach(c => {
+                c.classList.remove('active');
+                const icon = c.querySelector('.fa-chevron-down');
+                if (icon) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+            
+            // 如果当前卡片未激活，则展开
+            if (!isActive) {
+                card.classList.add('active');
+                const icon = card.querySelector('.fa-chevron-down');
+                if (icon) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            }
+        }
+        
+        // 选择选项
+        function selectOption(option) {
+            const questionCard = option.closest('.question-card');
+            const questionId = questionCard.dataset.questionId;
+            const value = option.dataset.value;
+            
+            // 保存答案
+            answers[questionId] = value;
+            
+            // 更新UI
+            const allOptions = questionCard.querySelectorAll('.option');
+            allOptions.forEach(opt => {
+                opt.classList.remove('selected');
+                // 取消所有单选按钮的选中状态
+                const radio = opt.querySelector('input[type="radio"]');
+                if (radio) {
+                    radio.checked = false;
+                }
+            });
+            
+            // 设置当前选项为选中状态
+            option.classList.add('selected');
+            const selectedRadio = option.querySelector('input[type="radio"]');
+            if (selectedRadio) {
+                selectedRadio.checked = true;
+            }
+            
+            // 保存到本地存储
+            saveData();
+            
+            // 自动收缩当前题并展开下一题
+            setTimeout(() => {
+                // 先收缩当前题
+                questionCard.classList.remove('active');
+                const currentIcon = questionCard.querySelector('.fa-chevron-up, .fa-chevron-down');
+                if (currentIcon) {
+                    currentIcon.classList.remove('fa-chevron-up');
+                    currentIcon.classList.add('fa-chevron-down');
+                }
+                
+                // 再展开下一题
+                let nextCard = questionCard.nextElementSibling;
+                
+                // 如果没有下一题（当前模块的最后一题），则跳转到下一个模块的第一题
+                if (!nextCard || !nextCard.classList.contains('question-card')) {
+                    // 查找下一个模块
+                    let nextModule = questionCard.closest('.mb-8').nextElementSibling;
+                    
+                    // 如果找到下一个模块，则展开该模块的第一个问题
+                    if (nextModule) {
+                        nextCard = nextModule.querySelector('.question-card');
+                    }
+                }
+                
+                if (nextCard && nextCard.classList.contains('question-card')) {
+                    // 直接展开下一题
+                    nextCard.classList.add('active');
+                    const nextIcon = nextCard.querySelector('.fa-chevron-down, .fa-chevron-up');
+                    if (nextIcon) {
+                        nextIcon.classList.remove('fa-chevron-down');
+                        nextIcon.classList.add('fa-chevron-up');
+                    }
+                    
+                    // 滚动到下一题
+                    nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 300);
+        }
+        
+        // 验证问卷
+        function validateQuestionnaire() {
+            const questionCards = document.querySelectorAll('.question-card');
+            let allAnswered = true;
+            
+            questionCards.forEach(card => {
+                const questionId = card.dataset.questionId;
+                if (!answers[questionId]) {
+                    card.classList.add('error-border');
+                    allAnswered = false;
+                } else {
+                    card.classList.remove('error-border');
+                }
+            });
+            
+            return allAnswered;
+        }
+        
+        // 生成报告 - 彻底重写版本
+        function generateReport() {
+            console.log('=== 开始生成报告（重写版本）===');
+            
+            try {
+                // 1. 首先确保获取所有问题的答案
+                const questionCards = document.querySelectorAll('.question-card');
+                questionCards.forEach(card => {
+                    const questionId = card.dataset.questionId;
+                    if (!answers[questionId]) {
+                        // 尝试从DOM中获取答案
+                        const selectedOption = card.querySelector('.option.selected');
+                        if (selectedOption) {
+                            answers[questionId] = selectedOption.dataset.value;
+                        } else {
+                            // 检查是否有radio被选中
+                            const checkedRadio = card.querySelector('input[type="radio"]:checked');
+                            if (checkedRadio) {
+                                answers[questionId] = checkedRadio.value;
+                            }
+                        }
+                    }
+                });
+                
+                console.log('所有问题答案:', answers);
+                
+                // 2. 计算各模块得分和总分
+                const moduleScores = calculateModuleScores();
+                const totalScore = calculateTotalScore(moduleScores);
+                const riskLevel = determineRiskLevel(totalScore);
+                
+                console.log('模块得分:', moduleScores);
+                console.log('总分:', totalScore);
+                console.log('风险等级:', riskLevel);
+                
+                // 3. 生成报告内容
+                generateReportContent(totalScore, riskLevel, moduleScores);
+                
+                // 4. 绘制雷达图
+                try {
+                    const radarChartElement = document.getElementById('radarChart');
+                    if (radarChartElement) {
+                        drawRadarChart(moduleScores);
+                    } else {
+                        console.log('雷达图元素不存在，跳过绘图');
+                    }
+                } catch (error) {
+                    console.log('雷达图绘制失败:', error);
+                }
+                
+                // 5. 保存报告数据
+                saveReportData(totalScore, riskLevel, moduleScores);
+                
+                console.log('=== 报告生成完成 ===');
+                
+            } catch (error) {
+                console.error('生成报告时发生错误:', error);
+                alert('生成报告时发生错误，请检查控制台日志');
+            }
+        }
+        
+        // 生成报告内容 - 新增函数
+        function generateReportContent(totalScore, riskLevel, moduleScores) {
+            // 1. 更新总分、风险等级和完成时间
+            updateReportHeader(totalScore, riskLevel);
+            
+            // 2. 生成错误答案提示
+            generateWrongAnswersNew();
+            
+            // 3. 生成改进建议
+            generateImprovementSuggestionsNew();
+        }
+        
+        // 更新报告头部信息 - 新增函数
+        function updateReportHeader(totalScore, riskLevel) {
+            const today = new Date();
+            const formattedDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+            
+            // 更新总分
+            const totalScoreElement = document.getElementById('totalScore');
+            if (totalScoreElement) {
+                totalScoreElement.textContent = `${totalScore}/100`;
+                totalScoreElement.style.display = 'block';
+                totalScoreElement.style.visibility = 'visible';
+                totalScoreElement.style.fontSize = '4rem';
+                totalScoreElement.style.fontWeight = 'bold';
+                totalScoreElement.style.color = '#3B82F6';
+            }
+            
+            // 更新风险等级
+            const riskLevelElement = document.getElementById('riskLevel');
+            if (riskLevelElement) {
+                riskLevelElement.textContent = getRiskLevelText(riskLevel);
+                riskLevelElement.className = `risk-level ${getRiskLevelClass(riskLevel)}`;
+                riskLevelElement.style.display = 'block';
+                riskLevelElement.style.visibility = 'visible';
+            }
+            
+            // 更新完成时间
+            const completionTimeElement = document.getElementById('completionTime');
+            if (completionTimeElement) {
+                completionTimeElement.textContent = formattedDate;
+                completionTimeElement.style.display = 'block';
+                completionTimeElement.style.visibility = 'visible';
+            }
+            
+            console.log('报告头部信息已更新');
+        }
+        
+        // 生成错误答案提示 - 新版本
+        function generateWrongAnswersNew() {
+            console.log('开始生成错误答案提示（新版本）...');
+            
+            // 找到错误答案容器 - 使用更可靠的选择器
+            let wrongAnswersContainer = document.getElementById('wrongAnswersContainer');
+            
+            if (!wrongAnswersContainer) {
+                // 尝试通过标题查找
+                const headers = document.querySelectorAll('#report-page h3');
+                for (let header of headers) {
+                    if (header.textContent.includes('错误答案')) {
+                        wrongAnswersContainer = header.nextElementSibling;
+                        break;
+                    }
+                }
+            }
+            
+            if (!wrongAnswersContainer) {
+                console.error('错误答案容器不存在，尝试创建新容器');
+                // 创建新的错误答案容器
+                const reportPage = document.getElementById('report-page');
+                if (reportPage) {
+                    // 查找改进建议部分
+                    const improvementSection = document.getElementById('improvementSuggestions') || 
+                                              document.querySelector('#report-page .mb-8:nth-child(5)');
+                    
+                    // 创建错误答案容器
+                    wrongAnswersContainer = document.createElement('div');
+                    wrongAnswersContainer.id = 'wrongAnswersContainer';
+                    wrongAnswersContainer.className = 'mb-8';
+                    
+                    // 添加标题
+                    const titleElement = document.createElement('h3');
+                    titleElement.className = 'text-xl font-bold mb-4 text-primary';
+                    titleElement.textContent = '错误答案';
+                    wrongAnswersContainer.appendChild(titleElement);
+                    
+                    // 如果找到改进建议部分，在其前面插入
+                    if (improvementSection) {
+                        reportPage.insertBefore(wrongAnswersContainer, improvementSection);
+                    } else {
+                        // 否则直接添加到报告页面
+                        reportPage.appendChild(wrongAnswersContainer);
+                    }
+                } else {
+                    console.error('无法找到报告页面容器');
+                    return;
+                }
+            }
+            
+            // 清空现有内容
+            wrongAnswersContainer.innerHTML = '';
+            
+            // 获取回答错误的问题
+            const wrongQuestions = [];
+            
+            // 遍历所有问题，找出回答错误的问题
+            Object.keys(correctAnswers).forEach(questionId => {
+                const userAnswer = answers[questionId];
+                const correctAnswer = correctAnswers[questionId];
+                
+                // 只有用户有回答且回答错误时才添加到错误问题列表
+                if (userAnswer && userAnswer !== correctAnswer) {
+                    // 从DOM中获取问题信息
+                    const questionCard = document.querySelector(`.question-card[data-question-id="${questionId}"]`);
+                    if (questionCard) {
+                        // 获取问题文本
+                        const questionTextElement = questionCard.querySelector('.question-header span:nth-child(2)');
+                        const questionText = questionTextElement ? questionTextElement.textContent : `问题${questionId}`;
+                        
+                        // 获取用户答案的选项文本
+                        const userOption = questionCard.querySelector(`.option[data-value="${userAnswer}"] span`);
+                        const userAnswerText = userOption ? userOption.textContent : userAnswer;
+                        
+                        // 获取正确答案的选项文本
+                        const correctOption = questionCard.querySelector(`.option[data-value="${correctAnswer}"] span`);
+                        const correctAnswerText = correctOption ? correctOption.textContent : correctAnswer;
+                        
+                        // 获取法规依据
+                        const lawReference = getLawReference(questionId);
+                        
+                        // 获取改进建议
+                        const improvementSuggestion = getImprovementSuggestion(questionId);
+                        
+                        wrongQuestions.push({
+                            id: questionId,
+                            question: questionText,
+                            userAnswer: userAnswer,
+                            userAnswerText: userAnswerText,
+                            correctAnswer: correctAnswer,
+                            correctAnswerText: correctAnswerText,
+                            lawReference: lawReference,
+                            improvementSuggestion: improvementSuggestion
+                        });
+                    }
+                }
+            });
+            
+            console.log('错误问题数量:', wrongQuestions.length);
+            
+            // 如果有错误答案，显示错误答案
+            if (wrongQuestions.length > 0) {
+                wrongQuestions.forEach((question, index) => {
+                    const answerDiv = document.createElement('div');
+                    answerDiv.className = 'bg-red-50 border-l-4 border-red-500 p-4 rounded mb-4';
+                    answerDiv.innerHTML = `
+                        <p class="font-medium mb-2">${index + 1}. ${question.question}</p>
+                        <p class="text-sm text-gray-600 mb-1">您的答案：${question.userAnswerText}</p>
+                        <p class="text-sm text-gray-600 mb-1">正确答案：${question.correctAnswerText}</p>
+                        <p class="text-sm text-gray-600 mb-1">法规依据：${question.lawReference}</p>
+                        <p class="text-sm text-gray-600">改进建议：${question.improvementSuggestion}</p>
+                    `;
+                    wrongAnswersContainer.appendChild(answerDiv);
+                });
+            } else {
+                // 如果没有错误答案，显示恭喜提示
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'bg-green-50 border-l-4 border-green-500 p-4 rounded';
+                answerDiv.innerHTML = `
+                    <p class="font-medium mb-2">恭喜！所有问题回答正确</p>
+                    <p class="text-sm text-gray-600">您的组织在合规方面表现良好，请继续保持</p>
+                `;
+                wrongAnswersContainer.appendChild(answerDiv);
+            }
+            
+            console.log('错误答案提示生成完成');
+        }
+        
+        // 获取法规依据 - 新增函数
+        function getLawReference(questionId) {
+            const lawReferences = {
+                '1': '《慈善法》第22条',
+                '2': '《慈善法》第10条',
+                '3': '《慈善法》第17条',
+                '4': '《慈善法》第60条',
+                '5': '《慈善组织信息公开办法》第8条',
+                '6': '《民间非营利组织会计制度》第5条',
+                '7': '《慈善法》第54条',
+                '8': '《慈善法》第16条',
+                '9': '《慈善法》第55条',
+                '10': '《慈善法》第52条',
+                '11': '《慈善法》第57条',
+                '12': '《慈善法》第58条',
+                '13': '《慈善法》第72条',
+                '14': '《慈善组织信息公开办法》第10条',
+                '15': '《慈善组织信息公开办法》第13条',
+                '16': '《企业所得税法》第9条',
+                '17': '《慈善法》第80条',
+                '18': '《慈善法》第18条'
+            };
+            
+            return lawReferences[questionId] || '';
+        }
+        
+        // 获取改进建议 - 新增函数
+        function getImprovementSuggestion(questionId) {
+            const improvementSuggestions = {
+                '1': '请及时在民政部门指定的慈善组织信息平台公开募捐方案，并定期更新募捐情况。',
+                '2': '建议建立完善的财务管理制度，确保资金使用透明合规，并定期进行内部审计。',
+                '3': '请按照《慈善法》规定，及时向登记管理机关报送年度工作报告和财务会计报告。',
+                '4': '建议聘请具有资质的会计师事务所进行年度审计，并按照规定公开审计报告。',
+                '5': '请按照《慈善组织信息公开办法》要求，及时在指定平台公开财务信息，接受社会监督。',
+                '6': '建议建立项目管理制度，明确项目负责人，制定项目计划，确保项目实施符合慈善宗旨。',
+                '7': '请建立完善的内部治理结构，明确决策机构、执行机构和监督机构的职责分工。',
+                '8': '建议制定详细的内部管理制度，包括人事管理、财务管理、项目管理等方面。',
+                '9': '请定期开展内部合规自查，及时发现并解决潜在的合规风险。',
+                '10': '建议建立项目评估机制，对项目实施效果进行定期评估，并根据评估结果改进工作。',
+                '11': '请确保项目资金专款专用，建立资金使用审批流程，防止资金挪用。',
+                '12': '建议建立项目档案管理制度，完整记录项目实施过程，保存相关文件资料。',
+                '13': '请按照《慈善法》规定，在民政部门指定的慈善组织信息平台公开年度工作报告。',
+                '14': '建议及时公开慈善项目实施情况，包括项目进展、资金使用、受益对象等信息。',
+                '15': '请按照《慈善组织信息公开办法》要求，及时公开重大资产变动情况和关联交易信息。',
+                '16': '建议了解并享受符合条件的税收优惠政策，同时按规定履行纳税义务。',
+                '17': '请按照《慈善法》规定，及时向税务部门报送相关材料，申请享受税收优惠。',
+                '18': '建议建立税务合规管理制度，定期进行税务自查，确保税务申报准确及时。'
+            };
+            
+            return improvementSuggestions[questionId] || '';
+        }
+        
+        // 生成改进建议 - 新版本
+        function generateImprovementSuggestionsNew() {
+            console.log('开始生成改进建议（新版本）...');
+            
+            // 找到改进建议容器 - 使用更可靠的选择器
+            let improvementSection = document.querySelector('#report-page .mb-8:nth-child(5)');
+            
+            // 如果找不到，尝试其他选择器
+            if (!improvementSection) {
+                improvementSection = document.querySelector('#improvementSuggestions');
+            }
+            
+            if (!improvementSection) {
+                improvementSection = document.querySelector('#report-page .improvement-suggestions');
+            }
+            
+            if (!improvementSection) {
+                // 尝试通过标题查找
+                const headers = document.querySelectorAll('#report-page h3');
+                for (let header of headers) {
+                    if (header.textContent.includes('改进建议')) {
+                        improvementSection = header.parentElement;
+                        break;
+                    }
+                }
+            }
+            
+            if (!improvementSection) {
+                console.error('改进建议部分不存在，尝试创建新容器');
+                // 创建新的改进建议容器
+                const reportPage = document.getElementById('report-page');
+                if (reportPage) {
+                    improvementSection = document.createElement('div');
+                    improvementSection.className = 'mb-8';
+                    improvementSection.id = 'improvementSuggestions';
+                    
+                    // 添加标题
+                    const titleElement = document.createElement('h3');
+                    titleElement.className = 'text-xl font-bold mb-4 text-primary';
+                    titleElement.textContent = '改进建议';
+                    improvementSection.appendChild(titleElement);
+                    
+                    // 添加到报告页面
+                    reportPage.appendChild(improvementSection);
+                } else {
+                    console.error('无法找到报告页面容器');
+                    return;
+                }
+            }
+            
+            // 定义问题与模块对应关系
+            const moduleRanges = {
+                '登记注册': ['1', '2', '3'],
+                '财务管理': ['4', '5', '6'],
+                '运营管理': ['7', '8', '9'],
+                '项目实施': ['10', '11', '12'],
+                '信息披露': ['13', '14', '15'],
+                '税务合规': ['16', '17', '18']
+            };
+            
+            // 定义各模块的改进建议
+            const moduleSuggestions = {
+                '登记注册': '完善登记备案材料归档机制，明确章程修订、分支机构设立等重大事项的审批流程和民政部门报备时限。指定专人负责资质证书（法人登记证书、免税资格证明等）的保管与年检，确保证书持续有效。',
+                '财务管理': '建立捐赠资金专项核算制度，区分限定性与非限定性资产，确保资金使用与捐赠约定一致。规范票据管理与费用报销流程，定期开展财务内部审计，每季度核对资金收支明细，防范财务风险。',
+                '运营管理': '健全理事会、监事会运作机制，明确议事规则和决策流程，确保重大事项集体决策。完善员工岗位职责说明书与合规培训计划，每年至少开展 2 次《慈善法》及相关法规培训，提升全员合规意识。',
+                '项目实施': '制定项目全流程管理规范，明确立项调研、方案审批、执行监控、结项评估的标准与责任分工。建立受益对象筛选机制和项目效果跟踪体系，留存项目执行过程性资料（如活动记录、受益人签字等），确保项目透明可追溯。',
+                '信息披露': '搭建官网、公众号等固定披露渠道，按规定及时公开年度工作报告、财务收支情况、项目执行进度及捐赠资金使用明细。统一披露内容的格式与口径，确保信息真实、准确、完整，方便社会监督。',
+                '税务合规': '指定专人负责税务申报工作，按时完成增值税、企业所得税等税种的申报与缴纳，留存完整纳税凭证。定期对接税务部门，核实免税资格备案及捐赠票据抵扣相关要求，确保税务处理符合法规规定。'
+            };
+            
+            // 识别高风险模块
+            const highRiskModules = [];
+            
+            // 遍历每个模块，计算错误率
+            for (const [moduleName, questionIds] of Object.entries(moduleRanges)) {
+                let wrongCount = 0;
+                let totalAnswered = 0;
+                
+                questionIds.forEach(questionId => {
+                    const userAnswer = answers[questionId];
+                    const correctAnswer = correctAnswers[questionId];
+                    
+                    // 只有用户有回答时才计入总数
+                    if (userAnswer) {
+                        totalAnswered++;
+                        if (userAnswer !== correctAnswer) {
+                            wrongCount++;
+                        }
+                    }
+                });
+                
+                // 如果错误率超过50%，认为是高风险模块
+                if (totalAnswered > 0 && (wrongCount / totalAnswered) > 0.5) {
+                    highRiskModules.push(moduleName);
+                }
+            }
+            
+            // 清空现有内容（保留标题）
+            const titleElement = improvementSection.querySelector('h3');
+            improvementSection.innerHTML = '';
+            if (titleElement) {
+                improvementSection.appendChild(titleElement);
+            }
+            
+            // 添加改进建议
+            if (highRiskModules.length > 0) {
+                // 添加高风险模块提示
+                const riskPromptDiv = document.createElement('div');
+                riskPromptDiv.className = 'bg-red-50 border-l-4 border-red-500 p-4 rounded mb-4';
+                riskPromptDiv.innerHTML = `
+                    <p class="font-medium mb-2">高风险模块提示</p>
+                    <p class="text-sm text-gray-600">根据您的问卷答案，以下模块存在较高合规风险，需要重点关注和改进：</p>
+                `;
+                improvementSection.appendChild(riskPromptDiv);
+                
+                // 为每个高风险模块添加改进建议
+                highRiskModules.forEach((moduleName, index) => {
+                    const suggestionDiv = document.createElement('div');
+                    suggestionDiv.className = 'bg-white border border-gray-200 rounded-lg p-4 mb-4 shadow-sm';
+                    suggestionDiv.innerHTML = `
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-red-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h4 class="font-medium text-lg mb-2">${index + 1}. ${moduleName}</h4>
+                                <p class="text-sm text-gray-600 mt-1">${moduleSuggestions[moduleName]}</p>
+                            </div>
+                        </div>
+                    `;
+                    improvementSection.appendChild(suggestionDiv);
+                });
+            } else {
+                // 如果没有高风险模块，显示恭喜提示
+                const suggestionDiv = document.createElement('div');
+                suggestionDiv.className = 'bg-green-50 border-l-4 border-green-500 p-4 rounded';
+                suggestionDiv.innerHTML = `
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">恭喜！您的组织在合规方面表现良好</p>
+                            <p class="text-sm text-gray-600 mt-1">所有模块的风险水平均在可控范围内，请继续保持良好的合规管理，定期进行自查，确保持续符合法规要求</p>
+                        </div>
+                    </div>
+                `;
+                improvementSection.appendChild(suggestionDiv);
+            }
+            
+            console.log('改进建议生成完成');
+        }
+        
+        // 生成错误答案提示
+        function generateWrongAnswers() {
+            // 确保获取所有问题的答案，包括未选中的问题
+            const questionCards = document.querySelectorAll('.question-card');
+            questionCards.forEach(card => {
+                const questionId = card.dataset.questionId;
+                if (!answers[questionId]) {
+                    // 如果answers中没有该问题的答案，尝试从DOM中获取
+                    const selectedOption = card.querySelector('.option.selected');
+                    if (selectedOption) {
+                        answers[questionId] = selectedOption.dataset.value;
+                    } else {
+                        // 如果没有选中的选项，检查是否有radio被选中
+                        const checkedRadio = card.querySelector('input[type="radio"]:checked');
+                        if (checkedRadio) {
+                            answers[questionId] = checkedRadio.value;
+                        }
+                    }
+                }
+            });
+            
+            // 预定义的问题文本和选项文本
+            const questionTexts = {
+                '1': '慈善组织公开募捐方案应在哪个平台公布？',
+                '2': '慈善组织是否需要建立财务管理制度？',
+                '3': '慈善组织年度工作报告应向哪个机关报送？',
+                '4': '慈善组织年度管理费用比例不得超过多少？',
+                '5': '以下哪项支出不可计入业务活动成本？',
+                '6': '慈善组织接受政府购买服务收入是否需要缴纳企业所得税？',
+                '7': '慈善组织重大投资方案需经多少比例决策机构成员同意？',
+                '8': '慈善组织负责人能否在关联企业兼职？',
+                '9': '慈善组织与关联方交易需遵循的原则是？',
+                '10': '慈善组织项目资金管理应遵循什么原则？',
+                '11': '慈善组织项目评估应多久进行一次？',
+                '12': '慈善组织项目档案应保存多久？',
+                '13': '慈善组织年度工作报告应在什么时间前公开？',
+                '14': '慈善组织项目实施情况应多久公开一次？',
+                '15': '慈善组织重大资产变动情况应多久公开一次？',
+                '16': '慈善组织捐赠收入是否需要缴纳企业所得税？',
+                '17': '慈善组织申请税收优惠应向哪个部门申请？',
+                '18': '慈善组织税务合规应多久进行一次自查？'
+            };
+            
+            const optionTexts = {
+                '1': {
+                    'A': 'A. 民政部门指定的慈善组织信息平台',
+                    'B': 'B. 组织自建网站',
+                    'C': 'C. 微信公众号',
+                    'D': 'D. 无需公开'
+                },
+                '2': {
+                    'A': 'A. 需要',
+                    'B': 'B. 不需要',
+                    'C': 'C. 视规模而定',
+                    'D': 'D. 仅大型组织需要'
+                },
+                '3': {
+                    'A': 'A. 民政部门',
+                    'B': 'B. 税务部门',
+                    'C': 'C. 业务主管单位',
+                    'D': 'D. 无需报送'
+                },
+                '4': {
+                    'A': 'A. 5%',
+                    'B': 'B. 10%',
+                    'C': 'C. 15%',
+                    'D': 'D. 20%'
+                },
+                '5': {
+                    'A': 'A. 项目执行差旅费',
+                    'B': 'B. 理事会会议场地租赁费',
+                    'C': 'C. 志愿者培训材料费',
+                    'D': 'D. 理事个人旅游费用'
+                },
+                '6': {
+                    'A': 'A. 需要',
+                    'B': 'B. 免除',
+                    'C': 'C. 部分免除',
+                    'D': 'D. 视金额而定'
+                },
+                '7': {
+                    'A': 'A. 二分之一',
+                    'B': 'B. 三分之二',
+                    'C': 'C. 四分之三',
+                    'D': 'D. 全体一致'
+                },
+                '8': {
+                    'A': 'A. 可以',
+                    'B': 'B. 禁止',
+                    'C': 'C. 需民政部门批准',
+                    'D': 'D. 无限制'
+                },
+                '9': {
+                    'A': 'A. 互利共赢',
+                    'B': 'B. 公开透明',
+                    'C': 'C. 自愿平等',
+                    'D': 'D. 利益最大化'
+                },
+                '10': {
+                    'A': 'A. 专款专用',
+                    'B': 'B. 统筹使用',
+                    'C': 'C. 灵活调配',
+                    'D': 'D. 无限制'
+                },
+                '11': {
+                    'A': 'A. 每月一次',
+                    'B': 'B. 每季度一次',
+                    'C': 'C. 每半年一次',
+                    'D': 'D. 每年一次'
+                },
+                '12': {
+                    'A': 'A. 3年',
+                    'B': 'B. 5年',
+                    'C': 'C. 10年',
+                    'D': 'D. 永久保存'
+                },
+                '13': {
+                    'A': 'A. 每年3月31日前',
+                    'B': 'B. 每年6月30日前',
+                    'C': 'C. 每年9月30日前',
+                    'D': 'D. 每年12月31日前'
+                },
+                '14': {
+                    'A': 'A. 每月一次',
+                    'B': 'B. 每季度一次',
+                    'C': 'C. 每半年一次',
+                    'D': 'D. 每年一次'
+                },
+                '15': {
+                    'A': 'A. 每月一次',
+                    'B': 'B. 每季度一次',
+                    'C': 'C. 每半年一次',
+                    'D': 'D. 每年一次'
+                },
+                '16': {
+                    'A': 'A. 需要',
+                    'B': 'B. 免除',
+                    'C': 'C. 部分免除',
+                    'D': 'D. 视金额而定'
+                },
+                '17': {
+                    'A': 'A. 民政部门',
+                    'B': 'B. 税务部门',
+                    'C': 'C. 业务主管单位',
+                    'D': 'D. 财政部门'
+                },
+                '18': {
+                    'A': 'A. 每月一次',
+                    'B': 'B. 每季度一次',
+                    'C': 'C. 每半年一次',
+                    'D': 'D. 每年一次'
+                }
+            };
+            
+            // 获取回答错误的问题
+            const wrongQuestions = [];
+            
+            // 遍历所有问题，找出回答错误的问题
+            Object.keys(correctAnswers).forEach(questionId => {
+                const userAnswer = answers[questionId];
+                const correctAnswer = correctAnswers[questionId];
+                
+                // 如果用户答案与正确答案不同，则认为是错误答案
+                if (userAnswer !== correctAnswer) {
+                    // 获取问题文本
+                    const questionText = questionTexts[questionId] || '';
+                    
+                    // 获取用户答案的选项文本
+                    const userAnswerText = optionTexts[questionId] && optionTexts[questionId][userAnswer] ? optionTexts[questionId][userAnswer] : '';
+                    
+                    // 获取正确答案的选项文本
+                    const correctAnswerText = optionTexts[questionId] && optionTexts[questionId][correctAnswer] ? optionTexts[questionId][correctAnswer] : '';
+                    
+                    // 获取法规依据
+                    let lawReference = '';
+                    // 获取改进建议
+                    let improvementSuggestion = '';
+                    
+                    // 根据问题ID获取法规依据和改进建议
+                    if (questionId === '1') {
+                        lawReference = '《慈善法》第22条';
+                        improvementSuggestion = '请及时在民政部门指定的慈善组织信息平台公开募捐方案，并定期更新募捐情况。';
+                    }
+                    else if (questionId === '2') {
+                        lawReference = '《慈善法》第10条';
+                        improvementSuggestion = '建议建立完善的财务管理制度，确保资金使用透明合规，并定期进行内部审计。';
+                    }
+                    else if (questionId === '3') {
+                        lawReference = '《慈善法》第17条';
+                        improvementSuggestion = '请按照《慈善法》规定，及时向登记管理机关报送年度工作报告和财务会计报告。';
+                    }
+                    else if (questionId === '4') {
+                        lawReference = '《慈善法》第60条';
+                        improvementSuggestion = '建议聘请具有资质的会计师事务所进行年度审计，并按照规定公开审计报告。';
+                    }
+                    else if (questionId === '5') {
+                        lawReference = '《慈善组织信息公开办法》第8条';
+                        improvementSuggestion = '请按照《慈善组织信息公开办法》要求，及时在指定平台公开财务信息，接受社会监督。';
+                    }
+                    else if (questionId === '6') {
+                        lawReference = '《民间非营利组织会计制度》第5条';
+                        improvementSuggestion = '建议建立项目管理制度，明确项目负责人，制定项目计划，确保项目实施符合慈善宗旨。';
+                    }
+                    else if (questionId === '7') {
+                        lawReference = '《慈善法》第54条';
+                        improvementSuggestion = '请建立完善的内部治理结构，明确决策机构、执行机构和监督机构的职责分工。';
+                    }
+                    else if (questionId === '8') {
+                        lawReference = '《慈善法》第16条';
+                        improvementSuggestion = '建议制定详细的内部管理制度，包括人事管理、财务管理、项目管理等方面。';
+                    }
+                    else if (questionId === '9') {
+                        lawReference = '《慈善法》第55条';
+                        improvementSuggestion = '请定期开展内部合规自查，及时发现并解决潜在的合规风险。';
+                    }
+                    else if (questionId === '10') {
+                        lawReference = '《慈善法》第52条';
+                        improvementSuggestion = '建议建立项目评估机制，对项目实施效果进行定期评估，并根据评估结果改进工作。';
+                    }
+                    else if (questionId === '11') {
+                        lawReference = '《慈善法》第57条';
+                        improvementSuggestion = '请确保项目资金专款专用，建立资金使用审批流程，防止资金挪用。';
+                    }
+                    else if (questionId === '12') {
+                        lawReference = '《慈善法》第58条';
+                        improvementSuggestion = '建议建立项目档案管理制度，完整记录项目实施过程，保存相关文件资料。';
+                    }
+                    else if (questionId === '13') {
+                        lawReference = '《慈善法》第72条';
+                        improvementSuggestion = '请按照《慈善法》规定，在民政部门指定的慈善组织信息平台公开年度工作报告。';
+                    }
+                    else if (questionId === '14') {
+                        lawReference = '《慈善组织信息公开办法》第10条';
+                        improvementSuggestion = '建议及时公开慈善项目实施情况，包括项目进展、资金使用、受益对象等信息。';
+                    }
+                    else if (questionId === '15') {
+                        lawReference = '《慈善组织信息公开办法》第13条';
+                        improvementSuggestion = '请按照《慈善组织信息公开办法》要求，及时公开重大资产变动情况和关联交易信息。';
+                    }
+                    else if (questionId === '16') {
+                        lawReference = '《企业所得税法》第9条';
+                        improvementSuggestion = '建议了解并享受符合条件的税收优惠政策，同时按规定履行纳税义务。';
+                    }
+                    else if (questionId === '17') {
+                        lawReference = '《慈善法》第80条';
+                        improvementSuggestion = '请按照《慈善法》规定，及时向税务部门报送相关材料，申请享受税收优惠。';
+                    }
+                    else if (questionId === '18') {
+                        lawReference = '《慈善法》第18条';
+                        improvementSuggestion = '建议建立税务合规管理制度，定期进行税务自查，确保税务申报准确及时。';
+                    }
+                    
+                    wrongQuestions.push({
+                        id: questionId,
+                        question: questionText,
+                        userAnswer: userAnswer,
+                        userAnswerText: userAnswerText,
+                        correctAnswer: correctAnswer,
+                        correctAnswerText: correctAnswerText,
+                        lawReference: lawReference,
+                        improvementSuggestion: improvementSuggestion
+                    });
+                }
+            });
+            
+            // 获取错误答案容器
+            const wrongAnswersContainer = document.getElementById('wrongAnswersContainer');
+            if (wrongAnswersContainer) {
+                // 清空现有内容
+                wrongAnswersContainer.innerHTML = '';
+                
+                // 如果有错误答案，显示对应的错误答案
+                if (wrongQuestions.length > 0) {
+                    wrongQuestions.forEach((question, index) => {
+                        const answerDiv = document.createElement('div');
+                        answerDiv.className = 'bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded mb-4';
+                        answerDiv.innerHTML = `
+                            <p class="font-medium mb-2">${index + 1}. ${question.question}</p>
+                            <p class="text-sm text-gray-600 mb-1">您的答案：${question.userAnswerText}</p>
+                            <p class="text-sm text-gray-600 mb-1">正确答案：${question.correctAnswerText}</p>
+                            <p class="text-sm text-gray-600 mb-1">法规依据：${question.lawReference}</p>
+                            <p class="text-sm text-gray-600">改进建议：${question.improvementSuggestion}</p>
+                        `;
+                        wrongAnswersContainer.appendChild(answerDiv);
+                    });
+                } else {
+                    // 如果没有错误答案，显示恭喜提示
+                    const answerDiv = document.createElement('div');
+                    answerDiv.className = 'bg-green-50 border-l-4 border-green-500 p-4 rounded';
+                    answerDiv.innerHTML = `
+                        <p class="font-medium mb-2">恭喜！所有问题回答正确</p>
+                        <p class="text-sm text-gray-600">您的组织在合规方面表现良好，请继续保持</p>
+                    `;
+                    wrongAnswersContainer.appendChild(answerDiv);
+                }
+            }
+        }
+        
+        // 生成正确答案板块
+        function generateCorrectAnswers() {
+            console.log('开始生成正确答案板块...');
+            
+            // 确保获取所有问题的答案，包括未选中的问题
+            const questionCards = document.querySelectorAll('.question-card');
+            questionCards.forEach(card => {
+                const questionId = card.dataset.questionId;
+                if (!answers[questionId]) {
+                    // 如果answers中没有该问题的答案，尝试从DOM中获取
+                    const selectedOption = card.querySelector('.option.selected');
+                    if (selectedOption) {
+                        answers[questionId] = selectedOption.dataset.value;
+                    } else {
+                        // 如果没有选中的选项，检查是否有radio被选中
+                        const checkedRadio = card.querySelector('input[type="radio"]:checked');
+                        if (checkedRadio) {
+                            answers[questionId] = checkedRadio.value;
+                        }
+                    }
+                }
+            });
+            
+            console.log('所有问题答案:', answers);
+            
+            // 获取正确答案容器
+            const correctAnswersContainer = document.getElementById('correctAnswersContainer');
+            if (!correctAnswersContainer) {
+                console.log('正确答案容器不存在');
+                return;
+            }
+            
+            // 清空现有内容
+            correctAnswersContainer.innerHTML = '';
+            
+            // 获取回答错误的问题
+            const wrongQuestions = [];
+            
+            // 遍历所有问题，找出回答错误的问题
+            Object.keys(correctAnswers).forEach(questionId => {
+                const userAnswer = answers[questionId];
+                const correctAnswer = correctAnswers[questionId];
+                
+                console.log(`问题${questionId}: 用户答案=${userAnswer}, 正确答案=${correctAnswer}`);
+                
+                // 只有用户有回答且回答错误时才添加到错误问题列表
+                if (userAnswer && userAnswer !== correctAnswer) {
+                    // 从DOM中获取问题信息
+                    const questionCard = document.querySelector(`.question-card[data-question-id="${questionId}"]`);
+                    if (questionCard) {
+                        // 获取问题文本
+                        const questionTextElement = questionCard.querySelector('.question-header span:nth-child(2)');
+                        const questionText = questionTextElement ? questionTextElement.textContent : `问题${questionId}`;
+                        
+                        // 获取用户答案的选项文本
+                        const userOption = questionCard.querySelector(`.option[data-value="${userAnswer}"] span`);
+                        const userAnswerText = userOption ? userOption.textContent : userAnswer;
+                        
+                        // 获取正确答案的选项文本
+                        const correctOption = questionCard.querySelector(`.option[data-value="${correctAnswer}"] span`);
+                        const correctAnswerText = correctOption ? correctOption.textContent : correctAnswer;
+                        
+                        // 获取法规依据（使用与generateWrongAnswers相同的逻辑）
+                        let lawReference = '';
+                        if (questionId === '1') lawReference = '《慈善法》第22条';
+                        else if (questionId === '2') lawReference = '《慈善法》第10条';
+                        else if (questionId === '3') lawReference = '《慈善法》第17条';
+                        else if (questionId === '4') lawReference = '《慈善法》第60条';
+                        else if (questionId === '5') lawReference = '《慈善组织信息公开办法》第8条';
+                        else if (questionId === '6') lawReference = '《民间非营利组织会计制度》第5条';
+                        else if (questionId === '7') lawReference = '《慈善法》第54条';
+                        else if (questionId === '8') lawReference = '《慈善法》第16条';
+                        else if (questionId === '9') lawReference = '《慈善法》第55条';
+                        else if (questionId === '10') lawReference = '《慈善法》第52条';
+                        else if (questionId === '11') lawReference = '《慈善法》第57条';
+                        else if (questionId === '12') lawReference = '《慈善法》第58条';
+                        else if (questionId === '13') lawReference = '《慈善法》第72条';
+                        else if (questionId === '14') lawReference = '《慈善组织信息公开办法》第10条';
+                        else if (questionId === '15') lawReference = '《慈善组织信息公开办法》第13条';
+                        else if (questionId === '16') lawReference = '《企业所得税法》第9条';
+                        else if (questionId === '17') lawReference = '《慈善法》第80条';
+                        else if (questionId === '18') lawReference = '《慈善法》第18条';
+                        
+                        // 获取改进建议（使用与generateWrongAnswers相同的逻辑）
+                        let improvementSuggestion = '';
+                        if (questionId === '1') improvementSuggestion = '请及时在民政部门指定的慈善组织信息平台公开募捐方案，并定期更新募捐情况。';
+                        else if (questionId === '2') improvementSuggestion = '建议建立完善的财务管理制度，确保资金使用透明合规，并定期进行内部审计。';
+                        else if (questionId === '3') improvementSuggestion = '请按照《慈善法》规定，及时向登记管理机关报送年度工作报告和财务会计报告。';
+                        else if (questionId === '4') improvementSuggestion = '建议聘请具有资质的会计师事务所进行年度审计，并按照规定公开审计报告。';
+                        else if (questionId === '5') improvementSuggestion = '请按照《慈善组织信息公开办法》要求，及时在指定平台公开财务信息，接受社会监督。';
+                        else if (questionId === '6') improvementSuggestion = '建议建立项目管理制度，明确项目负责人，制定项目计划，确保项目实施符合慈善宗旨。';
+                        else if (questionId === '7') improvementSuggestion = '请建立完善的内部治理结构，明确决策机构、执行机构和监督机构的职责分工。';
+                        else if (questionId === '8') improvementSuggestion = '建议制定详细的内部管理制度，包括人事管理、财务管理、项目管理等方面。';
+                        else if (questionId === '9') improvementSuggestion = '请定期开展内部合规自查，及时发现并解决潜在的合规风险。';
+                        else if (questionId === '10') improvementSuggestion = '建议建立项目评估机制，对项目实施效果进行定期评估，并根据评估结果改进工作。';
+                        else if (questionId === '11') improvementSuggestion = '请确保项目资金专款专用，建立资金使用审批流程，防止资金挪用。';
+                        else if (questionId === '12') improvementSuggestion = '建议建立项目档案管理制度，完整记录项目实施过程，保存相关文件资料。';
+                        else if (questionId === '13') improvementSuggestion = '请按照《慈善法》规定，在民政部门指定的慈善组织信息平台公开年度工作报告。';
+                        else if (questionId === '14') improvementSuggestion = '建议及时公开慈善项目实施情况，包括项目进展、资金使用、受益对象等信息。';
+                        else if (questionId === '15') improvementSuggestion = '请按照《慈善组织信息公开办法》要求，及时公开重大资产变动情况和关联交易信息。';
+                        else if (questionId === '16') improvementSuggestion = '建议了解并享受符合条件的税收优惠政策，同时按规定履行纳税义务。';
+                        else if (questionId === '17') improvementSuggestion = '请按照《慈善法》规定，及时向税务部门报送相关材料，申请享受税收优惠。';
+                        else if (questionId === '18') improvementSuggestion = '建议建立税务合规管理制度，定期进行税务自查，确保税务申报准确及时。';
+                        
+                        wrongQuestions.push({
+                            id: questionId,
+                            question: questionText,
+                            userAnswer: userAnswer,
+                            userAnswerText: userAnswerText,
+                            correctAnswer: correctAnswer,
+                            correctAnswerText: correctAnswerText,
+                            lawReference: lawReference,
+                            improvementSuggestion: improvementSuggestion
+                        });
+                    }
+                }
+            });
+            
+            console.log('错误问题数量:', wrongQuestions.length);
+            
+            // 如果有错误答案，显示对应的正确答案
+            if (wrongQuestions.length > 0) {
+                wrongQuestions.forEach((question, index) => {
+                    const answerDiv = document.createElement('div');
+                    answerDiv.className = 'bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4';
+                    answerDiv.innerHTML = `
+                        <p class="font-medium mb-2">${index + 1}. ${question.question}</p>
+                        <p class="text-sm text-gray-600 mb-1">您的答案：${question.userAnswerText}</p>
+                        <p class="text-sm text-gray-600 mb-1">正确答案：${question.correctAnswerText}</p>
+                        <p class="text-sm text-gray-600 mb-1">法规依据：${question.lawReference}</p>
+                        <p class="text-sm text-gray-600">改进建议：${question.improvementSuggestion}</p>
+                    `;
+                    correctAnswersContainer.appendChild(answerDiv);
+                });
+            } else {
+                // 如果没有错误答案，显示恭喜提示
+                const answerDiv = document.createElement('div');
+                answerDiv.className = 'bg-green-50 border-l-4 border-green-500 p-4 rounded';
+                answerDiv.innerHTML = `
+                    <p class="font-medium mb-2">恭喜！所有问题回答正确</p>
+                    <p class="text-sm text-gray-600">您的组织在合规方面表现良好，请继续保持</p>
+                `;
+                correctAnswersContainer.appendChild(answerDiv);
+            }
+            
+            console.log('正确答案板块生成完成');
+        }
+        
+        // 生成高风险问题
+        function generateHighRiskIssues() {
+            // 获取高风险问题
+            const highRiskQuestions = [];
+            
+            // 遍历所有问题，找出高风险答案
+            Object.keys(correctAnswers).forEach(questionId => {
+                const userAnswer = answers[questionId];
+                const correctAnswer = correctAnswers[questionId];
+                
+                // 根据问题ID和用户答案判断是否为高风险
+                let isHighRisk = false;
+                
+                // 问题1：选A或D → 高风险
+                if (questionId === '1' && (userAnswer === 'A' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题2：选A/C/D → 中风险（这里不处理）
+                // 问题3：选A/B/C/D → 高风险
+                else if (questionId === '3') {
+                    isHighRisk = true;
+                }
+                // 问题4：选A/C/D → 高风险
+                else if (questionId === '4' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题5：选C/D → 中风险（这里不处理）
+                // 问题6：选A → 中风险（这里不处理）
+                // 问题7：选A/C/D → 高风险
+                else if (questionId === '7' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题8：选A/C/D → 高风险
+                else if (questionId === '8' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题9：选A/C/D → 中风险（这里不处理）
+                // 问题10：选A/B/D → 高风险
+                else if (questionId === '10' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题11：选A/C/D → 高风险
+                else if (questionId === '11' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题12：选A/C/D → 中风险（这里不处理）
+                // 问题13：选A/C/D → 高风险
+                else if (questionId === '13' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题14：选A/B/D → 中风险（这里不处理）
+                // 问题15：选A/B/D → 高风险
+                else if (questionId === '15' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题16：选A/C/D → 高风险
+                else if (questionId === '16' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                // 问题17：选A/B/C → 高风险
+                else if (questionId === '17' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'C')) {
+                    isHighRisk = true;
+                }
+                // 问题18：选A/C/D → 高风险
+                else if (questionId === '18' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    isHighRisk = true;
+                }
+                
+                if (isHighRisk) {
+                    // 获取问题信息
+                    const questionCard = document.querySelector(`.question-card[data-question-id="${questionId}"]`);
+                    const questionTextElement = questionCard ? questionCard.querySelector('.question-header span:nth-child(2)') : null;
+                    const questionText = questionTextElement ? questionTextElement.textContent : '';
+                    
+                    // 获取用户答案的选项文本
+                    const userOption = questionCard ? questionCard.querySelector(`.option[data-value="${userAnswer}"] span`) : null;
+                    const userAnswerText = userOption ? userOption.textContent : '';
+                    
+                    // 获取正确答案的选项文本
+                    const correctOption = questionCard ? questionCard.querySelector(`.option[data-value="${correctAnswer}"] span`) : null;
+                    const correctAnswerText = correctOption ? correctOption.textContent : '';
+                    
+                    // 获取法规依据
+                    let lawReference = '';
+                    if (questionId === '1') lawReference = '《慈善法》第22条';
+                    else if (questionId === '3') lawReference = '《慈善法》第17条';
+                    else if (questionId === '4') lawReference = '《慈善法》第60条';
+                    else if (questionId === '7') lawReference = '《慈善法》第54条';
+                    else if (questionId === '8') lawReference = '《慈善法》第16条';
+                    else if (questionId === '10') lawReference = '《慈善法》第52条';
+                    else if (questionId === '11') lawReference = '《慈善法》第57条';
+                    else if (questionId === '13') lawReference = '《慈善法》第72条';
+                    else if (questionId === '15') lawReference = '《慈善组织信息公开办法》第13条';
+                    else if (questionId === '16') lawReference = '《企业所得税法》第9条';
+                    else if (questionId === '17') lawReference = '《慈善法》第80条';
+                    else if (questionId === '18') lawReference = '《慈善法》第18条';
+                    
+                    highRiskQuestions.push({
+                        id: questionId,
+                        question: questionText,
+                        userAnswer: userAnswer,
+                        userAnswerText: userAnswerText,
+                        correctAnswer: correctAnswer,
+                        correctAnswerText: correctAnswerText,
+                        lawReference: lawReference
+                    });
+                }
+            });
+            
+            // 获取高风险问题容器（注意：在layouts版本中，高风险问题是在第2个mb-8容器中）
+            const highRiskIssuesContainer = document.querySelector('#report-page .mb-8:nth-of-type(2)');
+            if (highRiskIssuesContainer) {
+                // 清空现有内容，保留标题
+                const title = highRiskIssuesContainer.querySelector('h3');
+                highRiskIssuesContainer.innerHTML = '';
+                highRiskIssuesContainer.appendChild(title);
+                
+                // 如果有高风险问题，显示对应的高风险问题
+                if (highRiskQuestions.length > 0) {
+                    highRiskQuestions.forEach((question, index) => {
+                        const issueDiv = document.createElement('div');
+                        issueDiv.className = 'bg-red-50 border-l-4 border-red-500 p-4 rounded mb-4';
+                        issueDiv.innerHTML = `
+                            <p class="font-medium mb-2">${index + 1}. ${question.question}</p>
+                            <p class="text-sm text-gray-600 mb-1">您的答案：${question.userAnswerText}</p>
+                            <p class="text-sm text-gray-600">法规依据：${question.lawReference}</p>
+                        `;
+                        highRiskIssuesContainer.appendChild(issueDiv);
+                    });
+                } else {
+                    // 如果没有高风险问题，显示合规提示
+                    const issueDiv = document.createElement('div');
+                    issueDiv.className = 'bg-green-50 border-l-4 border-green-500 p-4 rounded';
+                    issueDiv.innerHTML = `
+                        <p class="font-medium mb-2">恭喜！未发现高风险问题</p>
+                        <p class="text-sm text-gray-600">您的组织在合规方面表现良好，请继续保持</p>
+                    `;
+                    highRiskIssuesContainer.appendChild(issueDiv);
+                }
+            }
+        }
+        
+        // 生成改进建议
+        function generateImprovementSuggestions() {
+            // 获取需要改进建议的问题
+            const needImprovementQuestions = [];
+            
+            // 遍历所有问题，找出需要改进建议的答案
+            Object.keys(correctAnswers).forEach(questionId => {
+                const userAnswer = answers[questionId];
+                const correctAnswer = correctAnswers[questionId];
+                
+                // 根据问题ID和用户答案判断是否需要改进建议
+                let needImprovement = false;
+                
+                // 问题1：选A或D → 高风险，需要改进建议
+                if (questionId === '1' && (userAnswer === 'A' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题2：选A/C/D → 中风险，需要改进建议
+                else if (questionId === '2' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题3：选A/B/C/D → 高风险，需要改进建议
+                else if (questionId === '3') {
+                    needImprovement = true;
+                }
+                // 问题4：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '4' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题5：选C/D → 中风险，需要改进建议
+                else if (questionId === '5' && (userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题6：选A → 中风险，需要改进建议
+                else if (questionId === '6' && userAnswer === 'A') {
+                    needImprovement = true;
+                }
+                // 问题7：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '7' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题8：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '8' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题9：选A/C/D → 中风险，需要改进建议
+                else if (questionId === '9' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题10：选A/B/D → 高风险，需要改进建议
+                else if (questionId === '10' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题11：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '11' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题12：选A/C/D → 中风险，需要改进建议
+                else if (questionId === '12' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题13：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '13' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题14：选A/B/D → 中风险，需要改进建议
+                else if (questionId === '14' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题15：选A/B/D → 高风险，需要改进建议
+                else if (questionId === '15' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题16：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '16' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                // 问题17：选A/B/C → 高风险，需要改进建议
+                else if (questionId === '17' && (userAnswer === 'A' || userAnswer === 'B' || userAnswer === 'C')) {
+                    needImprovement = true;
+                }
+                // 问题18：选A/C/D → 高风险，需要改进建议
+                else if (questionId === '18' && (userAnswer === 'A' || userAnswer === 'C' || userAnswer === 'D')) {
+                    needImprovement = true;
+                }
+                
+                if (needImprovement) {
+                    // 获取问题信息
+                    const questionCard = document.querySelector(`.question-card[data-question-id="${questionId}"]`);
+                    const questionTextElement = questionCard ? questionCard.querySelector('.question-header span:nth-child(2)') : null;
+                    const questionText = questionTextElement ? questionTextElement.textContent : '';
+                    
+                    // 获取用户答案的选项文本
+                    const userOption = questionCard ? questionCard.querySelector(`.option[data-value="${userAnswer}"] span`) : null;
+                    const userAnswerText = userOption ? userOption.textContent : '';
+                    
+                    // 获取正确答案的选项文本
+                    const correctOption = questionCard ? questionCard.querySelector(`.option[data-value="${correctAnswer}"] span`) : null;
+                    const correctAnswerText = correctOption ? correctOption.textContent : '';
+                    
+                    needImprovementQuestions.push({
+                        id: questionId,
+                        question: questionText,
+                        userAnswer: userAnswer,
+                        userAnswerText: userAnswerText,
+                        correctAnswer: correctAnswer,
+                        correctAnswerText: correctAnswerText
+                    });
+                }
+            });
+            
+            // 获取改进建议容器
+            const improvementSuggestionsContainer = document.getElementById('improvementSuggestionsContainer');
+            if (improvementSuggestionsContainer) {
+                // 清空现有内容
+                improvementSuggestionsContainer.innerHTML = '';
+                
+                // 如果有需要改进的问题，显示对应的改进建议
+                if (needImprovementQuestions.length > 0) {
+                    // 创建建议容器
+                    const spaceY4Container = document.createElement('div');
+                    spaceY4Container.className = 'space-y-4';
+                    
+                    needImprovementQuestions.forEach((question, index) => {
+                        const suggestionDiv = document.createElement('div');
+                        suggestionDiv.className = 'flex items-start';
+                        
+                        // 根据问题ID生成针对性的建议
+                        let suggestionTitle = '加强合规学习';
+                        let suggestionText = '建议组织相关人员深入学习相关法律法规，提高合规意识。';
+                        let suggestionDetail = '可以通过参加培训、阅读法规文件等方式提升合规知识。';
+                        
+                        // 根据问题ID提供更具体的建议
+                        if (question.id === '1') {
+                            suggestionTitle = '申请公开募捐资格';
+                            suggestionText = '立即登录民政部官网提交《公开募捐资格申请表》。';
+                            suggestionDetail = '根据《慈善法》第22条规定，慈善组织应在完成登记注册后60日内向民政部门申请公开募捐资格。';
+                        } else if (question.id === '2') {
+                            suggestionTitle = '修订组织章程';
+                            suggestionText = '修订章程并提交民政部门备案。';
+                            suggestionDetail = '根据《慈善法》第11条规定，慈善组织章程必须载明组织形式等内容。';
+                        } else if (question.id === '3') {
+                            suggestionTitle = '立即停止违规行为';
+                            suggestionText = '立即停止违规行为并启动整改程序。';
+                            suggestionDetail = '根据《慈善法》第17条规定，连续2年未开展慈善活动、未公开年度工作报告等情形会导致慈善组织被吊销登记证书。';
+                        } else if (question.id === '4') {
+                            suggestionTitle = '调整预算结构';
+                            suggestionText = '调整预算结构并提交财务审计报告。';
+                            suggestionDetail = '根据《慈善法》第60条规定，慈善组织年度管理费用不得超过当年总支出的10%。';
+                        } else if (question.id === '5') {
+                            suggestionTitle = '规范业务活动成本核算';
+                            suggestionText = '使用财政部《业务活动成本核算表》规范分类。';
+                            suggestionDetail = '根据《非营利组织会计制度》第15条规定，理事个人旅游费用不可计入业务活动成本。';
+                        } else if (question.id === '6') {
+                            suggestionTitle = '正确申报免税收入';
+                            suggestionText = '在电子税务局勾选"免税收入"类别。';
+                            suggestionDetail = '根据《企业所得税法》第26条规定，慈善组织接受政府购买服务收入免除企业所得税。';
+                        } else if (question.id === '7') {
+                            suggestionTitle = '规范重大投资决策';
+                            suggestionText = '重新召开理事会并留存表决记录。';
+                            suggestionDetail = '根据《慈善法》第54条规定，慈善组织重大投资方案需经三分之二决策机构成员同意。';
+                        } else if (question.id === '8') {
+                            suggestionTitle = '解除关联企业兼职';
+                            suggestionText = '解除兼职关系并公示。';
+                            suggestionDetail = '根据《慈善法》第16条规定，慈善组织负责人禁止在关联企业兼职。';
+                        } else if (question.id === '9') {
+                            suggestionTitle = '制定关联交易审查制度';
+                            suggestionText = '制定关联交易审查制度并备案。';
+                            suggestionDetail = '根据《慈善法》第14条规定，慈善组织与关联方交易需遵循公平公允原则。';
+                        } else if (question.id === '10') {
+                            suggestionTitle = '规范项目资金使用';
+                            suggestionText = '申请临时拨款需提供第三方财务评估报告。';
+                            suggestionDetail = '根据《慈善法》第52条规定，慈善项目资金禁止临时用于弥补行政开支缺口。';
+                        } else if (question.id === '11') {
+                            suggestionTitle = '规范剩余财产处理';
+                            suggestionText = '公示剩余财产分配方案并报民政部门备案。';
+                            suggestionDetail = '根据《慈善法》第57条规定，慈善项目终止后剩余财产应按捐赠协议处理。';
+                        } else if (question.id === '12') {
+                            suggestionTitle = '制定信息公开计划';
+                            suggestionText = '制定信息公开计划并设置系统提醒。';
+                            suggestionDetail = '根据《慈善法》第73条规定，慈善项目周期超过6个月时，需至少每季度公开一次进展。';
+                        } else if (question.id === '13') {
+                            suggestionTitle = '在指定平台公开年度报告';
+                            suggestionText = '登录"慈善中国"官网（https://cszg.mca.gov.cn/）提交报告。';
+                            suggestionDetail = '根据《慈善法》第72条规定，慈善组织需在民政部指定平台公开年度工作报告。';
+                        } else if (question.id === '14') {
+                            suggestionTitle = '完善信息公开目录';
+                            suggestionText = '完善信息公开目录并分类标注。';
+                            suggestionDetail = '根据《慈善组织信息公开办法》第11条规定，内部管理制度不属于必须公开的范畴。';
+                        } else if (question.id === '15') {
+                            suggestionTitle = '建立资产变动预警机制';
+                            suggestionText = '建立资产变动预警机制并同步公示。';
+                            suggestionDetail = '根据《慈善组织信息公开办法》第13条规定，慈善组织发生重大资产变动后需在30日内公开。';
+                        } else if (question.id === '16') {
+                            suggestionTitle = '取得合规捐赠票据';
+                            suggestionText = '取得财政部门监制的捐赠票据。';
+                            suggestionDetail = '根据《企业所得税法》第9条规定，企业通过公益性社会组织捐赠可享受12%的所得税扣除比例。';
+                        } else if (question.id === '17') {
+                            suggestionTitle = '申请免税备案';
+                            suggestionText = '向税务部门申请免税备案。';
+                            suggestionDetail = '根据《慈善法》第80条规定，慈善组织接受股权捐赠时无需缴纳税费。';
+                        } else if (question.id === '18') {
+                            suggestionTitle = '制定清算方案';
+                            suggestionText = '制定清算方案并报民政部门批准。';
+                            suggestionDetail = '根据《慈善法》第18条规定，慈善组织清算后的剩余财产应转给宗旨相近的慈善组织。';
+                        }
+                        
+                        suggestionDiv.innerHTML = `
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-lightbulb text-yellow-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">${suggestionTitle}</p>
+                                <p class="text-sm text-gray-600 mt-1">${suggestionText}</p>
+                                <p class="text-sm text-gray-500 mt-1">${suggestionDetail}</p>
+                            </div>
+                        `;
+                        spaceY4Container.appendChild(suggestionDiv);
+                    });
+                    
+                    improvementSuggestionsContainer.appendChild(spaceY4Container);
+                } else {
+                    // 如果没有需要改进的问题，显示保持建议
+                    const spaceY4Container = document.createElement('div');
+                    spaceY4Container.className = 'space-y-4';
+                    
+                    const suggestionDiv = document.createElement('div');
+                    suggestionDiv.className = 'flex items-start';
+                    suggestionDiv.innerHTML = `
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="font-medium">继续保持合规运营</p>
+                            <p class="text-sm text-gray-600 mt-1">您的组织在合规方面表现良好，建议继续保持现有合规管理体系，定期开展自查。</p>
+                            <p class="text-sm text-gray-500 mt-1">建议每年至少进行一次全面的自查评估，及时发现并解决潜在的合规风险。</p>
+                        </div>
+                    `;
+                    spaceY4Container.appendChild(suggestionDiv);
+                    improvementSuggestionsContainer.appendChild(spaceY4Container);
+                }
+            }
+        }
+        
+        // 计算各模块得分
+        function calculateModuleScores() {
+            // 问题与模块对应关系
+            const moduleQuestions = {
+                'registration': ['1', '2', '3'],
+                'finance': ['4', '5', '6'],
+                'operation': ['7', '8', '9'],
+                'project': ['10', '11', '12'],
+                'information': ['13', '14', '15'],
+                'tax': ['16', '17', '18']
+            };
+            
+            const moduleScores = {};
+            
+            // 计算每个模块的得分
+            for (const [module, questions] of Object.entries(moduleQuestions)) {
+                let correctCount = 0;
+                questions.forEach(q => {
+                    if (answers[q] === correctAnswers[q]) {
+                        correctCount++;
+                    }
+                });
+                moduleScores[module] = Math.round((correctCount / questions.length) * 100);
+            }
+            
+            return moduleScores;
+        }
+        
+        // 计算总分
+        function calculateTotalScore(moduleScores) {
+            const scores = Object.values(moduleScores);
+            const total = scores.reduce((sum, score) => sum + score, 0);
+            return Math.round(total / scores.length);
+        }
+        
+        // 确定风险等级
+        function determineRiskLevel(score) {
+            if (score >= 80) return 'low';
+            if (score >= 60) return 'medium';
+            return 'high';
+        }
+        
+        // 获取风险等级文本
+        function getRiskLevelText(level) {
+            switch (level) {
+                case 'low': return '绿色（低风险）';
+                case 'medium': return '黄色（中风险）';
+                case 'high': return '红色（高风险）';
+                default: return '未知';
+            }
+        }
+        
+        // 获取风险等级样式类
+        function getRiskLevelClass(level) {
+            switch (level) {
+                case 'low': return 'risk-low';
+                case 'medium': return 'risk-medium';
+                case 'high': return 'risk-high';
+                default: return '';
+            }
+        }
+        
+        // 绘制雷达图
+        function drawRadarChart(moduleScores) {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            
+            // 如果已存在图表，先销毁
+            if (radarChart) {
+                radarChart.destroy();
+            }
+            
+            // 模块名称映射
+            const moduleNames = {
+                'registration': '登记注册',
+                'finance': '财务管理',
+                'operation': '运营管理',
+                'project': '项目实施',
+                'information': '信息披露',
+                'tax': '税务合规'
+            };
+            
+            radarChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: Object.keys(moduleScores).map(key => moduleNames[key]),
+                    datasets: [{
+                        label: '合规得分',
+                        data: Object.values(moduleScores),
+                        backgroundColor: 'rgba(198, 40, 40, 0.2)',
+                        borderColor: 'rgba(198, 40, 40, 0.8)',
+                        pointBackgroundColor: 'rgba(198, 40, 40, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(198, 40, 40, 1)'
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 100
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    maintainAspectRatio: true
+                }
+            });
+        }
+        
+        // 打印报告
+        function downloadPDF() {
+            // 使用浏览器原生打印功能
+            const reportContent = document.getElementById('report-page').innerHTML;
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>慈善组织合规自检报告</title>
+                        <style>
+                            body { font-family: 'Microsoft YaHei', sans-serif; margin: 20px; }
+                            h1, h2, h3 { color: #C62828; }
+                            .risk-level { padding: 5px 10px; border-radius: 4px; font-weight: bold; display: inline-block; }
+                            .risk-high { background-color: #FFEBEE; color: #C62828; }
+                            .risk-medium { background-color: #FFF8E1; color: #FF8F00; }
+                            .risk-low { background-color: #E8F5E9; color: #2E7D32; }
+                            .bg-lightGray { background-color: #F5F5F5; padding: 15px; border-radius: 8px; margin: 15px 0; }
+                            .bg-red-50 { background-color: #FFEBEE; padding: 15px; border-left: 4px solid #F44336; margin: 15px 0; }
+                            .grid { display: grid; gap: 20px; }
+                            .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+                            .text-center { text-align: center; }
+                            .font-bold { font-weight: bold; }
+                            .text-4xl { font-size: 2.5rem; }
+                            .text-2xl { font-size: 1.5rem; }
+                            .text-xl { font-size: 1.25rem; }
+                            .text-lg { font-size: 1.125rem; }
+                            .mb-2 { margin-bottom: 0.5rem; }
+                            .mb-4 { margin-bottom: 1rem; }
+                            .mt-1 { margin-top: 0.25rem; }
+                            .ml-3 { margin-left: 0.75rem; }
+                            @media print {
+                                body { margin: 0; }
+                                button { display: none; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        ${reportContent}
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+        
+        // 页面导航
+        function navigateToPage(page) {
+            console.log('Navigating to page:', page);
+            
+            // 隐藏所有页面
+            document.getElementById('entry-page').classList.add('hidden');
+            document.getElementById('questionnaire-page').classList.add('hidden');
+            document.getElementById('report-page').classList.add('hidden');
+            
+            // 显示目标页面
+            switch (page) {
+                case 1:
+                    document.getElementById('entry-page').classList.remove('hidden');
+                    console.log('Entry page shown');
+                    break;
+                case 2:
+                    document.getElementById('questionnaire-page').classList.remove('hidden');
+                    console.log('Questionnaire page shown');
+                    // 展开第一个问题
+                    const firstQuestion = document.querySelector('.question-card');
+                    if (firstQuestion) {
+                        toggleQuestionCard(firstQuestion);
+                    }
+                    break;
+                case 3:
+                    document.getElementById('report-page').classList.remove('hidden');
+                    console.log('Report page shown');
+                    
+                    // 检查报告页面元素是否可见
+                    setTimeout(() => {
+                        const reportPage = document.getElementById('report-page');
+                        console.log('Report page display style:', window.getComputedStyle(reportPage).display);
+                        console.log('Report page visibility:', window.getComputedStyle(reportPage).visibility);
+                        
+                        // 检查总分元素
+                        const totalScoreElement = document.getElementById('totalScore');
+                        console.log('Total score element after page switch:', totalScoreElement);
+                        console.log('Total score element display style:', totalScoreElement ? window.getComputedStyle(totalScoreElement).display : 'not found');
+                    }, 500);
+                    
+                    break;
+            }
+            
+            // 更新当前页面
+            currentPage = page;
+            
+            // 更新步骤指示器
+            updateStepIndicators(page);
+            
+            // 更新进度条
+            updateProgressBar();
+            
+            // 保存当前页面状态
+            saveData();
+        }
+        
+        // 更新步骤指示器
+        function updateStepIndicators(activeStep) {
+            // 重置所有步骤
+            for (let i = 1; i <= 3; i++) {
+                const stepIndicator = document.getElementById(`step-indicator-${i}`);
+                stepIndicator.classList.remove('active', 'completed');
+                
+                if (i < activeStep) {
+                    stepIndicator.classList.add('completed');
+                } else if (i === activeStep) {
+                    stepIndicator.classList.add('active');
+                }
+            }
+        }
+        
+        // 更新进度条
+        function updateProgressBar() {
+            const progressFill = document.getElementById('progressFill');
+            const progress = (currentPage / 3) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+        
+        // 保存数据到本地存储
+        function saveData() {
+            const data = {
+                currentPage: currentPage,
+                answers: answers
+            };
+            localStorage.setItem('complianceToolData', JSON.stringify(data));
+        }
+        
+        // 保存报告数据
+        function saveReportData(totalScore, riskLevel, moduleScores) {
+            const reportData = {
+                totalScore: totalScore,
+                riskLevel: riskLevel,
+                moduleScores: moduleScores,
+                date: new Date().toISOString()
+            };
+            localStorage.setItem('complianceToolReport', JSON.stringify(reportData));
+        }
+        
+        // 加载保存的数据
+        function loadSavedData() {
+            const savedData = localStorage.getItem('complianceToolData');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    currentPage = data.currentPage || 1;
+                    answers = data.answers || {};
+                    
+                    // 恢复答案状态
+                    Object.keys(answers).forEach(questionId => {
+                        const option = document.querySelector(`.question-card[data-question-id="${questionId}"] .option[data-value="${answers[questionId]}"]`);
+                        if (option) {
+                            option.classList.add('selected');
+                            const radio = option.querySelector('input[type="radio"]');
+                            if (radio) {
+                                radio.checked = true;
+                            }
+                        }
+                    });
+                    
+                    // 导航到保存的页面
+                    navigateToPage(currentPage);
+                } catch (e) {
+                    console.error('Failed to load saved data:', e);
+                }
+            }
+        }
+        
+        // 清除所有数据
+        function clearAllData() {
+            if (confirm('确定要清除所有数据吗？此操作不可撤销。')) {
+                localStorage.removeItem('complianceToolData');
+                localStorage.removeItem('complianceToolReport');
+                
+                // 重置答案
+                answers = {};
+                
+                // 重置选项状态
+                document.querySelectorAll('.option').forEach(option => {
+                    option.classList.remove('selected');
+                    const radio = option.querySelector('input[type="radio"]');
+                    if (radio) {
+                        radio.checked = false;
+                    }
+                });
+                
+                // 重置问题卡片状态
+                document.querySelectorAll('.question-card').forEach(card => {
+                    card.classList.remove('error-border');
+                });
+                
+                // 返回入口页
+                navigateToPage(1);
+                
+                alert('数据已清除');
+            }
+        }
+    </script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,362 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/styles.css">
+<!-- 面包屑导航 -->
+<div class="breadcrumb bg-lightGray py-3 px-4 mb-0">
+    <div class="container mx-auto">
+        <a href="/" class="text-gray-600 hover:text-primary transition-colors duration-300">首页</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <a href="/consulting/" class="text-gray-600 hover:text-primary transition-colors duration-300">咨询服务</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <span class="text-gray-900">{{ .Title }}</span>
+    </div>
+</div>
+
+<!-- 页面头部区域 -->
+<div class="training-header bg-gradient-to-r from-primary/90 to-primary text-white py-12 md:py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">{{ .Title }}</h1>
+            <p class="text-white/90 text-lg md:text-xl mb-6">{{ .Description | default "系统讲解《慈善法》及其实施条例的核心内容，结合实际案例分析慈善组织常见合规风险" }}</p>
+            
+            <!-- 培训基本信息 -->
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 mt-8">
+                <div class="flex items-center bg-white/10 px-4 py-2 rounded-full">
+                    <i class="fa fa-users mr-2"></i>
+                    <span>适合对象：基金会、社会团体、社会服务机构</span>
+                </div>
+                <div class="flex items-center bg-white/10 px-4 py-2 rounded-full">
+                    <i class="fa fa-calendar mr-2"></i>
+                    <span>培训周期：2天</span>
+                </div>
+                <div class="flex items-center bg-white/10 px-4 py-2 rounded-full">
+                    <i class="fa fa-graduation-cap mr-2"></i>
+                    <span>培训方式：线下/线上</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 主要内容区域 -->
+<main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- 价格与报名区域 -->
+        <div class="bg-gradient-to-r from-lightGray to-white rounded-xl p-6 mb-8 shadow-md">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-2xl font-bold text-primary mb-2">¥ 3,800/人</h3>
+                    <p class="text-gray-600">包含培训教材、午餐和茶歇</p>
+                </div>
+                <div class="flex gap-4">
+                    <a href="#" class="bg-primary text-white px-8 py-3 rounded-md hover:bg-red-700 transition-colors font-medium flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                        立即报名 <i class="fa fa-angle-right ml-2"></i>
+                    </a>
+                    <a href="#" class="border border-primary text-primary px-6 py-3 rounded-md hover:bg-primary hover:text-white transition-colors font-medium flex items-center">
+                        咨询详情 <i class="fa fa-comments-o ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 培训内容卡片 -->
+        <article class="training-content bg-white rounded-lg shadow-md p-6 md:p-8 mb-8 transform transition-all duration-300 hover:shadow-lg">
+            <!-- 内容目录 -->
+            <div class="toc-container mb-8 bg-lightGray rounded-lg p-4 md:p-6">
+                <h3 class="text-lg font-semibold text-neutral mb-3 flex items-center">
+                    <i class="fa fa-list-ul mr-2 text-primary"></i>
+                    培训大纲
+                </h3>
+                <nav class="toc">
+                    <ul>
+                        <li><a href="#section1">一、《慈善法》核心条款解读</a></li>
+                        <li><a href="#section2">二、慈善组织设立与登记实务</a></li>
+                        <li><a href="#section3">三、慈善组织运营合规要点</a></li>
+                        <li><a href="#section4">四、慈善项目管理与实施规范</a></li>
+                        <li><a href="#section5">五、常见合规风险案例分析</a></li>
+                        <li><a href="#section6">六、合规管理体系建设</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- 内容详情 -->
+            <div class="content-body">
+                <h2 id="section1" class="text-2xl font-bold mb-4 pb-2 border-b-2 border-primary">一、《慈善法》核心条款解读</h2>
+                <p>系统讲解《慈善法》的立法背景、基本原则和核心内容，重点解读慈善组织定义、慈善活动范围、税收优惠政策等关键条款，帮助学员全面把握法律框架。</p>
+                
+                <h2 id="section2" class="text-2xl font-bold mb-4 mt-8 pb-2 border-b-2 border-primary">二、慈善组织设立与登记实务</h2>
+                <p>详细介绍慈善组织的设立条件、登记流程、变更注销等实务操作，包括基金会、社会团体、社会服务机构等不同类型组织的设立要点和注意事项。</p>
+                <ul>
+                    <li>设立申请材料准备</li>
+                    <li>章程制定与优化</li>
+                    <li>治理结构设计</li>
+                    <li>登记常见问题解答</li>
+                </ul>
+                
+                <h2 id="section3" class="text-2xl font-bold mb-4 mt-8 pb-2 border-b-2 border-primary">三、慈善组织运营合规要点</h2>
+                <p>深入解析慈善组织日常运营中的合规要求，包括内部治理、信息公开、财务会计、人力资源等方面的合规要点和操作规范。</p>
+                <ul>
+                    <li>理事会、监事会运作规范</li>
+                    <li>年度报告编制与公开</li>
+                    <li>捐赠资金管理与使用</li>
+                    <li>志愿者管理与权益保护</li>
+                </ul>
+                
+                <h2 id="section4" class="text-2xl font-bold mb-4 mt-8 pb-2 border-b-2 border-primary">四、慈善项目管理与实施规范</h2>
+                <p>讲解慈善项目的全流程管理，从项目立项、执行到评估的合规要求和最佳实践，帮助组织提升项目管理水平和社会影响力。</p>
+                <ul>
+                    <li>项目设计与立项合规</li>
+                    <li>项目执行与监督</li>
+                    <li>项目财务管理</li>
+                    <li>项目评估与报告</li>
+                </ul>
+                
+                <h2 id="section5" class="text-2xl font-bold mb-4 mt-8 pb-2 border-b-2 border-primary">五、常见合规风险案例分析</h2>
+                <p>通过实际案例分析，深入剖析慈善组织常见的合规风险点，包括募捐活动违规、信息公开不规范、财务会计处理不当等典型问题，并提供风险防范措施。</p>
+                
+                <h2 id="section6" class="text-2xl font-bold mb-4 mt-8 pb-2 border-b-2 border-primary">六、合规管理体系建设</h2>
+                <p>指导慈善组织建立健全内部合规管理体系，包括合规政策制定、风险评估、合规培训、监督检查等环节，提升组织整体合规水平。</p>
+            </div>
+        </article>
+        
+        <!-- 讲师介绍 -->
+        <section class="trainers-section bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+                <i class="fa fa-user-circle-o mr-3 text-primary"></i>
+                资深讲师团队
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:shadow-md transition-all duration-300">
+                    <img src="https://picsum.photos/seed/teacher1/200/200" alt="张教授" class="w-20 h-20 rounded-full object-cover mr-4">
+                    <div>
+                        <h4 class="text-lg font-semibold text-neutral mb-2">张教授</h4>
+                        <p class="text-primary text-sm mb-2">慈善法研究专家 / 某知名大学法学院教授</p>
+                        <p class="text-gray-600 text-sm">从事慈善法研究20余年，参与《慈善法》起草工作，出版多部慈善法专著，具有丰富的理论和实践经验。</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start p-4 border border-gray-100 rounded-lg hover:shadow-md transition-all duration-300">
+                    <img src="https://picsum.photos/seed/teacher2/200/200" alt="李律师" class="w-20 h-20 rounded-full object-cover mr-4">
+                    <div>
+                        <h4 class="text-lg font-semibold text-neutral mb-2">李律师</h4>
+                        <p class="text-primary text-sm mb-2">公益法律专家 / 某知名律师事务所合伙人</p>
+                        <p class="text-gray-600 text-sm">专注于非营利组织法律服务15年，为多家知名慈善组织提供法律顾问服务，擅长慈善组织设立、治理和合规事务。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 往期培训风采 -->
+        <section class="gallery-section bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+                <i class="fa fa-picture-o mr-3 text-primary"></i>
+                往期培训风采
+            </h3>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <img src="https://picsum.photos/seed/training-img1/400/300" alt="培训现场1" class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity duration-300">
+                <img src="https://picsum.photos/seed/training-img2/400/300" alt="培训现场2" class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity duration-300">
+                <img src="https://picsum.photos/seed/training-img3/400/300" alt="培训现场3" class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity duration-300">
+                <img src="https://picsum.photos/seed/training-img4/400/300" alt="培训现场4" class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity duration-300">
+                <img src="https://picsum.photos/seed/training-img5/400/300" alt="培训现场5" class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity duration-300">
+                <img src="https://picsum.photos/seed/training-img6/400/300" alt="培训现场6" class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity duration-300">
+            </div>
+        </section>
+        
+        <!-- 学员评价 -->
+        <section class="testimonials-section bg-lightGray rounded-lg p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+                <i class="fa fa-comments-o mr-3 text-primary"></i>
+                学员评价
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-2">
+                        <div class="text-yellow-400">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-3">"培训内容非常实用，老师讲解清晰，案例分析深入，对我们基金会的合规运营有很大帮助。"</p>
+                    <p class="text-sm text-gray-500">—— 王秘书长，某教育基金会</p>
+                </div>
+                
+                <div class="bg-white p-4 rounded-lg shadow-sm">
+                    <div class="flex items-center mb-2">
+                        <div class="text-yellow-400">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-3">"通过这次培训，我们对《慈善法》有了更深入的理解，学习到了很多实用的合规管理方法，收获满满。"</p>
+                    <p class="text-sm text-gray-500">—— 刘主任，某社会服务机构</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 常见问题 -->
+        <section class="faq-section bg-white rounded-lg shadow-md p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+                <i class="fa fa-question-circle-o mr-3 text-primary"></i>
+                常见问题
+            </h3>
+            
+            <div class="space-y-4">
+                <div class="border-b border-gray-100 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-neutral" onclick="toggleFAQ(this)">
+                        培训费用包含哪些内容？
+                        <i class="fa fa-chevron-down text-xs text-gray-500 transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-600 text-sm hidden">
+                        培训费用包含培训教材、两天的午餐和茶歇、培训证书。交通和住宿费用需自理。
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-100 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-neutral" onclick="toggleFAQ(this)">
+                        如何获取培训发票？
+                        <i class="fa fa-chevron-down text-xs text-gray-500 transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-600 text-sm hidden">
+                        报名成功后，您可以在"个人中心"申请开具发票，我们将在3个工作日内为您开具并寄出。
+                    </div>
+                </div>
+                
+                <div class="border-b border-gray-100 pb-4">
+                    <button class="flex justify-between items-center w-full text-left font-medium text-neutral" onclick="toggleFAQ(this)">
+                        可以更换培训日期吗？
+                        <i class="fa fa-chevron-down text-xs text-gray-500 transition-transform"></i>
+                    </button>
+                    <div class="mt-2 text-gray-600 text-sm hidden">
+                        如需更换培训日期，请至少提前7个工作日联系我们，在当期培训名额允许的情况下可以更换。
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 再次报名按钮 -->
+        <div class="text-center mb-8">
+            <a href="#" class="inline-flex items-center px-8 py-4 bg-primary text-white rounded-md hover:bg-red-700 transition-colors font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                <i class="fa fa-check-circle mr-2"></i>
+                <span>立即报名参加培训</span>
+            </a>
+        </div>
+        
+        <!-- 返回咨询服务列表 -->
+        <div class="text-center">
+            <a href="/consulting/" class="inline-flex items-center px-6 py-2 border border-gray-300 text-gray-600 rounded-md hover:bg-gray-50 transition-colors font-medium">
+                <i class="fa fa-arrow-left mr-2"></i>
+                <span>返回咨询服务列表</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+<!-- 自定义详情页CSS -->
+<style>
+    /* 内容正文样式优化 */
+    .training-content .content-body h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--neutral);
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid var(--primary);
+    }
+    
+    .training-content .content-body p {
+        margin-bottom: 1.25rem;
+        line-height: 1.8;
+        color: var(--text-color);
+        text-align: justify;
+        font-size: 16px;
+    }
+    
+    .training-content .content-body ul {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+    
+    .training-content .content-body li {
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+    }
+    
+    .training-content .content-body ul li {
+        list-style-type: disc;
+    }
+    
+    /* 目录样式 */
+    .toc-container .toc {
+        font-size: 14px;
+    }
+    
+    .toc-container .toc ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+    
+    .toc-container .toc li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .toc-container .toc a {
+        color: var(--neutral);
+        text-decoration: none;
+        display: block;
+        padding: 4px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .toc-container .toc a:hover {
+        color: var(--primary);
+        padding-left: 5px;
+    }
+    
+    /* FAQ切换功能 */
+    function toggleFAQ(element) {
+        const content = element.nextElementSibling;
+        const icon = element.querySelector('i');
+        
+        if (content.classList.contains('hidden')) {
+            content.classList.remove('hidden');
+            icon.style.transform = 'rotate(180deg)';
+        } else {
+            content.classList.add('hidden');
+            icon.style.transform = 'rotate(0)';
+        }
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+        .training-header {
+            padding: 80px 0;
+        }
+        
+        .training-header h1 {
+            font-size: 2rem;
+        }
+        
+        .training-content {
+            padding: 20px;
+        }
+        
+        .flex.flex-col.md\:flex-row.justify-between.items-center {
+            flex-direction: column;
+        }
+        
+        .flex.gap-4 {
+            margin-top: 1rem;
+        }
+    }
+</style>
+{{ end }}

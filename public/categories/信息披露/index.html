@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=12147&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国慈善组织合规通 - 一站式慈善合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<div class="bg-white border border-darkGray rounded-md mb-6">
+    <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+        <h1 class="text-xl font-bold text-neutral">信息披露</h1>
+    </div>
+    <div class="p-6">
+        
+            <p class="text-neutral mb-6">本栏目暂无内容，敬请期待。</p>
+        
+        
+        
+        <a href="/compliance_guide/charity-large-project-approval-guide/" class="block border border-darkGray rounded-md p-4 mb-4 hover:border-primary transition-colors">
+            <h3 class="text-lg font-bold text-primary mb-2">慈善大型项目审批指南</h3>
+            <p class="text-sm text-gray-600 mb-2">发布时间：2025-11-12</p>
+            <p class="text-sm mb-2"><h1 id="慈善大型项目审批指南">慈善大型项目审批指南</h1>
+<h2 id="概述">概述</h2>
+<p>慈善大型项目是指资金规模大、社会影响力广、实施周期长的公益项目。为确保项目合规、透明、有效，慈善组织需要严格按照相关规定进行项目审批和管理。本指南详细介绍慈善大型项目的审批流程和要求，帮助慈善组织规范开展大型公益活动。</p>
+<h2 id="项目界定标准">项目界定标准</h2>
+<h3 id="大型项目认定条件">大型项目认定条件</h3>
+<ol>
+<li><strong>资金规模</strong>：单次项目资金超过50万元人民币</li>
+<li><strong>受益人数</strong>：预计受益人数超过1000人</li>
+<li><strong>实施周期</strong>：项目实施周期超过1年</li>
+<li><strong>地域范围</strong>：跨多个行政区域实施</li>
+<li><strong>合作方数量</strong>：涉及5个以上合作单位或机构</li>
+</ol>
+<p>满足以上任一条件的项目，应作为大型项目进行管理和审批。</p>
+<h2 id="审批准备材料">审批准备材料</h2>
+<h3 id="基础材料">基础材料</h3>
+<ol>
+<li><strong>项目立项申请书</strong>：详细说明项目背景、目标、内容、预算、预期效果等</li>
+<li><strong>项目可行性研究报告</strong>：对项目必要性、可行性、社会效益的全面分析</li>
+<li><strong>项目预算方案</strong>：详细的资金使用计划和明细</li>
+<li><strong>风险评估报告</strong>：识别可能存在的风险及应对措施</li>
+<li><strong>利益相关方分析</strong>：项目涉及的各方权益分析</li>
+</ol>
+<h3 id="审批流程">审批流程</h3>
+<h4 id="第一步内部初审">第一步：内部初审</h4>
+<ol>
+<li>项目负责人提交完整立项材料</li>
+<li>机构业务部门进行初审，提出修改意见</li>
+<li>项目负责人根据意见完善材料</li>
+</ol>
+<h4 id="第二步理事会审议">第二步：理事会审议</h4>
+<ol>
+<li>业务部门向理事会提交项目材料</li>
+<li>召开理事会会议进行项目审议</li>
+<li>理事会表决通过后形成决议文件</li>
+</ol>
+<h4 id="第三步信息公开备案">第三步：信息公开备案</h4>
+<ol>
+<li>在机构官方渠道公开项目信息</li>
+<li>向登记管理机关备案</li>
+<li>按照规定在慈善中国平台进行公开</li>
+</ol>
+<h4 id="第四步签署合作协议">第四步：签署合作协议</h4>
+<ol>
+<li>与合作方签订正式协议</li>
+<li>明确各方权利义务和责任分工</li>
+<li>约定信息公开和监督方式</li>
+</ol>
+<h2 id="实施管理要求">实施管理要求</h2>
+<h3 id="财务管理">财务管理</h3>
+<ol>
+<li><strong>专项账户管理</strong>：大型项目应设立专门的银行账户或进行专项核算</li>
+<li><strong>财务报告制度</strong>：定期编制财务报告，接受理事会监督</li>
+<li><strong>审计要求</strong>：项目结束后应进行专项审计</li>
+</ol>
+<h3 id="信息公开">信息公开</h3>
+<ol>
+<li><strong>公开内容</strong>：项目进度、资金使用情况、阶段性成果等</li>
+<li><strong>公开频率</strong>：至少每季度公开一次项目进展</li>
+<li><strong>公开渠道</strong>：机构官网、慈善中国平台、捐赠人专属报告等</li>
+</ol>
+<h3 id="监督评估">监督评估</h3>
+<ol>
+<li><strong>内部监督</strong>：设立项目监督小组，定期检查项目实施情况</li>
+<li><strong>第三方评估</strong>：邀请独立第三方机构进行项目评估</li>
+<li><strong>社会监督</strong>：接受社会公众和媒体的监督</li>
+</ol>
+<h2 id="注意事项">注意事项</h2>
+<ol>
+<li><strong>审批时限</strong>：完整的审批流程应在项目启动前至少30天完成</li>
+<li><strong>资料保存</strong>：所有审批材料应妥善保存至少5年</li>
+<li><strong>变更管理</strong>：项目重大变更需重新履行审批程序</li>
+<li><strong>合规底线</strong>：严格遵守《慈善法》等相关法律法规</li>
+<li><strong>责任追究</strong>：明确项目各方责任，建立责任追究机制</li>
+</ol>
+<h2 id="常见问题解答">常见问题解答</h2>
+<h3 id="q-项目审批过程中需要邀请法律顾问参与吗">Q: 项目审批过程中需要邀请法律顾问参与吗？</h3>
+<p>A: 是的，对于大型项目，建议邀请法律顾问全程参与，对项目合规性进行把关，特别是涉及多方合作和大额资金的项目。</p>
+<h3 id="q-项目资金使用比例有什么限制">Q: 项目资金使用比例有什么限制？</h3>
+<p>A: 根据《慈善法》要求，慈善组织年度管理费用不得超过当年总支出的10%，大型项目的管理成本应控制在合理范围内，原则上不超过项目总资金的15%。</p>
+<h3 id="q-如何确保项目信息公开的真实性和完整性">Q: 如何确保项目信息公开的真实性和完整性？</h3>
+<p>A: 项目信息公开前应由财务部门、业务部门和法务部门共同审核，确保公开信息真实、准确、完整，同时建立信息公开档案，记录每次公开的内容和时间。</p>
+<h2 id="后续工作">后续工作</h2>
+<p>项目审批通过后，还需完成以下工作：</p>
+<ol>
+<li>制定详细的项目实施方案</li>
+<li>组建项目实施团队</li>
+<li>开展项目人员培训</li>
+<li>建立项目管理信息系统</li>
+<li>制定应急预案</li>
+</ol>
+<h2 id="相关法规">相关法规</h2>
+<ul>
+<li>《中华人民共和国慈善法》</li>
+<li>《慈善组织信息公开办法》</li>
+<li>《关于规范基金会行为的若干规定（试行）》</li>
+<li>《慈善项目管理办法》</li>
+<li>《关于慈善组织开展慈善活动年度支出和管理费用的规定》</li>
+</ul>
+<p>通过本指南的帮助，希望慈善组织能够规范、透明地开展大型公益项目，最大化项目社会效益，维护慈善组织的公信力，促进慈善事业健康发展。</p></p>
+            <span class="text-primary text-sm hover:underline">阅读更多 →</span>
+        </a>
+        
+    </div>
+</div>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    中国慈善组织合规通是专业的慈善组织合规服务平台，致力于为各类慈善组织提供政策解读、合规指导、风险管理等全方位服务，助力慈善事业健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市海淀区中关村南大街5号</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>400-888-9999</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>contact@hegui.org.cn</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP备案号：京ICP备12345678号</li>
+                    <li>公安备案号：京公网安备11010802020123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 中国慈善组织合规通 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

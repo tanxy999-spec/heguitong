@@ -1,0 +1,110 @@
+{{ define "main" }}
+<div class="container mx-auto px-4 py-8">
+    <!-- 面包屑导航 -->
+    <nav class="text-sm text-gray-500 mb-6">
+        <a href="/" class="hover:text-primary">首页</a> &gt; 
+        <a href="/download/" class="hover:text-primary">资料下载</a> &gt; 
+        <span class="text-gray-700">{{ .Title }}</span>
+    </nav>
+
+    <!-- 主要内容区域 -->
+    <div class="max-w-3xl mx-auto">
+        <!-- 资料标题 -->
+        <h1 class="text-2xl font-bold text-primary mb-6">{{ .Title }}</h1>
+        
+        <!-- 资料下载链接 -->
+        <div class="mb-8">
+            {{ with .Params.download_link }}
+            <a href="{{ . }}" class="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-red-700 transition-colors mb-4">
+                <i class="fa fa-download mr-2"></i>立即下载
+            </a>
+            {{ else }}
+            <a href="#" class="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-red-700 transition-colors mb-4">
+                <i class="fa fa-download mr-2"></i>立即下载
+            </a>
+            {{ end }}
+        </div>
+        
+        <!-- 资料基本信息 -->
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">资料信息</h2>
+            <div class="space-y-2">
+                <div class="flex">
+                    <span class="w-24 text-gray-600">作者：</span>
+                    <span>{{ .Params.author | default "合规研究中心" }}</span>
+                </div>
+                <div class="flex">
+                    <span class="w-24 text-gray-600">发布日期：</span>
+                    <span>{{ .Date.Format "2006年01月02日" }}</span>
+                </div>
+                <div class="flex">
+                    <span class="w-24 text-gray-600">文件格式：</span>
+                    <span>{{ .Params.file_format | default "PDF" }}</span>
+                </div>
+                {{ with .Params.file_size }}
+                <div class="flex">
+                    <span class="w-24 text-gray-600">文件大小：</span>
+                    <span>{{ . }}</span>
+                </div>
+                {{ end }}
+                {{ with .Params.pages }}
+                <div class="flex">
+                    <span class="w-24 text-gray-600">页数：</span>
+                    <span>{{ . }} 页</span>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        
+        <!-- 资料内容 -->
+        <div class="mb-8">
+            {{ .Content }}
+        </div>
+        
+        <!-- 资料描述 -->
+        {{ with .Params.description }}
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">资料介绍</h2>
+            <p class="text-gray-600">{{ . }}</p>
+        </div>
+        {{ end }}
+        
+        <!-- 资料目录 -->
+        {{ with .Params.toc }}
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">资料目录</h2>
+            <ul class="list-disc pl-5 space-y-2">
+                {{ range . }}
+                    <li>{{ . }}</li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+        
+        <!-- 适用人群 -->
+        {{ with .Params.target_audience }}
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-4">适用人群</h2>
+            <div class="flex flex-wrap gap-2">
+                {{ range . }}
+                    <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">{{ . }}</span>
+                {{ end }}
+            </div>
+        </div>
+        {{ end }}
+        
+        <!-- 再次提供下载链接 -->
+        <div class="mb-12">
+            {{ with .Params.download_link }}
+            <a href="{{ . }}" class="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-red-700 transition-colors">
+                <i class="fa fa-download mr-2"></i>立即下载
+            </a>
+            {{ else }}
+            <a href="#" class="inline-flex items-center px-6 py-3 bg-primary text-white font-medium rounded-md hover:bg-red-700 transition-colors">
+                <i class="fa fa-download mr-2"></i>立即下载
+            </a>
+            {{ end }}
+        </div>
+    </div>
+</div>
+{{ end }}

@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>慈善组织合规自检工具 - 中国慈善组织合规通</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #C62828;
+            --secondary-color: #f5f5f5;
+            --text-color: #333333;
+            --border-color: #dddddd;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --danger-color: #F44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 步骤导航 */
+        .progress-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: var(--border-color);
+            z-index: 1;
+        }
+        
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed {
+            background: var(--success-color);
+            color: white;
+        }
+        
+        .step-label {
+            position: absolute;
+            bottom: -25px;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: normal;
+        }
+        
+        /* 内容区 */
+        .content {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .step-content {
+            display: block;
+        }
+        
+        .step-content.hidden {
+            display: none;
+        }
+        
+        /* 入口页样式 */
+        .entry-page {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .entry-page h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .entry-page p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #9c2121;
+        }
+        
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        /* 问卷样式 */
+        .module {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .module:last-child {
+            border-bottom: none;
+        }
+        
+        .module h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .module h2 i {
+            margin-right: 10px;
+        }
+        
+        .question {
+            margin: 1.5rem 0;
+        }
+        
+        .question label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .options label {
+            display: flex;
+            align-items: center;
+            margin-right: 1.5rem;
+            cursor: pointer;
+            font-weight: normal;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        /* 报告样式 */
+        .score-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .score {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 1rem;
+        }
+        
+        .badge.green {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--success-color);
+        }
+        
+        .badge.orange {
+            background-color: rgba(255, 152, 0, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .badge.red {
+            background-color: rgba(244, 67, 54, 0.2);
+            color: var(--danger-color);
+        }
+        
+        .risk-alert {
+            color: var(--danger-color);
+            padding: 1rem;
+            border-left: 4px solid var(--danger-color);
+            background-color: rgba(244, 67, 54, 0.1);
+            margin: 1.5rem 0;
+        }
+        
+        .module-score {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: var(--secondary-color);
+        }
+        
+        .module-score h3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .progress-bar-container {
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+        
+        .progress-bar-fill.high {
+            background-color: var(--success-color);
+        }
+        
+        .progress-bar-fill.medium {
+            background-color: var(--warning-color);
+        }
+        
+        .progress-bar-fill.low {
+            background-color: var(--danger-color);
+        }
+        
+        .risk-items {
+            margin-top: 0.5rem;
+        }
+        
+        .risk-item {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .risk-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--danger-color);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 1.5rem;
+            }
+            
+            .entry-page h1 {
+                font-size: 2rem;
+            }
+            
+            .entry-page p {
+                font-size: 1rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+            
+            .options {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .step-label {
+                font-size: 12px;
+            }
+            
+            .progress-bar {
+                padding: 0.5rem;
+            }
+            
+            .step {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+            
+            .module {
+                margin-bottom: 1.5rem;
+            }
+            
+            .question {
+                margin: 0.8rem 0;
+            }
+            
+            .options label {
+                margin: 0.3rem 0;
+                padding: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .score {
+                font-size: 1.5rem;
+            }
+            
+            .module-score {
+                padding: 0.8rem;
+            }
+            
+            .module-score h3 {
+                font-size: 0.9rem;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .progress-info {
+                font-size: 0.9rem;
+            }
+            
+            .module-intro div {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 问卷答案提示样式 */
+        .wrong-answers-container, .improvement-suggestions-container {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: #fff9e6;
+            border: 1px solid #f0c674;
+        }
+        
+        .wrong-answers-container h3, .improvement-suggestions-container h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .wrong-answer-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            background-color: #fff;
+            border-left: 4px solid var(--warning-color);
+        }
+        
+        .wrong-answer-item h4 {
+            color: var(--warning-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .wrong-answer-item p {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        
+        .wrong-answer-item .correct-answer {
+            color: var(--success-color);
+            font-weight: 500;
+        }
+        
+        .wrong-answer-item .user-answer {
+            color: var(--danger-color);
+            font-weight: 500;
+        }
+        
+        .wrong-answer-item .legal-basis {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .wrong-answer-item .improvement-suggestion {
+            color: var(--primary-color);
+            font-weight: 500;
+            background-color: #f0f8ff;
+            padding: 0.5rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .improvement-item {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+            background-color: #fff;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .improvement-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .improvement-item p {
+            margin-bottom: 0;
+            line-height: 1.5;
+        }
+        
+        .all-correct {
+            padding: 1.5rem;
+            border-radius: 8px;
+            background-color: rgba(76, 175, 80, 0.1);
+            border: 1px solid var(--success-color);
+            text-align: center;
+            color: var(--success-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="bg-white text-primary border-b border-darkGray">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                        <i class="fa fa-shield text-xl"></i>
+                        <i class="fa fa-heart text-xl absolute text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-6">
+                    <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                    <a href="index.html" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主导航栏 -->
+    <nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-2">
+                <!-- 桌面端导航 -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <div class="nav-item">
+                        <a href="regulations.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group">法规政策
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="compliance_guide.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group">合规指南
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="cases.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group">典型案例
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="consulting.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group">咨询服务
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="compliance_tool.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group active">合规工具
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="experts.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group">专家库
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="about.html" class="nav-link px-5 py-2 text-white font-medium inline-block relative group">关于我们
+                            <div class="absolute left-0 right-0 bottom-0 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-center duration-300"></div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <button id="menuBtn" class="md:hidden text-white text-xl">
+                    <i class="fa fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- 移动端导航菜单 -->
+            <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+                <div class="flex flex-col space-y-2">
+                    <a href="regulations.html" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                    <a href="compliance_guide.html" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                    <a href="cases.html" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                    <a href="consulting.html" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                    <a href="compliance_tool.html" class="text-primary font-medium text-red-700 transition-colors py-2 px-4">合规工具</a>
+                    <a href="experts.html" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                    <a href="about.html" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="container">
+        <!-- 进度导航 -->
+        <div class="progress-bar" role="tablist" aria-label="自检工具步骤导航">
+            <div class="step active" id="step-indicator-1" role="tab" aria-selected="true" aria-controls="step1" tabindex="0">
+                1
+                <span class="step-label">入口</span>
+            </div>
+            <div class="step" id="step-indicator-2" role="tab" aria-selected="false" aria-controls="step2" tabindex="-1">
+                2
+                <span class="step-label">问卷</span>
+            </div>
+            <div class="step" id="step-indicator-3" role="tab" aria-selected="false" aria-controls="step3" tabindex="-1">
+                3
+                <span class="step-label">报告</span>
+            </div>
+        </div>
+        
+        <!-- 内容区 -->
+        <div class="content">
+            <!-- 入口页 -->
+            <div id="step1" class="step-content entry-page" role="tabpanel" aria-labelledby="step-indicator-1">
+                <h1>慈善组织合规自检工具</h1>
+                <p>一键自查6大模块，生成风险报告</p>
+                <div class="module-intro" style="max-width: 800px; margin: 0 auto 2rem; text-align: left;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 2rem;">
+                        <div style="padding: 1rem; border-radius: 8px; background-color: var(--secondary-color);">
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-registered"></i> 登记注册</h3>
+                            <p style="font-size: 0.9rem;">检查组织登记注册情况及合法性</p>
+                        </div>
+                        <div style="padding: 1rem; border-radius: 8px; background-color: var(--secondary-color);">
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-users"></i> 组织治理</h3>
+                            <p style="font-size: 0.9rem;">评估内部治理结构和决策机制</p>
+                        </div>
+                        <div style="padding: 1rem; border-radius: 8px; background-color: var(--secondary-color);">
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-coins"></i> 财务管理</h3>
+                            <p style="font-size: 0.9rem;">审查财务制度和资金使用情况</p>
+                        </div>
+                        <div style="padding: 1rem; border-radius: 8px; background-color: var(--secondary-color);">
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-hands-helping"></i> 项目管理</h3>
+                            <p style="font-size: 0.9rem;">评估项目实施和效果评估机制</p>
+                        </div>
+                        <div style="padding: 1rem; border-radius: 8px; background-color: var(--secondary-color);">
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-bullhorn"></i> 信息公开</h3>
+                            <p style="font-size: 0.9rem;">检查信息公开的及时性和完整性</p>
+                        </div>
+                        <div style="padding: 1rem; border-radius: 8px; background-color: var(--secondary-color);">
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;"><i class="fas fa-balance-scale"></i> 合规风险</h3>
+                            <p style="font-size: 0.9rem;">识别潜在合规风险和改进建议</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="nextStep(2)" aria-label="开始慈善组织合规自检">开始自检</button>
+            </div>
+            
+            <!-- 问卷页 -->
+            <div id="step2" class="step-content hidden" role="tabpanel" aria-labelledby="step-indicator-2">
+                <div class="progress-info" style="margin-bottom: 1.5rem; text-align: center;">
+                    <span id="progress-text" style="font-size: 1.1rem; color: #666;">步骤 2/3：问卷</span>
+                    <div style="margin-top: 0.5rem;">
+                        <span id="completion-percentage" style="font-weight: bold;">0%</span> 已完成
+                    </div>
+                </div>
+                
+                <div class="module" data-module="registration">
+                    <h2><i class="fas fa-registered"></i> 登记注册</h2>
+                    <div class="question">
+                        <label for="reg_status">✅ 是否已在民政部门完成登记注册？</label>
+                        <div class="options">
+                            <label><input type="radio" id="reg_status_yes" name="reg_status" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="reg_status_no" name="reg_status" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="reg_certificate">✅ 是否有有效的法人登记证书？</label>
+                        <div class="options">
+                            <label><input type="radio" id="reg_certificate_yes" name="reg_certificate" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="reg_certificate_no" name="reg_certificate" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="reg_annual_report">✅ 是否按规定完成年度工作报告？</label>
+                        <div class="options">
+                            <label><input type="radio" id="reg_annual_report_yes" name="reg_annual_report" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="reg_annual_report_no" name="reg_annual_report" value="否"> 否</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module" data-module="governance">
+                    <h2><i class="fas fa-users"></i> 组织治理</h2>
+                    <div class="question">
+                        <label for="gov_board">✅ 是否设立了理事会或董事会？</label>
+                        <div class="options">
+                            <label><input type="radio" id="gov_board_yes" name="gov_board" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="gov_board_no" name="gov_board" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="gov_charter">✅ 是否制定了完善的组织章程？</label>
+                        <div class="options">
+                            <label><input type="radio" id="gov_charter_yes" name="gov_charter" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="gov_charter_no" name="gov_charter" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="gov_meetings">✅ 是否定期召开理事会或董事会会议？</label>
+                        <div class="options">
+                            <label><input type="radio" id="gov_meetings_yes" name="gov_meetings" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="gov_meetings_no" name="gov_meetings" value="否"> 否</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module" data-module="finance">
+                    <h2><i class="fas fa-coins"></i> 财务管理</h2>
+                    <div class="question">
+                        <label for="fin_account">✅ 是否建立了独立的财务账户？</label>
+                        <div class="options">
+                            <label><input type="radio" id="fin_account_yes" name="fin_account" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="fin_account_no" name="fin_account" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="fin_audit">✅ 是否定期进行财务审计？</label>
+                        <div class="options">
+                            <label><input type="radio" id="fin_audit_yes" name="fin_audit" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="fin_audit_no" name="fin_audit" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="fin_disclosure">✅ 是否按规定公开财务报告？</label>
+                        <div class="options">
+                            <label><input type="radio" id="fin_disclosure_yes" name="fin_disclosure" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="fin_disclosure_no" name="fin_disclosure" value="否"> 否</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module" data-module="project">
+                    <h2><i class="fas fa-hands-helping"></i> 项目管理</h2>
+                    <div class="question">
+                        <label for="proj_management">✅ 是否建立了项目管理制度？</label>
+                        <div class="options">
+                            <label><input type="radio" id="proj_management_yes" name="proj_management" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="proj_management_no" name="proj_management" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="proj_evaluation">✅ 是否对项目进行定期评估？</label>
+                        <div class="options">
+                            <label><input type="radio" id="proj_evaluation_yes" name="proj_evaluation" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="proj_evaluation_no" name="proj_evaluation" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="proj_archives">✅ 是否建立了项目档案管理制度？</label>
+                        <div class="options">
+                            <label><input type="radio" id="proj_archives_yes" name="proj_archives" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="proj_archives_no" name="proj_archives" value="否"> 否</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module" data-module="information">
+                    <h2><i class="fas fa-bullhorn"></i> 信息公开</h2>
+                    <div class="question">
+                        <label for="info_system">✅ 是否建立了信息公开制度？</label>
+                        <div class="options">
+                            <label><input type="radio" id="info_system_yes" name="info_system" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="info_system_no" name="info_system" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="info_basic">✅ 是否定期公开组织基本信息？</label>
+                        <div class="options">
+                            <label><input type="radio" id="info_basic_yes" name="info_basic" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="info_basic_no" name="info_basic" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="info_projects">✅ 是否公开项目执行情况和募捐信息？</label>
+                        <div class="options">
+                            <label><input type="radio" id="info_projects_yes" name="info_projects" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="info_projects_no" name="info_projects" value="否"> 否</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="module" data-module="risk">
+                    <h2><i class="fas fa-balance-scale"></i> 合规风险</h2>
+                    <div class="question">
+                        <label for="risk_system">✅ 是否建立了合规风险管理制度？</label>
+                        <div class="options">
+                            <label><input type="radio" id="risk_system_yes" name="risk_system" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="risk_system_no" name="risk_system" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="risk_assessment">✅ 是否定期进行合规风险评估？</label>
+                        <div class="options">
+                            <label><input type="radio" id="risk_assessment_yes" name="risk_assessment" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="risk_assessment_no" name="risk_assessment" value="否"> 否</label>
+                        </div>
+                    </div>
+                    <div class="question">
+                        <label for="risk_emergency">✅ 是否建立了应急处理机制？</label>
+                        <div class="options">
+                            <label><input type="radio" id="risk_emergency_yes" name="risk_emergency" value="是" required aria-required="true"> 是</label>
+                            <label><input type="radio" id="risk_emergency_no" name="risk_emergency" value="否"> 否</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()" aria-label="返回上一步">上一步</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)" aria-label="生成合规报告">生成报告</button>
+                </div>
+            </div>
+            
+            <!-- 报告页 -->
+            <div id="step3" class="step-content hidden" role="tabpanel" aria-labelledby="step-indicator-3">
+                <div class="score-container">
+                    <h2>自检报告</h2>
+                    <div class="score" id="total-score" aria-live="polite">85/100</div>
+                    <span class="badge green" id="score-badge">合规优秀</span>
+                </div>
+                
+                <div class="risk-alert" id="high-risk-alert" role="alert">
+                    <strong>高风险问题：</strong> <span id="high-risk-text">未登记注册</span>
+                </div>
+                
+                <div id="module-scores" aria-live="polite">
+                    <!-- 模块评分将通过JavaScript动态生成 -->
+                </div>
+                
+                <div class="wrong-answers-container" id="wrong-answers-container">
+                    <h3>问卷答案提示</h3>
+                    <div id="wrongAnswersContainer">
+                        <!-- 错误答案将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="improvement-suggestions-container" id="improvement-suggestions-container">
+                    <h3>改进建议</h3>
+                    <div id="improvementSuggestionsContainer">
+                        <!-- 改进建议将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevStep()" aria-label="返回修改答案">返回修改</button>
+                    <button class="btn btn-primary" onclick="downloadPDF()" aria-label="下载PDF报告">下载PDF</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 引入html2canvas和jsPDF库，用于PDF导出功能 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <script>
+        // 当前步骤（1:入口, 2:问卷, 3:报告）
+        let currentStep = 1;
+        const localStorageKey = 'compliance_progress';
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateUI();
+            
+            // 添加自动保存功能
+            setInterval(saveProgress, 300000); // 每5分钟自动保存
+            
+            // 为所有单选按钮添加变化监听，实时保存和更新进度
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    saveProgress();
+                    updateProgressInfo();
+                    updateNextButtonState(); // 更新按钮状态
+                });
+            });
+            
+            // 移动端菜单功能
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // 添加键盘导航支持
+            document.addEventListener('keydown', function(e) {
+                // ESC键关闭移动端菜单
+                if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                
+                // 在问卷页面，可以使用Ctrl+Enter跳转到下一步
+                if (e.ctrlKey && e.key === 'Enter' && currentStep === 2) {
+                    if (validateStep(currentStep)) {
+                        nextStep(3);
+                    } else {
+                        alert('请完成所有必填项后再继续');
+                    }
+                }
+                
+                // 在报告页面，可以使用Ctrl+P下载PDF
+                if (e.ctrlKey && e.key === 'p' && currentStep === 3) {
+                    e.preventDefault();
+                    downloadPDF();
+                }
+            });
+            
+            // 添加页面滚动时的进度保存
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(saveProgress, 1000);
+            });
+            
+            // 添加页面离开前的提醒
+            window.addEventListener('beforeunload', function(e) {
+                if (currentStep === 2) {
+                    // 检查是否有未保存的答案
+                    const answers = JSON.parse(localStorage.getItem(localStorageKey) || '{}');
+                    const currentAnswers = getCurrentAnswers();
+                    
+                    if (JSON.stringify(answers) !== JSON.stringify(currentAnswers)) {
+                        e.preventDefault();
+                        e.returnValue = '您有未保存的答案，确定要离开吗？';
+                        return e.returnValue;
+                    }
+                }
+            });
+        });
+        
+        // 获取当前答案
+        function getCurrentAnswers() {
+            const answers = {
+                registration: {
+                    reg_status: document.querySelector('input[name="reg_status"]:checked')?.value,
+                    reg_certificate: document.querySelector('input[name="reg_certificate"]:checked')?.value,
+                    reg_annual_report: document.querySelector('input[name="reg_annual_report"]:checked')?.value
+                },
+                governance: {
+                    gov_board: document.querySelector('input[name="gov_board"]:checked')?.value,
+                    gov_charter: document.querySelector('input[name="gov_charter"]:checked')?.value,
+                    gov_meetings: document.querySelector('input[name="gov_meetings"]:checked')?.value
+                },
+                finance: {
+                    fin_account: document.querySelector('input[name="fin_account"]:checked')?.value,
+                    fin_audit: document.querySelector('input[name="fin_audit"]:checked')?.value,
+                    fin_disclosure: document.querySelector('input[name="fin_disclosure"]:checked')?.value
+                },
+                project: {
+                    proj_management: document.querySelector('input[name="proj_management"]:checked')?.value,
+                    proj_evaluation: document.querySelector('input[name="proj_evaluation"]:checked')?.value,
+                    proj_archives: document.querySelector('input[name="proj_archives"]:checked')?.value
+                },
+                information: {
+                    info_system: document.querySelector('input[name="info_system"]:checked')?.value,
+                    info_basic: document.querySelector('input[name="info_basic"]:checked')?.value,
+                    info_projects: document.querySelector('input[name="info_projects"]:checked')?.value
+                },
+                risk: {
+                    risk_system: document.querySelector('input[name="risk_system"]:checked')?.value,
+                    risk_assessment: document.querySelector('input[name="risk_assessment"]:checked')?.value,
+                    risk_emergency: document.querySelector('input[name="risk_emergency"]:checked')?.value
+                },
+                currentStep: currentStep
+            };
+            
+            return answers;
+        }
+        
+        // 保存进度到localStorage
+        function saveProgress() {
+            const answers = {
+                registration: {
+                    reg_status: document.querySelector('input[name="reg_status"]:checked')?.value,
+                    reg_certificate: document.querySelector('input[name="reg_certificate"]:checked')?.value,
+                    reg_annual_report: document.querySelector('input[name="reg_annual_report"]:checked')?.value
+                },
+                governance: {
+                    gov_board: document.querySelector('input[name="gov_board"]:checked')?.value,
+                    gov_charter: document.querySelector('input[name="gov_charter"]:checked')?.value,
+                    gov_meetings: document.querySelector('input[name="gov_meetings"]:checked')?.value
+                },
+                finance: {
+                    fin_account: document.querySelector('input[name="fin_account"]:checked')?.value,
+                    fin_audit: document.querySelector('input[name="fin_audit"]:checked')?.value,
+                    fin_disclosure: document.querySelector('input[name="fin_disclosure"]:checked')?.value
+                },
+                project: {
+                    proj_management: document.querySelector('input[name="proj_management"]:checked')?.value,
+                    proj_evaluation: document.querySelector('input[name="proj_evaluation"]:checked')?.value,
+                    proj_archives: document.querySelector('input[name="proj_archives"]:checked')?.value
+                },
+                information: {
+                    info_system: document.querySelector('input[name="info_system"]:checked')?.value,
+                    info_basic: document.querySelector('input[name="info_basic"]:checked')?.value,
+                    info_projects: document.querySelector('input[name="info_projects"]:checked')?.value
+                },
+                risk: {
+                    risk_system: document.querySelector('input[name="risk_system"]:checked')?.value,
+                    risk_assessment: document.querySelector('input[name="risk_assessment"]:checked')?.value,
+                    risk_emergency: document.querySelector('input[name="risk_emergency"]:checked')?.value
+                },
+                currentStep: currentStep
+            };
+            
+            localStorage.setItem(localStorageKey, JSON.stringify(answers));
+        }
+        
+        // 加载进度
+        function loadProgress() {
+            const saved = localStorage.getItem(localStorageKey);
+            if (saved) {
+                const answers = JSON.parse(saved);
+                
+                // 恢复答案
+                for (const module in answers) {
+                    if (module !== 'currentStep') {
+                        for (const question in answers[module]) {
+                            const radio = document.querySelector(`input[name="${question}"][value="${answers[module][question]}"]`);
+                            if (radio) radio.checked = true;
+                        }
+                    }
+                }
+                
+                // 恢复当前步骤
+                if (answers.currentStep) {
+                    currentStep = answers.currentStep;
+                }
+            }
+        }
+        
+        // 跳转步骤
+        function nextStep(targetStep) {
+            if (validateStep(currentStep)) {
+                saveProgress();
+                currentStep = targetStep;
+                
+                // 如果是跳转到报告页，先生成报告
+                if (targetStep === 3) {
+                    generateReport();
+                }
+                
+                updateUI();
+            } else {
+                alert('请完成所有必填项后再继续');
+            }
+        }
+        
+        // 返回上一步
+        function prevStep() {
+            if (currentStep > 1) {
+                saveProgress();
+                currentStep--;
+                updateUI();
+            }
+        }
+        
+        // 验证必填项
+        function validateStep(step, showError = true) {
+            if (step === 2) {
+                const requiredQuestions = [
+                    'reg_status', 'reg_certificate', 'reg_annual_report',
+                    'gov_board', 'gov_charter', 'gov_meetings',
+                    'fin_account', 'fin_audit', 'fin_disclosure',
+                    'proj_management', 'proj_evaluation', 'proj_archives',
+                    'info_system', 'info_basic', 'info_projects',
+                    'risk_system', 'risk_assessment', 'risk_emergency'
+                ];
+                
+                for (const question of requiredQuestions) {
+                    const answer = document.querySelector(`input[name="${question}"]:checked`);
+                    if (!answer) {
+                        if (showError) {
+                            // 找到未回答的问题并滚动到该位置
+                            const questionElement = document.querySelector(`input[name="${question}"]`).closest('.question');
+                            if (questionElement) {
+                                questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                questionElement.style.backgroundColor = '#ffeeee';
+                                setTimeout(() => {
+                                    questionElement.style.backgroundColor = '';
+                                }, 2000);
+                            }
+                        }
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        
+        // 更新UI
+        function updateUI() {
+            // 隐藏所有内容
+            document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
+            
+            // 显示当前步骤
+            document.getElementById(`step${currentStep}`).classList.remove('hidden');
+            
+            // 更新导航栏
+            document.querySelectorAll('.step').forEach((el, index) => {
+                el.classList.remove('active', 'completed');
+                if (index + 1 === currentStep) {
+                    el.classList.add('active');
+                } else if (index + 1 < currentStep) {
+                    el.classList.add('completed');
+                }
+            });
+            
+            // 更新进度信息
+            updateProgressInfo();
+            
+            // 如果是报告页，生成报告
+            if (currentStep === 3) {
+                generateReport();
+            }
+            
+            // 如果是问卷页，检查是否可以生成报告
+            if (currentStep === 2) {
+                updateNextButtonState();
+            }
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+        }
+        
+        // 更新"生成报告"按钮状态
+        function updateNextButtonState() {
+            const nextButton = document.querySelector('.navigation .btn-primary');
+            if (nextButton) {
+                const allQuestionsAnswered = validateStep(2, false);
+                nextButton.disabled = !allQuestionsAnswered;
+                
+                if (!allQuestionsAnswered) {
+                    nextButton.setAttribute('title', '请完成所有必填项后再继续');
+                } else {
+                    nextButton.removeAttribute('title');
+                }
+            }
+        }
+        
+        // 更新进度信息
+        function updateProgressInfo() {
+            if (currentStep === 2) {
+                const progressText = document.getElementById('progress-text');
+                const completionPercentage = document.getElementById('completion-percentage');
+                
+                if (progressText && completionPercentage) {
+                    progressText.textContent = `步骤 2/3：问卷`;
+                    
+                    // 计算完成百分比
+                    const answers = getCurrentAnswers();
+                    const totalQuestions = 18; // 6个模块 × 3个问题
+                    let answeredQuestions = 0;
+                    
+                    // 统计已回答的问题数量
+                    for (const module in answers) {
+                        if (module !== 'currentStep' && typeof answers[module] === 'object') {
+                            for (const question in answers[module]) {
+                                if (answers[module][question]) {
+                                    answeredQuestions++;
+                                }
+                            }
+                        }
+                    }
+                    
+                    const percentage = Math.round((answeredQuestions / totalQuestions) * 100);
+                    completionPercentage.textContent = `${percentage}%`;
+                }
+            }
+        }
+        
+        // 计算分数
+        function calculateScore(answers) {
+            let totalScore = 0;
+            let maxScore = 0;
+            const moduleScores = {};
+            
+            // 每个问题的分值
+            const questionScores = {
+                reg_status: 10, reg_certificate: 5, reg_annual_report: 5,
+                gov_board: 8, gov_charter: 7, gov_meetings: 5,
+                fin_account: 10, fin_audit: 8, fin_disclosure: 7,
+                proj_management: 8, proj_evaluation: 7, proj_archives: 5,
+                info_system: 8, info_basic: 7, info_projects: 5,
+                risk_system: 8, risk_assessment: 7, risk_emergency: 5
+            };
+            
+            // 计算每个模块的分数
+            for (const module in answers) {
+                if (module !== 'currentStep') {
+                    moduleScores[module] = { score: 0, max: 0, risks: [] };
+                    
+                    for (const question in answers[module]) {
+                        const weight = questionScores[question] || 5;
+                        moduleScores[module].max += weight;
+                        maxScore += weight;
+                        
+                        if (answers[module][question] === '是') {
+                            moduleScores[module].score += weight;
+                            totalScore += weight;
+                        } else {
+                            // 记录风险项
+                            const questionText = document.querySelector(`label[for="${question}"]`) || 
+                                               document.querySelector(`input[name="${question}"]`).closest('.question').querySelector('label').textContent;
+                            moduleScores[module].risks.push({
+                                question: questionText.replace('✅ ', ''),
+                                weight: weight
+                            });
+                        }
+                    }
+                }
+            }
+            
+            return {
+                total: totalScore,
+                max: maxScore,
+                percentage: Math.round((totalScore / maxScore) * 100),
+                modules: moduleScores
+            };
+        }
+        
+        // 生成报告
+        function generateReport() {
+            // 确保获取所有问题的答案
+            const questionCards = document.querySelectorAll('.question');
+            questionCards.forEach(card => {
+                const questionName = card.querySelector('input[type="radio"]').name;
+                if (!answers[questionName]) {
+                    const selectedOption = card.querySelector('input[type="radio"]:checked');
+                    if (selectedOption) {
+                        answers[questionName] = selectedOption.value;
+                    }
+                }
+            });
+            
+            // 保存当前进度
+            saveProgress();
+            const scoreData = calculateScore(answers);
+            
+            // 更新总分
+            document.getElementById('total-score').textContent = `${scoreData.total}/${scoreData.max}`;
+            
+            // 更新评级徽章
+            const badgeElement = document.getElementById('score-badge');
+            if (scoreData.percentage >= 85) {
+                badgeElement.textContent = '合规优秀';
+                badgeElement.className = 'badge green';
+            } else if (scoreData.percentage >= 70) {
+                badgeElement.textContent = '基本合规';
+                badgeElement.className = 'badge orange';
+            } else {
+                badgeElement.textContent = '存在风险';
+                badgeElement.className = 'badge red';
+            }
+            
+            // 生成高风险提示
+            const highRisks = [];
+            for (const module in scoreData.modules) {
+                const moduleScore = scoreData.modules[module];
+                if (moduleScore.risks.length > 0) {
+                    // 找出权重最高的风险项
+                    const highestRisk = moduleScore.risks.reduce((prev, current) => 
+                        (prev.weight > current.weight) ? prev : current
+                    );
+                    highRisks.push(highestRisk.question);
+                }
+            }
+            
+            const riskAlertElement = document.getElementById('high-risk-alert');
+            const highRiskTextElement = document.getElementById('high-risk-text');
+            
+            if (highRisks.length > 0) {
+                highRiskTextElement.textContent = highRisks.join('、');
+                riskAlertElement.style.display = 'block';
+            } else {
+                riskAlertElement.style.display = 'none';
+            }
+            
+            // 生成各模块评分
+            const moduleScoresContainer = document.getElementById('module-scores');
+            moduleScoresContainer.innerHTML = '';
+            
+            const moduleNames = {
+                registration: '登记注册',
+                governance: '组织治理',
+                finance: '财务管理',
+                project: '项目管理',
+                information: '信息公开',
+                risk: '合规风险'
+            };
+            
+            const moduleIcons = {
+                registration: 'fa-registered',
+                governance: 'fa-users',
+                finance: 'fa-coins',
+                project: 'fa-hands-helping',
+                information: 'fa-bullhorn',
+                risk: 'fa-balance-scale'
+            };
+            
+            for (const module in scoreData.modules) {
+                const moduleScore = scoreData.modules[module];
+                const percentage = Math.round((moduleScore.score / moduleScore.max) * 100);
+                
+                let progressClass = 'high';
+                if (percentage < 70) progressClass = 'low';
+                else if (percentage < 85) progressClass = 'medium';
+                
+                const moduleScoreElement = document.createElement('div');
+                moduleScoreElement.className = 'module-score';
+                
+                moduleScoreElement.innerHTML = `
+                    <h3>
+                        <span><i class="fas ${moduleIcons[module]}"></i> ${moduleNames[module]}</span>
+                        <span>${moduleScore.score}/${moduleScore.max} (${percentage}%)</span>
+                    </h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill ${progressClass}" style="width: ${percentage}%"></div>
+                    </div>
+                    ${moduleScore.risks.length > 0 ? `
+                        <div class="risk-items">
+                            <strong>风险项：</strong>
+                            ${moduleScore.risks.map(risk => `<div class="risk-item">${risk.question}</div>`).join('')}
+                        </div>
+                    ` : '<div class="risk-items"><strong>无风险项</strong></div>'}
+                `;
+                
+                moduleScoresContainer.appendChild(moduleScoreElement);
+            }
+            
+            // 生成错误答案提示（只显示回答错误的问题）
+            generateWrongAnswers();
+            
+            // 生成改进建议（只显示需要改进的问题）
+            generateImprovementSuggestions();
+        }
+        
+        // 生成错误答案提示
+        function generateWrongAnswers() {
+            console.log('generateWrongAnswers函数被调用');
+            console.log('当前answers对象:', answers);
+            
+            // 确保获取所有问题的答案
+            const questionCards = document.querySelectorAll('.question');
+            questionCards.forEach(card => {
+                const questionName = card.querySelector('input[type="radio"]').name;
+                if (!answers[questionName]) {
+                    const selectedOption = card.querySelector('input[type="radio"]:checked');
+                    if (selectedOption) {
+                        answers[questionName] = selectedOption.value;
+                    }
+                }
+            });
+            
+            console.log('补充后的answers对象:', answers);
+            
+            // 问题文本映射
+            const questionTexts = {
+                reg_status: "是否已在民政部门完成登记注册？",
+                reg_certificate: "是否有有效的法人登记证书？",
+                reg_annual_report: "是否按规定完成年度工作报告？",
+                gov_board: "是否设立了理事会或董事会？",
+                gov_charter: "是否制定了完善的组织章程？",
+                gov_meetings: "是否定期召开理事会或董事会会议？",
+                fin_account: "是否建立了独立的财务账户？",
+                fin_audit: "是否定期进行财务审计？",
+                fin_disclosure: "是否按规定公开财务报告？",
+                proj_management: "是否建立了项目管理制度？",
+                proj_evaluation: "是否对项目进行定期评估？",
+                proj_archives: "是否建立了项目档案管理制度？",
+                info_system: "是否建立了信息公开制度？",
+                info_basic: "是否定期公开组织基本信息？",
+                info_projects: "是否公开项目执行情况和募捐信息？",
+                risk_system: "是否建立了合规风险管理制度？",
+                risk_assessment: "是否定期进行合规风险评估？",
+                risk_emergency: "是否建立了应急处理机制？"
+            };
+            
+            // 选项文本映射
+            const optionTexts = {
+                是: "是",
+                否: "否"
+            };
+            
+            // 正确答案
+            const correctAnswers = {
+                reg_status: "是",
+                reg_certificate: "是",
+                reg_annual_report: "是",
+                gov_board: "是",
+                gov_charter: "是",
+                gov_meetings: "是",
+                fin_account: "是",
+                fin_audit: "是",
+                fin_disclosure: "是",
+                proj_management: "是",
+                proj_evaluation: "是",
+                proj_archives: "是",
+                info_system: "是",
+                info_basic: "是",
+                info_projects: "是",
+                risk_system: "是",
+                risk_assessment: "是",
+                risk_emergency: "是"
+            };
+            
+            // 法规依据
+            const legalBasis = {
+                reg_status: "《慈善法》第十条规定，设立慈善组织，应当向县级以上人民政府民政部门申请登记。",
+                reg_certificate: "《慈善法》第十一条规定，民政部门应当自受理登记申请之日起三十日内作出决定。符合规定的，准予登记并向社会公告；不符合规定的，不予登记并书面说明理由。",
+                reg_annual_report: "《慈善法》第十三条规定，慈善组织应当每年向其登记的民政部门报送年度工作报告和财务会计报告。",
+                gov_board: "《慈善法》第十二条规定，慈善组织应当建立健全内部治理结构，明确决策、执行、监督等方面的职责权限。",
+                gov_charter: "《慈善组织信息公开办法》第五条规定，慈善组织应当制定和完善组织章程。",
+                gov_meetings: "《慈善组织内部治理指引》第八条规定，理事会应当每年至少召开两次会议。",
+                fin_account: "《慈善法》第三十六条规定，慈善组织应当建立健全财务管理制度，对捐赠财产进行独立核算。",
+                fin_audit: "《慈善法》第三十七条规定，慈善组织应当每年至少委托一次会计师事务所进行财务审计。",
+                fin_disclosure: "《慈善组织信息公开办法》第九条规定，慈善组织应当及时公开年度财务会计报告。",
+                proj_management: "《慈善组织项目管理指引》第三条规定，慈善组织应当建立健全项目管理制度。",
+                proj_evaluation: "《慈善组织项目管理指引》第十条规定，慈善组织应当对项目实施情况进行定期评估。",
+                proj_archives: "《慈善组织项目管理指引》第十五条规定，慈善组织应当建立健全项目档案管理制度。",
+                info_system: "《慈善组织信息公开办法》第四条规定，慈善组织应当建立健全信息公开制度。",
+                info_basic: "《慈善组织信息公开办法》第六条规定，慈善组织应当及时公开组织基本信息。",
+                info_projects: "《慈善组织信息公开办法》第八条规定，慈善组织应当及时公开项目执行情况和募捐信息。",
+                risk_system: "《慈善组织内部治理指引》第十二条规定，慈善组织应当建立健全合规风险管理制度。",
+                risk_assessment: "《慈善组织内部治理指引》第十三条规定，慈善组织应当每年至少进行一次合规风险评估。",
+                risk_emergency: "《慈善组织内部治理指引》第十四条规定，慈善组织应当建立健全应急处理机制。"
+            };
+            
+            // 改进建议
+            const improvementSuggestions = {
+                reg_status: "建议尽快到当地民政部门办理登记注册手续，确保组织合法性。",
+                reg_certificate: "建议及时更新法人登记证书，确保证书在有效期内。",
+                reg_annual_report: "建议建立年度工作报告制度，按时向民政部门提交报告。",
+                gov_board: "建议尽快设立理事会或董事会，完善组织治理结构。",
+                gov_charter: "建议制定完善的组织章程，明确组织宗旨、业务范围和治理结构。",
+                gov_meetings: "建议建立定期会议制度，确保理事会或董事会至少每季度召开一次会议。",
+                fin_account: "建议尽快开设独立的银行账户，确保慈善资金专款专用。",
+                fin_audit: "建议每年委托专业会计师事务所进行财务审计，确保财务透明。",
+                fin_disclosure: "建议建立财务公开制度，定期向社会公开财务报告。",
+                proj_management: "建议建立完善的项目管理制度，规范项目立项、实施和评估流程。",
+                proj_evaluation: "建议建立项目评估机制，定期对项目效果进行评估和改进。",
+                proj_archives: "建议建立项目档案管理制度，确保项目资料完整保存。",
+                info_system: "建议建立信息公开制度，明确信息公开的范围、方式和时限。",
+                info_basic: "建议定期在官方网站或指定平台公开组织基本信息。",
+                info_projects: "建议定期公开项目执行情况和募捐信息，提高透明度。",
+                risk_system: "建议建立合规风险管理制度，明确风险识别、评估和应对流程。",
+                risk_assessment: "建议每年至少进行一次全面合规风险评估，及时发现和解决问题。",
+                risk_emergency: "建议建立应急处理机制，制定应急预案，提高应对突发事件的能力。"
+            };
+            
+            // 获取用户答案
+            const userAnswers = {};
+            for (const question in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedOption) {
+                    userAnswers[question] = selectedOption.value;
+                }
+            }
+            
+            // 找出错误答案
+            const wrongQuestions = [];
+            for (const question in correctAnswers) {
+                if (userAnswers[question] !== correctAnswers[question]) {
+                    wrongQuestions.push({
+                        id: question,
+                        text: questionTexts[question],
+                        userAnswer: userAnswers[question] || "未回答",
+                        correctAnswer: correctAnswers[question],
+                        legalBasis: legalBasis[question],
+                        improvementSuggestion: improvementSuggestions[question]
+                    });
+                }
+            }
+            
+            // 生成HTML
+            const wrongAnswersContainer = document.getElementById('wrongAnswersContainer');
+            console.log('wrongAnswersContainer元素:', wrongAnswersContainer);
+            wrongAnswersContainer.innerHTML = '';
+            
+            if (wrongQuestions.length === 0) {
+                wrongAnswersContainer.innerHTML = '<div class="all-correct">恭喜！所有问题回答正确。</div>';
+            } else {
+                wrongQuestions.forEach(question => {
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'wrong-answer-item';
+                    
+                    questionElement.innerHTML = `
+                        <h4>${question.text}</h4>
+                        <p><span class="user-answer">您的答案：${optionTexts[question.userAnswer] || question.userAnswer}</span></p>
+                        <p><span class="correct-answer">正确答案：${optionTexts[question.correctAnswer]}</span></p>
+                        <p class="legal-basis">法规依据：${question.legalBasis}</p>
+                        <p class="improvement-suggestion">改进建议：${question.improvementSuggestion}</p>
+                    `;
+                    
+                    wrongAnswersContainer.appendChild(questionElement);
+                });
+            }
+        }
+        
+        // 生成改进建议
+        function generateImprovementSuggestions() {
+            console.log('generateImprovementSuggestions函数被调用');
+            console.log('当前answers对象:', answers);
+            
+            // 确保获取所有问题的答案
+            const questionCards = document.querySelectorAll('.question');
+            questionCards.forEach(card => {
+                const questionName = card.querySelector('input[type="radio"]').name;
+                if (!answers[questionName]) {
+                    const selectedOption = card.querySelector('input[type="radio"]:checked');
+                    if (selectedOption) {
+                        answers[questionName] = selectedOption.value;
+                    }
+                }
+            });
+            
+            // 问题文本映射
+            const questionTexts = {
+                reg_status: "是否已在民政部门完成登记注册？",
+                reg_certificate: "是否有有效的法人登记证书？",
+                reg_annual_report: "是否按规定完成年度工作报告？",
+                gov_board: "是否设立了理事会或董事会？",
+                gov_charter: "是否制定了完善的组织章程？",
+                gov_meetings: "是否定期召开理事会或董事会会议？",
+                fin_account: "是否建立了独立的财务账户？",
+                fin_audit: "是否定期进行财务审计？",
+                fin_disclosure: "是否按规定公开财务报告？",
+                proj_management: "是否建立了项目管理制度？",
+                proj_evaluation: "是否对项目进行定期评估？",
+                proj_archives: "是否建立了项目档案管理制度？",
+                info_system: "是否建立了信息公开制度？",
+                info_basic: "是否定期公开组织基本信息？",
+                info_projects: "是否公开项目执行情况和募捐信息？",
+                risk_system: "是否建立了合规风险管理制度？",
+                risk_assessment: "是否定期进行合规风险评估？",
+                risk_emergency: "是否建立了应急处理机制？"
+            };
+            
+            // 正确答案
+            const correctAnswers = {
+                reg_status: "是",
+                reg_certificate: "是",
+                reg_annual_report: "是",
+                gov_board: "是",
+                gov_charter: "是",
+                gov_meetings: "是",
+                fin_account: "是",
+                fin_audit: "是",
+                fin_disclosure: "是",
+                proj_management: "是",
+                proj_evaluation: "是",
+                proj_archives: "是",
+                info_system: "是",
+                info_basic: "是",
+                info_projects: "是",
+                risk_system: "是",
+                risk_assessment: "是",
+                risk_emergency: "是"
+            };
+            
+            // 改进建议
+            const improvementSuggestions = {
+                reg_status: "建议尽快到当地民政部门办理登记注册手续，确保组织合法性。",
+                reg_certificate: "建议及时更新法人登记证书，确保证书在有效期内。",
+                reg_annual_report: "建议建立年度工作报告制度，按时向民政部门提交报告。",
+                gov_board: "建议尽快设立理事会或董事会，完善组织治理结构。",
+                gov_charter: "建议制定完善的组织章程，明确组织宗旨、业务范围和治理结构。",
+                gov_meetings: "建议建立定期会议制度，确保理事会或董事会至少每季度召开一次会议。",
+                fin_account: "建议尽快开设独立的银行账户，确保慈善资金专款专用。",
+                fin_audit: "建议每年委托专业会计师事务所进行财务审计，确保财务透明。",
+                fin_disclosure: "建议建立财务公开制度，定期向社会公开财务报告。",
+                proj_management: "建议建立完善的项目管理制度，规范项目立项、实施和评估流程。",
+                proj_evaluation: "建议建立项目评估机制，定期对项目效果进行评估和改进。",
+                proj_archives: "建议建立项目档案管理制度，确保项目资料完整保存。",
+                info_system: "建议建立信息公开制度，明确信息公开的范围、方式和时限。",
+                info_basic: "建议定期在官方网站或指定平台公开组织基本信息。",
+                info_projects: "建议定期公开项目执行情况和募捐信息，提高透明度。",
+                risk_system: "建议建立合规风险管理制度，明确风险识别、评估和应对流程。",
+                risk_assessment: "建议每年至少进行一次全面合规风险评估，及时发现和解决问题。",
+                risk_emergency: "建议建立应急处理机制，制定应急预案，提高应对突发事件的能力。"
+            };
+            
+            // 获取用户答案
+            const userAnswers = {};
+            for (const question in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedOption) {
+                    userAnswers[question] = selectedOption.value;
+                }
+            }
+            
+            // 找出需要改进的问题
+            const needImprovement = [];
+            for (const question in correctAnswers) {
+                if (userAnswers[question] !== correctAnswers[question]) {
+                    needImprovement.push({
+                        id: question,
+                        text: questionTexts[question],
+                        suggestion: improvementSuggestions[question]
+                    });
+                }
+            }
+            
+            // 生成HTML
+            const improvementSuggestionsContainer = document.getElementById('improvementSuggestionsContainer');
+            console.log('improvementSuggestionsContainer元素:', improvementSuggestionsContainer);
+            improvementSuggestionsContainer.innerHTML = '';
+            
+            if (needImprovement.length === 0) {
+                improvementSuggestionsContainer.innerHTML = '<div class="all-correct">暂无改进建议，继续保持。</div>';
+            } else {
+                needImprovement.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'improvement-item';
+                    
+                    itemElement.innerHTML = `
+                        <h4>${item.text}</h4>
+                        <p>${item.suggestion}</p>
+                    `;
+                    
+                    improvementSuggestionsContainer.appendChild(itemElement);
+                });
+            }
+        }
+        function downloadPDF() {
+            const button = event.target;
+            button.innerHTML = '<span class="loading"></span> 生成中...';
+            button.disabled = true;
+            
+            // 使用html2canvas将报告内容转换为图片
+            html2canvas(document.querySelector('.content'), {
+                scale: 2,
+                logging: false,
+                useCORS: true
+            }).then(canvas => {
+                // 创建PDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                const imgData = canvas.toDataURL('image/png');
+                const imgWidth = 210; // A4宽度(mm)
+                const pageHeight = 295; // A4高度(mm)
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                // 添加第一页
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // 如果内容超过一页，添加更多页面
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                // 保存PDF
+                pdf.save('慈善组织合规自检报告.pdf');
+                
+                // 恢复按钮状态
+                button.innerHTML = '下载PDF';
+                button.disabled = false;
+            }).catch(error => {
+                console.error('生成PDF失败:', error);
+                alert('生成PDF失败，请重试');
+                
+                // 恢复按钮状态
+                button.innerHTML = '下载PDF';
+                button.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>

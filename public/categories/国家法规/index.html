@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=12147&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国慈善组织合规通 - 一站式慈善合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<div class="bg-white border border-darkGray rounded-md mb-6">
+    <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+        <h1 class="text-xl font-bold text-neutral">国家法规</h1>
+    </div>
+    <div class="p-6">
+        
+            <p class="text-neutral mb-6">本栏目暂无内容，敬请期待。</p>
+        
+        
+        
+        <a href="/regulations/charity-law6/" class="block border border-darkGray rounded-md p-4 mb-4 hover:border-primary transition-colors">
+            <h3 class="text-lg font-bold text-primary mb-2">中华人民共和国慈善法28</h3>
+            <p class="text-sm text-gray-600 mb-2">发布时间：2025-11-02</p>
+            <p class="text-sm mb-2"><p>第一章 总则</p>
+<p>第一条  规范慈善组织信息公开行为，提高慈善组织透明度，保护捐赠人、受益人和慈善组织等合法权益，促进慈善事业健康发展，根据《中华人民共和国慈善法》等法律法规，制定本办法。</p>
+<p><strong>第二条</strong> 本办法所称慈善组织，是指依法成立、符合《中华人民共和国慈善法》规定，以面向社会开展慈善活动为宗旨的非营利性组织。</p>
+<p><strong>第三条</strong> 慈善组织应当依法履行信息公开义务，真实、完整、及时地公开相关信息。</p>
+<h2 id="第二章-信息公开的范围和内容">第二章 信息公开的范围和内容</h2>
+<p><strong>第四条</strong> 慈善组织应当在年度报告中公开以下信息：</p>
+<ol>
+<li>组织基本情况，包括名称、住所、类型、成立时间、统一社会信用代码、业务主管单位等；</li>
+<li>年度开展慈善活动的情况，包括慈善项目的名称、主要内容、实施地域、受益人数等；</li>
+<li>年度财务状况，包括收入、支出、资产负债等；</li>
+<li>年度审计报告；</li>
+<li>其他应当公开的信息。</li>
+</ol>
+<p><strong>第五条</strong> 慈善组织应当在每次募捐活动结束后三个月内，公开以下信息：</p>
+<ol>
+<li>募捐活动名称、时间、地域、方式等；</li>
+<li>接受捐赠的情况，包括捐赠人姓名（名称）、捐赠金额、捐赠物资的种类和数量等；</li>
+<li>募捐活动支出情况，包括直接用于慈善目的的支出比例等；</li>
+<li>募捐活动的效果。</li>
+</ol>
+<p>第三章 信息公开的方式和期限</p>
+<p><strong>第六条</strong> 慈善组织应当通过自身官方网站、官方微博、官方微信公众号等渠道公开信息，并同时在中国社会组织公共服务平台、民政部门指定的慈善信息平台上公开。</p>
+<p><strong>第七条</strong> 慈善组织应当在年度报告形成后三个月内公开年度报告。</p>
+<p>第四章 监督管理</p>
+<p><strong>第八条</strong> 民政部门应当建立慈善组织信息公开监督检查制度，定期对慈善组织信息公开情况进行检查。</p>
+<p><strong>第九条</strong> 慈善组织未按照本办法规定公开信息的，民政部门可以责令限期改正；逾期不改正的，依法予以处罚。</p>
+<h2 id="第五章-附则">第五章 附则</h2>
+<p><strong>第十条</strong> 本办法自2025年3月1日起施行。</p></p>
+            <span class="text-primary text-sm hover:underline">阅读更多 →</span>
+        </a>
+        
+        <a href="/regulations/charity-law2/" class="block border border-darkGray rounded-md p-4 mb-4 hover:border-primary transition-colors">
+            <h3 class="text-lg font-bold text-primary mb-2">中华人民共和国慈善法2028</h3>
+            <p class="text-sm text-gray-600 mb-2">发布时间：2025-11-01</p>
+            <p class="text-sm mb-2"><p>第一章 总则</p>
+<p>第一条  规范慈善组织信息公开行为，提高慈善组织透明度，保护捐赠人、受益人和慈善组织等合法权益，促进慈善事业健康发展，根据《中华人民共和国慈善法》等法律法规，制定本办法。</p>
+<p><strong>第二条</strong> 本办法所称慈善组织，是指依法成立、符合《中华人民共和国慈善法》规定，以面向社会开展慈善活动为宗旨的非营利性组织。</p>
+<p><strong>第三条</strong> 慈善组织应当依法履行信息公开义务，真实、完整、及时地公开相关信息。</p>
+<h2 id="第二章-信息公开的范围和内容">第二章 信息公开的范围和内容</h2>
+<p><strong>第四条</strong> 慈善组织应当在年度报告中公开以下信息：</p>
+<ol>
+<li>组织基本情况，包括名称、住所、类型、成立时间、统一社会信用代码、业务主管单位等；</li>
+<li>年度开展慈善活动的情况，包括慈善项目的名称、主要内容、实施地域、受益人数等；</li>
+<li>年度财务状况，包括收入、支出、资产负债等；</li>
+<li>年度审计报告；</li>
+<li>其他应当公开的信息。</li>
+</ol>
+<p><strong>第五条</strong> 慈善组织应当在每次募捐活动结束后三个月内，公开以下信息：</p>
+<ol>
+<li>募捐活动名称、时间、地域、方式等；</li>
+<li>接受捐赠的情况，包括捐赠人姓名（名称）、捐赠金额、捐赠物资的种类和数量等；</li>
+<li>募捐活动支出情况，包括直接用于慈善目的的支出比例等；</li>
+<li>募捐活动的效果。</li>
+</ol>
+<p>第三章 信息公开的方式和期限</p>
+<p><strong>第六条</strong> 慈善组织应当通过自身官方网站、官方微博、官方微信公众号等渠道公开信息，并同时在中国社会组织公共服务平台、民政部门指定的慈善信息平台上公开。</p>
+<p><strong>第七条</strong> 慈善组织应当在年度报告形成后三个月内公开年度报告。</p>
+<p>第四章 监督管理</p>
+<p><strong>第八条</strong> 民政部门应当建立慈善组织信息公开监督检查制度，定期对慈善组织信息公开情况进行检查。</p>
+<p><strong>第九条</strong> 慈善组织未按照本办法规定公开信息的，民政部门可以责令限期改正；逾期不改正的，依法予以处罚。</p>
+<h2 id="第五章-附则">第五章 附则</h2>
+<p><strong>第十条</strong> 本办法自2025年3月1日起施行。</p></p>
+            <span class="text-primary text-sm hover:underline">阅读更多 →</span>
+        </a>
+        
+        <a href="/regulations/charity-law/" class="block border border-darkGray rounded-md p-4 mb-4 hover:border-primary transition-colors">
+            <h3 class="text-lg font-bold text-primary mb-2">中华人民共和国慈善法2026</h3>
+            <p class="text-sm text-gray-600 mb-2">发布时间：2016-09-01</p>
+            <p class="text-sm mb-2"><h2 id="基本信息">基本信息</h2>
+<p>《中华人民共和国慈善法》是中国慈善领域的基础性法律，于2016年3月16日第十二届全国人民代表大会第四次会议通过，自2016年9月1日起施行。该法明确了慈善活动的范围、慈善组织的设立和管理、慈善募捐和捐赠、慈善财产管理和使用、慈善服务、信息公开、促进措施和法律责任等内容。</p>
+<h2 id="主要条款解读">主要条款解读</h2>
+<h3 id="慈善活动的定义">慈善活动的定义</h3>
+<p>慈善活动，是指自然人、法人和其他组织以捐赠财产或者提供服务等方式，自愿开展的下列公益活动：</p>
+<ol>
+<li>扶贫、济困</li>
+<li>扶老、救孤、恤病、助残、优抚</li>
+<li>救助自然灾害、事故灾难和公共卫生事件等突发事件造成的损害</li>
+<li>促进教育、科学、文化、卫生、体育等事业的发展</li>
+<li>防治污染和其他公害，保护和改善生态环境</li>
+<li>符合本法规定的其他公益活动</li>
+</ol>
+<h3 id="慈善组织的设立条件">慈善组织的设立条件</h3>
+<p>设立慈善组织，应当向县级以上人民政府民政部门申请登记，民政部门应当自受理申请之日起三十日内作出决定。符合本法规定条件的，准予登记并向社会公告；不符合本法规定条件的，不予登记并书面说明理由。</p>
+<h3 id="慈善募捐的规定">慈善募捐的规定</h3>
+<p>慈善组织开展公开募捐，应当取得公开募捐资格。依法登记满二年的慈善组织，可以向其登记的民政部门申请公开募捐资格。民政部门应当自受理申请之日起二十日内作出决定。慈善组织符合内部治理结构健全、运作规范的条件的，发给公开募捐资格证书；不符合条件的，不发给公开募捐资格证书并书面说明理由。</p>
+<h3 id="信息公开要求">信息公开要求</h3>
+<p>慈善组织应当依法履行信息公开义务。慈善组织应当向社会公开组织章程和决策、执行、监督机构成员信息以及国务院民政部门要求公开的其他信息。信息公开应当真实、完整、及时。</p>
+<h2 id="重要意义">重要意义</h2>
+<p>《慈善法》的颁布实施，对于规范慈善活动，保护慈善组织、捐赠人、志愿者、受益人等慈善活动参与者的合法权益，促进慈善事业健康发展，具有重要意义。它为慈善组织的设立、运营提供了明确的法律依据，同时也为捐赠人权益保护、慈善信息公开等方面提供了法律保障。</p>
+<h2 id="相关链接">相关链接</h2>
+<ul>
+<li><a href="http://cishan.chinanpo.gov.cn/">民政部慈善组织信息公开平台</a></li>
+<li><a href="http://cishan.chinanpo.gov.cn/cishan/index.html">慈善组织年报备案查询</a></li>
+</ul></p>
+            <span class="text-primary text-sm hover:underline">阅读更多 →</span>
+        </a>
+        
+    </div>
+</div>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    中国慈善组织合规通是专业的慈善组织合规服务平台，致力于为各类慈善组织提供政策解读、合规指导、风险管理等全方位服务，助力慈善事业健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市海淀区中关村南大街5号</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>400-888-9999</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>contact@hegui.org.cn</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP备案号：京ICP备12345678号</li>
+                    <li>公安备案号：京公网安备11010802020123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 中国慈善组织合规通 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

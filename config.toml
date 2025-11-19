@@ -1,0 +1,58 @@
+baseURL = "http://localhost:8000/"
+languageCode = "zh-CN"
+title = "中国慈善组织合规通"
+
+[params]
+  description = "一站式慈善合规解决方案，助力公益组织规范发展"
+  phone = "400-888-9999"
+  primaryColor = "#C62828"
+  secondaryColor = "#1565C0"
+  neutralColor = "#333333"
+  lightGrayColor = "#F5F5F5"
+  darkGrayColor = "#E0E0E0"
+
+[menu]
+  [[menu.main]]
+    name = "首页"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "法规政策"
+    url = "/regulations/"
+    weight = 2
+
+  [[menu.main]]
+    name = "合规指南"
+    url = "/compliance_guide/"
+    weight = 3
+
+  [[menu.main]]
+    name = "典型案例"
+    url = "/cases/"
+    weight = 4
+
+  [[menu.main]]
+    name = "咨询服务"
+    url = "/consulting/"
+    weight = 5
+
+  [[menu.main]]
+  name = "合规工具"
+  url = "/compliance_tool/"
+  weight = 5
+
+[[menu.main]]
+  name = "资料下载"
+  url = "/download/"
+  weight = 6
+
+[[menu.main]]
+  name = "专家库"
+  url = "/experts/"
+  weight = 7
+
+[[menu.main]]
+  name = "关于我们"
+  url = "/about/"
+  weight = 8

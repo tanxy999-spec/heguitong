@@ -1,0 +1,402 @@
+{{ define "title" }}慈善组织财务合规管理 - 中国慈善组织合规通{{ end }}
+
+{{ define "main" }}
+<main>
+    <!-- 面包屑导航 -->
+    <div class="container mx-auto px-4 py-3">
+        <nav class="text-sm text-gray-500">
+            <a href="/" class="hover:text-primary">首页</a> &gt; 
+            <a href="/consulting/" class="hover:text-primary">咨询服务</a> &gt; 
+            <span class="text-primary">慈善组织财务合规管理</span>
+        </nav>
+    </div>
+
+    <!-- 培训头部区域 -->
+    <div class="bg-gray-100 py-8">
+        <div class="container mx-auto px-4">
+            <h1 class="text-3xl font-bold text-primary mb-4">慈善组织财务合规管理</h1>
+            <p class="text-gray-600 mb-6 max-w-3xl">针对慈善组织财务人员设计，涵盖非营利组织会计制度、捐赠资金管理、项目财务管理、税务合规等内容，帮助提升财务合规水平。</p>
+            
+            <!-- 基本信息 -->
+            <div class="flex flex-wrap gap-4 text-sm">
+                <div class="flex items-center">
+                    <i class="fa fa-users text-primary mr-2"></i>
+                    <span>适合对象：财务人员、项目管理人员</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-calendar text-primary mr-2"></i>
+                    <span>培训周期：3天</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa fa-map-marker text-primary mr-2"></i>
+                    <span>培训方式：线下</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- 左侧内容区 -->
+            <div class="lg:col-span-3 space-y-8">
+                <!-- 价格与报名 -->
+                <div class="bg-white border border-gray-200 rounded-md p-6">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="text-3xl font-bold text-primary">¥ 4,500/人</div>
+                        <div class="space-y-3">
+                            <p class="text-gray-600">含培训教材、午餐、茶歇、住宿</p>
+                            <a href="#register" class="inline-block bg-primary text-white px-8 py-3 rounded-md hover:bg-red-700 transition-colors font-medium text-center">
+                                立即报名
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 培训大纲 -->
+                <div class="bg-white border border-gray-200 rounded-md p-6">
+                    <h2 class="text-xl font-bold text-primary mb-6">培训大纲</h2>
+                    
+                    <div class="space-y-8">
+                        <!-- 第1节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">1</span>
+                                非营利组织会计制度解析
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 非营利组织会计制度的适用范围与基本原则</p>
+                                <p>• 会计科目设置与核算要求</p>
+                                <p>• 财务报表编制与分析要点</p>
+                                <p>• 新旧会计制度衔接与转换实务</p>
+                                <p>• 会计信息化与财务管理系统应用</p>
+                            </div>
+                        </div>
+
+                        <!-- 第2节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">2</span>
+                                捐赠资金管理与核算
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 捐赠收入确认与计量原则</p>
+                                <p>• 限定性资产与非限定性资产管理</p>
+                                <p>• 捐赠协议执行与资金使用跟踪</p>
+                                <p>• 捐赠票据管理与开具规范</p>
+                                <p>• 捐赠项目财务报告编制</p>
+                            </div>
+                        </div>
+
+                        <!-- 第3节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">3</span>
+                                项目财务管理实务
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 项目预算编制与审批流程</p>
+                                <p>• 项目成本核算与费用分摊方法</p>
+                                <p>• 项目资金支付与报销管理</p>
+                                <p>• 项目财务监督与内部控制</p>
+                                <p>• 项目财务决算与绩效评价</p>
+                            </div>
+                        </div>
+
+                        <!-- 第4节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">4</span>
+                                税务合规与筹划
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 非营利组织税收优惠政策解析</p>
+                                <p>• 企业所得税免税资格管理</p>
+                                <p>• 增值税与其他税种合规要求</p>
+                                <p>• 个人所得税代扣代缴管理</p>
+                                <p>• 税务风险防范与筹划策略</p>
+                            </div>
+                        </div>
+
+                        <!-- 第5节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">5</span>
+                                财务内控体系建设
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 财务内部控制框架设计</p>
+                                <p>• 货币资金与票据管理制度</p>
+                                <p>• 采购与固定资产管理控制</p>
+                                <p>• 财务授权审批制度建设</p>
+                                <p>• 内部审计与监督机制</p>
+                            </div>
+                        </div>
+
+                        <!-- 第6节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">6</span>
+                                财务报告与信息公开
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 年度财务报告编制规范</p>
+                                <p>• 财务信息公开要求与标准</p>
+                                <p>• 财务透明度提升策略</p>
+                                <p>• 财务分析与决策支持</p>
+                                <p>• 财务数据解读与沟通技巧</p>
+                            </div>
+                        </div>
+
+                        <!-- 第7节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">7</span>
+                                财务风险管理与案例分析
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 财务风险识别与评估方法</p>
+                                <p>• 常见财务违规行为分析</p>
+                                <p>• 财务欺诈防范措施</p>
+                                <p>• 财务危机处理与应对</p>
+                                <p>• 典型财务合规案例解析</p>
+                            </div>
+                        </div>
+
+                        <!-- 第8节 -->
+                        <div>
+                            <h3 class="text-lg font-bold mb-4 flex items-center">
+                                <span class="inline-block w-8 h-8 rounded-full bg-primary text-white text-center mr-3">8</span>
+                                实务操作与技能训练
+                            </h3>
+                            <div class="pl-11 space-y-2 text-gray-600">
+                                <p>• 会计凭证审核与账务处理实操</p>
+                                <p>• 财务报表编制实务演练</p>
+                                <p>• 预算编制与分析实操</p>
+                                <p>• 内部财务制度设计工作坊</p>
+                                <p>• 财务问题诊断与解决方案</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 讲师介绍 -->
+                <div class="bg-white border border-gray-200 rounded-md p-6">
+                    <h2 class="text-xl font-bold text-primary mb-6">讲师介绍</h2>
+                    <div class="flex flex-col md:flex-row gap-6">
+                        <div class="md:w-1/4">
+                            <img src="https://picsum.photos/seed/lecturer2/300/400" alt="讲师照片" class="w-full h-auto rounded-md">
+                        </div>
+                        <div class="md:w-3/4 space-y-4">
+                            <h3 class="text-lg font-bold">王建国 注册会计师</h3>
+                            <p class="text-gray-600">中汇会计师事务所合伙人，非营利组织财务咨询专家，具有20年财务审计和咨询经验，专注于非营利组织财务合规研究。</p>
+                            <p class="text-gray-600">曾为多家大型基金会和社会组织提供财务审计、咨询和培训服务，参与制定多项非营利组织财务管理制度指南。</p>
+                            <div class="pt-4 border-t border-gray-200">
+                                <h4 class="font-bold mb-2">主要研究领域：</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">非营利组织会计</span>
+                                    <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">税务筹划</span>
+                                    <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">财务管理</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 往期风采 -->
+                <div class="bg-white border border-gray-200 rounded-md p-6">
+                    <h2 class="text-xl font-bold text-primary mb-6">往期风采</h2>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <img src="https://picsum.photos/seed/training2-1/400/300" alt="培训照片1" class="w-full h-48 object-cover rounded-md">
+                        <img src="https://picsum.photos/seed/training2-2/400/300" alt="培训照片2" class="w-full h-48 object-cover rounded-md">
+                        <img src="https://picsum.photos/seed/training2-3/400/300" alt="培训照片3" class="w-full h-48 object-cover rounded-md">
+                        <img src="https://picsum.photos/seed/training2-4/400/300" alt="培训照片4" class="w-full h-48 object-cover rounded-md">
+                        <img src="https://picsum.photos/seed/training2-5/400/300" alt="培训照片5" class="w-full h-48 object-cover rounded-md">
+                        <img src="https://picsum.photos/seed/training2-6/400/300" alt="培训照片6" class="w-full h-48 object-cover rounded-md">
+                    </div>
+                </div>
+
+                <!-- 学员评价 -->
+                <div class="bg-white border border-gray-200 rounded-md p-6">
+                    <h2 class="text-xl font-bold text-primary mb-6">学员评价</h2>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <p class="text-gray-600 italic mb-2">"培训内容非常实用，特别是关于非营利组织会计制度和税务合规的讲解，解决了我们工作中遇到的很多实际问题。"</p>
+                            <p class="text-right font-medium">—— 某基金会财务总监</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <p class="text-gray-600 italic mb-2">"讲师实战经验丰富，案例分析具体生动，实操演练环节让我们能够将学到的知识立即应用到工作中。"</p>
+                            <p class="text-right font-medium">—— 某社会服务机构财务经理</p>
+                        </div>
+                        <div class="border-l-4 border-primary pl-4 py-2">
+                            <p class="text-gray-600 italic mb-2">"通过培训，我们对项目财务管理有了更系统的认识，对提升机构的财务管理水平非常有帮助。"</p>
+                            <p class="text-right font-medium">—— 某社团财务主管</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 常见问题 -->
+                <div class="bg-white border border-gray-200 rounded-md p-6">
+                    <h2 class="text-xl font-bold text-primary mb-6">常见问题</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-bold mb-2">Q1: 培训是否提供后续咨询服务？</h3>
+                            <p class="text-gray-600">A: 是的，培训结束后，我们将提供3个月的免费在线咨询服务，解答学员在实际工作中遇到的财务问题。</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2">Q2: 是否提供发票？</h3>
+                            <p class="text-gray-600">A: 是的，我们可以提供正规增值税发票，请在报名时注明发票抬头和税号。</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold mb-2">Q3: 培训材料是否包含电子版？</h3>
+                            <p class="text-gray-600">A: 是的，我们将提供纸质版和电子版培训材料，以及相关财务表格模板和工具。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 报名表单 -->
+                <div id="register" class="bg-white border border-gray-200 rounded-md p-6">
+                    <h2 class="text-xl font-bold text-primary mb-6">立即报名</h2>
+                    <form class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="name">姓名</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 mb-2" for="phone">电话</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="organization">所在机构</label>
+                            <input type="text" id="organization" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="position">职位</label>
+                            <input type="text" id="position" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="email">邮箱</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="notes">备注</label>
+                            <textarea id="notes" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md"></textarea>
+                        </div>
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-md hover:bg-red-700 transition-colors font-medium">
+                                提交报名
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 右侧侧边栏 -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- 课程信息卡片 -->
+                <div class="bg-white border border-gray-200 rounded-md overflow-hidden">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-lg font-bold">课程信息</h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex gap-3">
+                            <i class="fa fa-calendar text-primary mt-1"></i>
+                            <div>
+                                <p class="text-gray-500 text-sm">培训周期</p>
+                                <p class="font-medium">3天</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa fa-map-marker text-primary mt-1"></i>
+                            <div>
+                                <p class="text-gray-500 text-sm">培训方式</p>
+                                <p class="font-medium">线下</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa fa-users text-primary mt-1"></i>
+                            <div>
+                                <p class="text-gray-500 text-sm">适合对象</p>
+                                <p class="font-medium">财务人员、项目管理人员</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa fa-graduation-cap text-primary mt-1"></i>
+                            <div>
+                                <p class="text-gray-500 text-sm">颁发证书</p>
+                                <p class="font-medium">培训结业证书</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 近期培训安排 -->
+                <div class="bg-white border border-gray-200 rounded-md overflow-hidden">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-lg font-bold">近期培训安排</h3>
+                    </div>
+                    <div class="p-4 space-y-4">
+                        <div class="border-b border-gray-100 pb-3">
+                            <p class="font-medium">2023年10月20-22日</p>
+                            <p class="text-gray-600 text-sm">北京·中国公益研究院</p>
+                            <p class="text-primary font-medium mt-1">剩余名额：5人</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-3">
+                            <p class="font-medium">2023年11月15-17日</p>
+                            <p class="text-gray-600 text-sm">上海·公益新天地</p>
+                            <p class="text-primary font-medium mt-1">剩余名额：10人</p>
+                        </div>
+                        <div>
+                            <p class="font-medium">2023年12月10-12日</p>
+                            <p class="text-gray-600 text-sm">广州·广东省公益创新中心</p>
+                            <p class="text-primary font-medium mt-1">剩余名额：15人</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 联系方式 -->
+                <div class="bg-white border border-gray-200 rounded-md overflow-hidden">
+                    <div class="bg-primary text-white p-4">
+                        <h3 class="text-lg font-bold">联系方式</h3>
+                    </div>
+                    <div class="p-4 space-y-3">
+                        <div class="flex gap-3">
+                            <i class="fa fa-phone text-primary mt-1"></i>
+                            <p>400-123-4567</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa fa-envelope text-primary mt-1"></i>
+                            <p>training@charitycompliance.org</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <i class="fa fa-map-marker text-primary mt-1"></i>
+                            <p>北京市朝阳区建国路88号</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+/* 培训详情页样式 */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+    .grid-cols-3 {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+{{ end }}

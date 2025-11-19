@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on 中国慈善组织合规通</title>
+    <link>http://localhost:12147/categories/</link>
+    <description>Recent content in Categories on 中国慈善组织合规通</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Wed, 19 Nov 2025 13:31:07 +0000</lastBuildDate>
+    <atom:link href="http://localhost:12147/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>地方政策</title>
+      <link>http://localhost:12147/categories/%E5%9C%B0%E6%96%B9%E6%94%BF%E7%AD%96/</link>
+      <pubDate>Wed, 19 Nov 2025 13:31:07 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E5%9C%B0%E6%96%B9%E6%94%BF%E7%AD%96/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>信息披露</title>
+      <link>http://localhost:12147/categories/%E4%BF%A1%E6%81%AF%E6%8A%AB%E9%9C%B2/</link>
+      <pubDate>Wed, 12 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E4%BF%A1%E6%81%AF%E6%8A%AB%E9%9C%B2/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>财务管理</title>
+      <link>http://localhost:12147/categories/%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Wed, 12 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E8%B4%A2%E5%8A%A1%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>运营管理</title>
+      <link>http://localhost:12147/categories/%E8%BF%90%E8%90%A5%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Wed, 12 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E8%BF%90%E8%90%A5%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>国家法规</title>
+      <link>http://localhost:12147/categories/%E5%9B%BD%E5%AE%B6%E6%B3%95%E8%A7%84/</link>
+      <pubDate>Sun, 02 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E5%9B%BD%E5%AE%B6%E6%B3%95%E8%A7%84/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>政策解读</title>
+      <link>http://localhost:12147/categories/%E6%94%BF%E7%AD%96%E8%A7%A3%E8%AF%BB/</link>
+      <pubDate>Sun, 02 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E6%94%BF%E7%AD%96%E8%A7%A3%E8%AF%BB/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>行政处罚案例</title>
+      <link>http://localhost:12147/categories/%E8%A1%8C%E6%94%BF%E5%A4%84%E7%BD%9A%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Wed, 15 May 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E8%A1%8C%E6%94%BF%E5%A4%84%E7%BD%9A%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>合规成功案例</title>
+      <link>http://localhost:12147/categories/%E5%90%88%E8%A7%84%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Fri, 15 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E5%90%88%E8%A7%84%E6%88%90%E5%8A%9F%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>行业典型案例</title>
+      <link>http://localhost:12147/categories/%E8%A1%8C%E4%B8%9A%E5%85%B8%E5%9E%8B%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Fri, 15 Mar 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E8%A1%8C%E4%B8%9A%E5%85%B8%E5%9E%8B%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>合规指南</title>
+      <link>http://localhost:12147/categories/%E5%90%88%E8%A7%84%E6%8C%87%E5%8D%97/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E5%90%88%E8%A7%84%E6%8C%87%E5%8D%97/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>治理管理</title>
+      <link>http://localhost:12147/categories/%E6%B2%BB%E7%90%86%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E6%B2%BB%E7%90%86%E7%AE%A1%E7%90%86/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>项目实施</title>
+      <link>http://localhost:12147/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%96%BD/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>培训服务</title>
+      <link>http://localhost:12147/categories/%E5%9F%B9%E8%AE%AD%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Fri, 15 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/%E5%9F%B9%E8%AE%AD%E6%9C%8D%E5%8A%A1/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Finance</title>
+      <link>http://localhost:12147/categories/finance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/finance/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Registration</title>
+      <link>http://localhost:12147/categories/registration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:12147/categories/registration/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

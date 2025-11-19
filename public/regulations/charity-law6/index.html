@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=12147&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国慈善组织合规通 - 一站式慈善合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<link rel="stylesheet" href="/css/styles.css">
+
+
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 space-y-6">
+            
+            <div class="relative bg-gradient-to-r from-primary to-red-800 text-white rounded-md p-6 overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-2">法规政策</h2>
+                    <p class="text-white text-opacity-90">全面收录慈善领域相关法规政策，助力组织合规运营</p>
+                </div>
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa fa-book" style="font-size: 120px;"></i>
+                </div>
+            </div>
+            
+            
+            
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-4">
+                    <h1 class="text-2xl font-bold text-neutral">中华人民共和国慈善法28</h1>
+                    <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+                        <span><i class="fa fa-calendar mr-1"></i> 发布日期：2025年11月02日</span>
+                        
+                        <span class="inline-flex items-center">
+                            <i class="fa fa-tag mr-1"></i>
+                            分类：
+                            
+                                
+                                
+                                    
+                                        
+                                    
+                                    
+                                        <span class="ml-1 px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-sm">国家法规</span>
+                                    
+                                
+                            
+                        </span>
+                        
+                        <span><i class="fa fa-eye mr-1"></i> 浏览次数：0</span>
+                    </div>
+                </div>
+                
+                
+                <div class="p-6 bg-lightGray">
+                    <p>第一章 总则</p>
+<p>第一条  规范慈善组织信息公开行为，提高慈善组织透明度，保护捐赠人、受益人和慈善组织等合法权益，促进慈善事业健康发展，根据《中华人民共和国慈善法》等法律法规，制定本办法。</p>
+<p><strong>第二条</strong> 本办法所称慈善组织，是指依法成立、符合《中华人民共和国慈善法》规定，以面向社会开展慈善活动为宗旨的非营利性组织。</p>
+<p><strong>第三条</strong> 慈善组织应当依法履行信息公开义务，真实、完整、及时地公开相关信息。</p>
+<h2 id="第二章-信息公开的范围和内容">第二章 信息公开的范围和内容</h2>
+<p><strong>第四条</strong> 慈善组织应当在年度报告中公开以下信息：</p>
+<ol>
+<li>组织基本情况，包括名称、住所、类型、成立时间、统一社会信用代码、业务主管单位等；</li>
+<li>年度开展慈善活动的情况，包括慈善项目的名称、主要内容、实施地域、受益人数等；</li>
+<li>年度财务状况，包括收入、支出、资产负债等；</li>
+<li>年度审计报告；</li>
+<li>其他应当公开的信息。</li>
+</ol>
+<p><strong>第五条</strong> 慈善组织应当在每次募捐活动结束后三个月内，公开以下信息：</p>
+<ol>
+<li>募捐活动名称、时间、地域、方式等；</li>
+<li>接受捐赠的情况，包括捐赠人姓名（名称）、捐赠金额、捐赠物资的种类和数量等；</li>
+<li>募捐活动支出情况，包括直接用于慈善目的的支出比例等；</li>
+<li>募捐活动的效果。</li>
+</ol>
+<p>第三章 信息公开的方式和期限</p>
+<p><strong>第六条</strong> 慈善组织应当通过自身官方网站、官方微博、官方微信公众号等渠道公开信息，并同时在中国社会组织公共服务平台、民政部门指定的慈善信息平台上公开。</p>
+<p><strong>第七条</strong> 慈善组织应当在年度报告形成后三个月内公开年度报告。</p>
+<p>第四章 监督管理</p>
+<p><strong>第八条</strong> 民政部门应当建立慈善组织信息公开监督检查制度，定期对慈善组织信息公开情况进行检查。</p>
+<p><strong>第九条</strong> 慈善组织未按照本办法规定公开信息的，民政部门可以责令限期改正；逾期不改正的，依法予以处罚。</p>
+<h2 id="第五章-附则">第五章 附则</h2>
+<p><strong>第十条</strong> 本办法自2025年3月1日起施行。</p>
+
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex space-x-4 mb-4 md:mb-0">
+                        <a href="#" class="inline-flex items-center text-primary hover:text-red-700">
+                            <i class="fa fa-print mr-2"></i> 打印法规
+                        </a>
+                    </div>
+                    <div class="flex space-x-4">
+                        <span class="text-sm text-gray-500">分享到：</span>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weixin"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weibo"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-qq"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="space-y-6">
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">法规搜索</h3>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <div class="relative">
+                            <input type="text" placeholder="输入关键词搜索法规..." 
+                                class="w-full px-4 py-2 border border-darkGray rounded-md focus:outline-none focus:border-primary">
+                            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            慈善法
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            信息公开
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            税收优惠
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            等级评估
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            募捐管理
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">热门法规</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">1</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《中华人民共和国慈善法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">2</span>
+                            <a href="/regulations/charity-info-disclosure-detail/" class="text-neutral hover:text-primary line-clamp-2">《慈善组织信息公开办法》2025修订版</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">3</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《慈善组织保值增值投资活动管理暂行办法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-gray-300 text-gray-700 w-5 h-5 flex items-center justify-center rounded-full text-xs">4</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《慈善组织认定办法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-gray-300 text-gray-700 w-5 h-5 flex items-center justify-center rounded-full text-xs">5</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《社会组织评估管理办法》</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="bg-lightGray border border-darkGray rounded-md">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-neutral mb-4">法规咨询</h3>
+                    <p class="text-gray-600 text-sm mb-4">对法规政策有疑问？我们的专业团队为您提供一对一解答</p>
+                    <button class="w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors">
+                        立即咨询
+                    </button>
+                    <div class="text-center mt-4 text-sm text-gray-500">
+                        <i class="fa fa-phone mr-1"></i> 400-888-9999
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+  
+  
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('法规详情页加载完成，准备更新法规列表');
+      
+      
+      const regulationInfo = {
+        title: document.title,
+        description: document.querySelector('meta[name="description"]') ? 
+          document.querySelector('meta[name="description"]').content : 
+          '法规详情页面',
+        category: 'national',
+        url: window.location.href,
+        date: '2025-11-02'
+      };
+      
+      console.log('获取到的法规信息:', regulationInfo);
+      
+      
+      function hasRegulationBeenAdded() {
+        try {
+          const addedRegulations = localStorage.getItem('addedRegulations') || '[]';
+          const regulations = JSON.parse(addedRegulations);
+          return regulations.includes(window.location.href);
+        } catch (e) {
+          console.error('检查已添加法规时出错:', e);
+          return false;
+        }
+      }
+      
+      
+      function markRegulationAsAdded() {
+        try {
+          const addedRegulations = localStorage.getItem('addedRegulations') || '[]';
+          const regulations = JSON.parse(addedRegulations);
+          if (!regulations.includes(window.location.href)) {
+            regulations.push(window.location.href);
+            localStorage.setItem('addedRegulations', JSON.stringify(regulations));
+            console.log('已标记法规为已添加');
+          }
+        } catch (e) {
+          console.error('标记法规为已添加时出错:', e);
+        }
+      }
+      
+      
+      function addToRegulationList() {
+        
+        if (document.referrer && document.referrer.includes('regulations.html')) {
+          console.log('从法规列表页面跳转而来，跳过自动添加');
+          return;
+        }
+        
+        
+        if (hasRegulationBeenAdded()) {
+          console.log('该法规已存在于列表中，跳过添加');
+          return;
+        }
+        
+        console.log('准备添加法规到列表');
+        
+        
+        try {
+          localStorage.setItem('pendingRegulation', JSON.stringify(regulationInfo));
+          console.log('已存储法规信息到localStorage');
+          
+          
+          markRegulationAsAdded();
+          
+          
+          console.log('法规信息已保存，下次访问法规列表页时将自动添加');
+        } catch (e) {
+          console.error('存储法规信息时出错:', e);
+          
+          
+          const addToListButton = document.createElement('button');
+          addToListButton.className = 'fixed bottom-4 right-4 bg-primary text-white px-4 py-2 rounded shadow-lg z-50';
+          addToListButton.innerHTML = '<i class="fa fa-plus mr-1"></i> 添加到法规列表';
+          addToListButton.onclick = function() {
+            
+            const encodedData = encodeURIComponent(JSON.stringify(regulationInfo));
+            window.location.href = '/regulations/?newRegulation=' + encodedData;
+          };
+          document.body.appendChild(addToListButton);
+          console.log('已添加手动添加按钮');
+        }
+      }
+      
+      
+      addToRegulationList();
+    });
+  </script>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    中国慈善组织合规通是专业的慈善组织合规服务平台，致力于为各类慈善组织提供政策解读、合规指导、风险管理等全方位服务，助力慈善事业健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市海淀区中关村南大街5号</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>400-888-9999</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>contact@hegui.org.cn</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP备案号：京ICP备12345678号</li>
+                    <li>公安备案号：京公网安备11010802020123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 中国慈善组织合规通 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

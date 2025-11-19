@@ -1,0 +1,261 @@
+{{ define "main" }}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- 左侧主栏 (8/12) -->
+    <div class="lg:col-span-8 space-y-6">
+        <!-- Banner -->
+        <div class="relative bg-primary rounded-md overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <img src="images/banner-bg.jpg" alt="背景" class="w-full h-64 object-cover opacity-20">
+            </div>
+            <div class="relative z-10 p-8 text-white">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">一站式慈善合规解决方案，助力公益组织规范发展</h2>
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <a href="/regulations/" class="bg-white text-primary hover:bg-gray-100 px-6 py-2 rounded font-semibold transition-colors">
+                        政策查询
+                    </a>
+                    <a href="/compliance_tool/" class="bg-transparent border-2 border-white text-white hover:bg-white hover:bg-opacity-10 px-6 py-2 rounded font-semibold transition-colors">
+                        合规诊断
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 核心内容 -->
+        <div class="bg-white border border-darkGray rounded-md">
+            <!-- 最新法规解读 -->
+            <div class="p-6 border-b border-darkGray">
+                <div class="flex items-start">
+                    <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-2">
+                            <a href="/regulations/charity-info-disclosure-detail/">《慈善组织信息公开办法》2025修订版解读</a>
+                        </h4>
+                        <p class="text-gray-600 mb-3">近日，民政部发布了《慈善组织信息公开办法》2025修订版，对慈善组织的信息公开要求进行了全面升级。新办法进一步明确了信息公开的范围、内容和时限，强化了对重大活动、财务状况等关键信息的披露要求，同时对信息公开平台的建设和管理提出了新的标准。本文将对修订版的主要变化进行详细解读，并提供实施建议...</p>
+                        <div class="text-sm text-gray-500">发布时间: 2025-01-15</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 热门合规指南 -->
+            <div class="p-6 border-b border-darkGray">
+                <div class="flex items-start">
+                    <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-neutral mb-2">
+                            <a href="/compliance_guide/annual-report/" class="hover:text-primary">慈善组织年度工作报告编写指南</a>
+                        </h4>
+                        <p class="text-gray-600 mb-3">年度工作报告是慈善组织向登记管理机关提交的重要法定文件，也是展示组织年度工作成果的重要窗口。本指南详细介绍了年度工作报告的编写要求、内容框架、数据填报规范等，帮助慈善组织准确、完整、及时地完成年度工作报告的编制和提交...</p>
+                        <div class="text-sm text-gray-500">发布时间: 2025-01-10</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 典型案例 -->
+            <div class="p-6">
+                <div class="flex items-start">
+                    <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-neutral mb-2">
+                            <a href="/cases/foundation-finance-compliance/" class="hover:text-primary">某基金会财务合规整改成功案例分析</a>
+                        </h4>
+                        <p class="text-gray-600 mb-3">本文分析了某基金会因财务核算不规范被约谈后，通过全面整改实现合规运营的成功案例。该基金会通过建立健全财务管理制度、加强人员培训、引入第三方审计等措施，成功解决了财务合规问题，并建立了长效的合规管理机制。案例对其他慈善组织具有重要的参考价值...</p>
+                        <div class="text-sm text-gray-500">发布时间: 2025-01-05</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 右侧边栏 (4/12) -->
+    <div class="lg:col-span-4 space-y-6">
+        <!-- 快速查询入口 -->
+        <div class="bg-white border border-darkGray rounded-md">
+            <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                <h3 class="text-lg font-semibold text-neutral">快速查询</h3>
+            </div>
+            <div class="p-6">
+                <div class="mb-4">
+                    <div class="relative">
+                        <input type="text" placeholder="输入关键词搜索法规政策..." 
+                            class="w-full px-4 py-2 border border-darkGray rounded-md focus:outline-none focus:border-primary">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <a href="/regulations/?keyword=募捐" class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                        募捐
+                    </a>
+                    <a href="/regulations/?keyword=财务" class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                        财务
+                    </a>
+                    <a href="/regulations/?keyword=项目管理" class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                        项目管理
+                    </a>
+                    <a href="/regulations/?keyword=信息公开" class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            信息公开
+                        </a>
+                        <a href="/regulations/?keyword=税收优惠" class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            税收优惠
+                        </a>
+                        <a href="/regulations/?keyword=等级评估" class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            等级评估
+                        </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 行业动态简讯 -->
+        <div class="bg-white border border-darkGray rounded-md">
+            <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                <h3 class="text-lg font-semibold text-neutral">行业动态</h3>
+            </div>
+            <div class="p-6">
+                <ul class="space-y-4">
+                    <li>
+                        <a href="/cases/illegal-fundraising-penalty/" class="text-neutral hover:text-primary line-clamp-1">某基金会因募捐不合规被处罚</a>
+                        <div class="text-sm text-gray-500 mt-1">2025-01-12</div>
+                    </li>
+                    <li>
+                        <a href="/regulations/high-quality-development/" class="text-neutral hover:text-primary line-clamp-1">五部门联合发布《关于促进慈善事业高质量发展的指导意见》</a>
+                        <div class="text-sm text-gray-500 mt-1">2025-01-10</div>
+                    </li>
+                    <li>
+                        <a href="/industry_data/transparency-index/" class="text-neutral hover:text-primary line-clamp-1">全国慈善组织透明度指数报告发布</a>
+                        <div class="text-sm text-gray-500 mt-1">2025-01-08</div>
+                    </li>
+                    <li>
+                        <a href="/consulting/training-plan/" class="text-neutral hover:text-primary line-clamp-1">2025年慈善行业合规培训计划启动</a>
+                        <div class="text-sm text-gray-500 mt-1">2025-01-05</div>
+                    </li>
+                    <li>
+                        <a href="/compliance_guide/tax-benefits/" class="text-neutral hover:text-primary line-clamp-1">多地出台慈善组织税收优惠实施细则</a>
+                        <div class="text-sm text-gray-500 mt-1">2025-01-01</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 服务热线/在线咨询 -->
+        <div class="bg-lightGray border border-darkGray rounded-md">
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-neutral mb-4">咨询服务</h3>
+                <div class="text-center mb-4">
+                    <i class="fa fa-phone text-3xl text-primary mb-2"></i>
+                    <div class="text-xl font-bold text-primary">400-888-9999</div>
+                    <div class="text-gray-600 text-sm mt-1">工作日 9:00-17:30</div>
+                </div>
+                <a href="/consulting/" class="block w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors text-center">
+                    立即咨询
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 服务资源Banner -->
+<div class="relative bg-cover bg-center py-10 px-6 rounded-lg mb-8 mt-10" style="background-image: url('images/service-banner.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
+    <div class="relative container mx-auto text-center">
+        <h3 class="text-3xl font-bold text-white mb-4">专业服务资源</h3>
+        <p class="text-white/90 text-lg max-w-2xl mx-auto">为慈善组织提供全方位的合规支持与服务，助力慈善事业健康发展</p>
+    </div>
+</div>
+
+<!-- 中部区域：细分服务板块 -->
+<div>
+    <div class="border-b border-darkGray pb-3 mb-6">
+        <h3 class="text-xl font-semibold text-neutral">服务资源</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 服务卡片 1 -->
+        <a href="/compliance_tool/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-check-circle"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">合规自查工具</h4>
+            <p class="text-gray-600 text-sm">帮助慈善组织进行合规风险自我评估，识别潜在问题</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 2 -->
+        <a href="/regulations/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">政策法规</h4>
+            <p class="text-gray-600 text-sm">最新政策法律文件，方便随时查阅</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 3 -->
+        <a href="/cases/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-book"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">典型案例解析</h4>
+            <p class="text-gray-600 text-sm">真实案例深度分析，提供合规参考</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 4 -->
+        <a href="/training/" class="block">
+            <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+                <div class="text-primary text-2xl mb-3">
+                    <i class="fa fa-graduation-cap"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-neutral mb-2">培训课程</h4>
+                <p class="text-gray-600 text-sm">专业合规培训课程，提升组织合规能力</p>
+            </div>
+            </a>
+            
+            <!-- 服务卡片 5 -->
+            <a href="/download/" class="block">
+            <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+                <div class="text-primary text-2xl mb-3">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-neutral mb-2">下载中心</h4>
+                <p class="text-gray-600 text-sm">各类合规文件模板，方便组织使用参考</p>
+            </div>
+            </a>
+        
+        <!-- 服务卡片 6 -->
+        <a href="/experts/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-comments"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">权威专家专栏</h4>
+            <p class="text-gray-600 text-sm">权威专家解答疑难问题，提供专业指导</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 7 -->
+        <a href="/industry_data/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-line-chart"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">行业数据报告</h4>
+            <p class="text-gray-600 text-sm">最新行业发展数据，助力战略决策</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 8 -->
+        <a href="/news/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-users"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">新闻报道</h4>
+            <p class="text-gray-600 text-sm">媒体新闻与报道，提升传播能力</p>
+        </div>
+        </a>
+    </div>
+</div>
+{{ end }}
