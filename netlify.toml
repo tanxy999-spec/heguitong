@@ -1,0 +1,13 @@
+[build]
+  command = "hugo --gc --minify"
+  publish = "public"
+
+[build.environment]
+  HUGO_VERSION = "0.92.0"
+  HUGO_ENV = "production"
+  NODE_VERSION = "14"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
