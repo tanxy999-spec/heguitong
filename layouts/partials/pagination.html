@@ -1,0 +1,58 @@
+<!-- 通用分页组件 -->
+<nav class="inline-flex rounded-md shadow">
+    {{ if .Paginator.HasPrev }}
+    <a href="{{ .Paginator.Prev.URL }}" class="px-4 py-2 border border-darkGray text-sm font-medium text-neutral hover:bg-lightGray">
+        <i class="fa fa-angle-left"></i> 上一页
+    </a>
+    {{ else }}
+    <span class="px-4 py-2 border border-darkGray text-sm font-medium text-gray-400 cursor-not-allowed">
+        <i class="fa fa-angle-left"></i> 上一页
+    </span>
+    {{ end }}
+    
+    <!-- 页码显示 -->
+    {{ $currentPage := .Paginator.PageNumber }}
+    {{ $totalPages := .Paginator.TotalPages }}
+    
+    <!-- 显示当前页附近的页码 -->
+    {{ range $index := seq 1 $totalPages }}
+        {{ $shouldShowPage := false }}
+        
+        <!-- 始终显示第一页 -->
+        {{ if eq $index 1 }}
+            {{ $shouldShowPage = true }}
+        <!-- 始终显示最后一页 -->
+        {{ else if eq $index $totalPages }}
+            {{ $shouldShowPage = true }}
+        <!-- 显示当前页 -->
+        {{ else if eq $index $currentPage }}
+            {{ $shouldShowPage = true }}
+        <!-- 显示当前页前后各2页 -->
+        {{ else if and (ge $index (sub $currentPage 2)) (le $index (add $currentPage 2)) }}
+            {{ $shouldShowPage = true }}
+        {{ end }}
+        
+        {{ if $shouldShowPage }}
+            <!-- 如果上一个页码没有显示，添加省略号 -->
+            {{ if and (gt $index 1) (not (in (seq (sub $index 1) (sub $index 1)) (seq 1 $totalPages | where "shouldShowPage" true))) }}
+                <span class="px-4 py-2 border-t border-b border-darkGray text-sm font-medium text-gray-500">...</span>
+            {{ end }}
+            
+            {{ $page := $.Paginator.GetPage $index }}
+            <a href="{{ $page.URL }}" class="px-4 py-2 border-t border-b border-darkGray text-sm font-medium 
+                {{ if eq $index $currentPage }}bg-primary text-white{{ else }}text-neutral hover:bg-lightGray{{ end }}">
+                {{ $index }}
+            </a>
+        {{ end }}
+    {{ end }}
+    
+    {{ if .Paginator.HasNext }}
+    <a href="{{ .Paginator.Next.URL }}" class="px-4 py-2 border border-darkGray text-sm font-medium text-neutral hover:bg-lightGray">
+        下一页 <i class="fa fa-angle-right"></i>
+    </a>
+    {{ else }}
+    <span class="px-4 py-2 border border-darkGray text-sm font-medium text-gray-400 cursor-not-allowed">
+        下一页 <i class="fa fa-angle-right"></i>
+    </span>
+    {{ end }}
+</nav>

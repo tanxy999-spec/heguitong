@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3457&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社会组织合规网 - 一站式社会组织合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">社会组织合规网</h1>
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 13383222137</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<link rel="stylesheet" href="/css/styles.css">
+
+<div class="breadcrumb bg-lightGray py-3 px-4 mb-0">
+    <div class="container mx-auto">
+        <a href="/" class="text-gray-600 hover:text-primary transition-colors duration-300">首页</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <a href="/compliance_guide/" class="text-gray-600 hover:text-primary transition-colors duration-300">合规指南</a>
+        <span class="mx-2 text-gray-400">/</span>
+        <span class="text-gray-900">安徽某教育基金会被处罚后整改到位恢复正常运转</span>
+    </div>
+</div>
+
+
+<div class="guide-header bg-gradient-to-r from-primary/90 to-primary text-white py-12 md:py-16">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">安徽某教育基金会被处罚后整改到位恢复正常运转</h1>
+            <p class="text-white/90 text-lg md:text-xl mb-6">安徽省某教育基金会因内部管理问题，长期未能正常开展活动。因连续未按规定参加年检，2022年1月，安徽省民政厅拟对其作出撤销登记的行政处罚。基金会积极配合调查，认真开展整改，提出经多方努力，已经完成内部整顿，并争取到了资金支持，希望减轻处罚，积极为慈善事业发展作出贡献。</p>
+            
+        </div>
+    </div>
+</div>
+
+
+<main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        
+        <article class="guide-content bg-white rounded-lg shadow-md p-6 md:p-8 mb-8 transform transition-all duration-300 hover:shadow-lg">
+            
+            <div class="toc-container mb-8 bg-lightGray rounded-lg p-4 md:p-6">
+                <h3 class="text-lg font-semibold text-neutral mb-3 flex items-center">
+                    <i class="fa fa-list-ul mr-2 text-primary"></i>
+                    目录
+                </h3>
+                <nav class="toc">
+                    <nav id="TableOfContents"></nav>
+                </nav>
+            </div>
+            
+            
+            <div class="content-body">
+                <p>【基本案情】安徽省某教育基金会因内部管理问题，长期未能正常开展活动。因连续未按规定参加年检，2022年1月，安徽省民政厅拟对其作出撤销登记的行政处罚。基金会积极配合调查，认真开展整改，提出经多方努力，已经完成内部整顿，并争取到了资金支持，希望减轻处罚，积极为慈善事业发展作出贡献。</p>
+<p>　　【处理结果】2022年2月，安徽省民政厅根据《中华人民共和国行政处罚法》、《基金会管理条例》的规定，对该基金会减轻处罚，给予警告的行政处罚；进一步约谈基金会负责人，责令限期整改。目前，该基金会已按规定完成相关整改工作，走上了正常运转轨道。</p>
+<p>　　【典型意义】根据《基金会管理条例》、《基金会年检办法》的规定，对该基金会的违法情形，登记管理机关是可以作出撤销登记的行政处罚。本案中，该基金会积极配合调查并取得了良好的整改效果，有意愿、有条件继续从事慈善事业。登记管理机关经商业务主管单位，依法对其作出减轻处罚的决定，没有一罚了之、一撤了之地机械执法，避免了不必要的矛盾冲突和风险隐患，践行了习近平总书记关于“要让执法既有力度又有温度”的重要论述精神，体现了《中华人民共和国行政处罚法》“坚持处罚与教育相结合，教育公民、法人或者其他组织自觉守法”的原则，努力做到了社会组织登记管理机关执法办案法律效果、社会效果、政治效果的统一。</p>
+
+            </div>
+            
+            
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="flex justify-center">
+                    <span class="text-primary text-2xl">
+                        <i class="fa fa-check-circle"></i>
+                    </span>
+                </div>
+            </div>
+        </article>
+        
+        
+        
+        <section class="related-guides bg-gradient-to-r from-lightGray to-white rounded-xl p-6 md:p-8 mb-8">
+            <h3 class="text-2xl font-bold text-neutral mb-6 flex items-center">
+                <i class="fa fa-bookmark-o mr-3 text-primary"></i>
+                相关指南推荐
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                
+                <a href="/compliance_guide/2025-11-19-%E6%85%88%E5%96%84%E5%9F%BA%E6%9C%AC%E9%A1%B9%E7%9B%AE%E5%AE%A1%E6%89%B9%E6%8C%87%E5%8D%97/" class="group">
+                    <div class="flex items-start bg-white rounded-lg p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                        <div class="text-primary text-2xl mr-4 mt-1 flex-shrink-0">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-semibold text-neutral mb-2 group-hover:text-primary transition-colors duration-300">慈善基本项目审批指南</h4>
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">制定工作计划和时间表，
+收集年度工作总结和数据</p>
+                            <span class="inline-flex items-center text-primary text-sm font-medium">
+                                查看详情
+                                <i class="fa fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/compliance_guide/annual-report-guide/" class="group">
+                    <div class="flex items-start bg-white rounded-lg p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                        <div class="text-primary text-2xl mr-4 mt-1 flex-shrink-0">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-semibold text-neutral mb-2 group-hover:text-primary transition-colors duration-300">年度报告编制指南</h4>
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">详细说明慈善组织年度报告的编制流程、内容要求和注意事项。</p>
+                            <span class="inline-flex items-center text-primary text-sm font-medium">
+                                查看详情
+                                <i class="fa fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/compliance_guide/charity-large-project-approval-guide/" class="group">
+                    <div class="flex items-start bg-white rounded-lg p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                        <div class="text-primary text-2xl mr-4 mt-1 flex-shrink-0">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-semibold text-neutral mb-2 group-hover:text-primary transition-colors duration-300">慈善大型项目审批指南</h4>
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">详细介绍慈善大型项目审批流程、所需材料和注意事项，帮助慈善组织规范开展大型公益项目。</p>
+                            <span class="inline-flex items-center text-primary text-sm font-medium">
+                                查看详情
+                                <i class="fa fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                
+                <a href="/compliance_guide/governance-structure-guide/" class="group">
+                    <div class="flex items-start bg-white rounded-lg p-4 md:p-5 shadow-sm hover:shadow-md transition-all duration-300 border-l-4 border-transparent hover:border-primary">
+                        <div class="text-primary text-2xl mr-4 mt-1 flex-shrink-0">
+                            <i class="fa fa-file-text-o"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="text-lg font-semibold text-neutral mb-2 group-hover:text-primary transition-colors duration-300">慈善组织治理结构指南</h4>
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-2">提供慈善组织理事会、监事会等治理机构的设置、职责划分和运作规范指导。</p>
+                            <span class="inline-flex items-center text-primary text-sm font-medium">
+                                查看详情
+                                <i class="fa fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+                
+            </div>
+        </section>
+        
+        
+        <div class="text-center mb-8">
+            <a href="/compliance_guide/" class="inline-flex items-center px-8 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                <i class="fa fa-arrow-left mr-2"></i>
+                <span>返回合规指南列表</span>
+            </a>
+        </div>
+    </div>
+</main>
+
+
+<style>
+     
+    .guide-content .content-body h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--neutral);
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 3px solid var(--primary);
+    }
+    
+    .guide-content .content-body h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--neutral);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .guide-content .content-body p {
+        margin-bottom: 1.25rem;
+        line-height: 1.8;
+        color: var(--text-color);
+        text-align: justify;
+        font-size: 16px;
+    }
+    
+    .guide-content .content-body ul, 
+    .guide-content .content-body ol {
+        margin-bottom: 1.5rem;
+        padding-left: 1.5rem;
+    }
+    
+    .guide-content .content-body li {
+        margin-bottom: 0.75rem;
+        line-height: 1.6;
+    }
+    
+    .guide-content .content-body ul li {
+        list-style-type: disc;
+    }
+    
+    .guide-content .content-body ol li {
+        list-style-type: decimal;
+    }
+    
+    .guide-content .content-body a {
+        color: var(--primary);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+    
+    .guide-content .content-body a:hover {
+        text-decoration: underline;
+        color: #b91c1c;
+    }
+    
+     
+    .toc-container .toc {
+        font-size: 14px;
+    }
+    
+    .toc-container .toc ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
+    
+    .toc-container .toc li {
+        margin-bottom: 0.5rem;
+    }
+    
+    .toc-container .toc a {
+        color: var(--neutral);
+        text-decoration: none;
+        display: block;
+        padding: 4px 0;
+        transition: all 0.3s ease;
+    }
+    
+    .toc-container .toc a:hover {
+        color: var(--primary);
+        padding-left: 5px;
+    }
+    
+    .toc-container .toc ul ul {
+        padding-left: 1.25rem;
+        margin-top: 0.5rem;
+    }
+    
+     
+    @media (max-width: 1024px) {
+        .guide-header {
+            padding: 100px 0;
+        }
+        
+        .guide-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .max-w-4xl {
+            max-width: 100%;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .guide-header {
+            padding: 80px 0;
+        }
+        
+        .guide-header h1 {
+            font-size: 2rem;
+        }
+        
+        .guide-header p {
+            font-size: 1rem;
+        }
+        
+        .guide-content {
+            padding: 20px;
+        }
+    }
+</style>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    社会组织合规网是专业的社会组织合规服务平台，致力于为各类社会组织提供政策解读、合规指导、风险管理等全方位服务，助力社会组织健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市西城区百万庄北街3号院</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>13383222137</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>comsense2020@foxmail.com</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP</li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 社会组织合规网 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

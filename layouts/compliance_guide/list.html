@@ -1,0 +1,230 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/styles.css">
+<!-- 主要内容区域 -->
+<main class="container mx-auto px-4 py-8">
+    <!-- 页面标题 -->
+    <div class="banner bg-primary text-white py-12 text-center mb-8">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-4">合规指南</h2>
+            <p class="max-w-3xl mx-auto text-white/90">为社会组织提供全面的合规操作指南，帮助组织理解和落实各类法规要求，规范运营管理，降低合规风险。</p>
+        </div>
+    </div>
+
+    <!-- 合规指南分类标签 -->
+    <div class="bg-white border border-darkGray rounded-md">
+        <div class="flex overflow-x-auto" id="categoryTabs">
+            <div class="category-tab active" data-category="全部">全部指南</div>
+            <div class="category-tab inactive" data-category="登记注册">登记注册</div>
+            <div class="category-tab inactive" data-category="财务管理">财务管理</div>
+            <div class="category-tab inactive" data-category="运营管理">运营管理</div>
+            <div class="category-tab inactive" data-category="项目实施">项目实施</div>
+            <div class="category-tab inactive" data-category="信息披露">信息披露</div>
+            <div class="category-tab inactive" data-category="税务合规">税务合规</div>
+        </div>
+    </div>
+
+    <!-- 合规指南内容区域 - 动态生成卡片 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {{ range where .Site.RegularPages "Section" "compliance_guide" }}
+        <div class="guide-card" data-category="{{ with .Params.categories }}{{ index . 0 }}{{ else }}全部{{ end }}">
+            <div class="flex items-start">
+                <div class="text-primary text-2xl mr-4">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold text-neutral mb-2">{{ .Title }}</h3>
+                    <p class="text-gray-600 mb-4">{{ .Description | truncate 150 }}</p>
+                    <a href="{{ .RelPermalink }}" class="flex items-center text-sm text-primary">
+                        <span>阅读更多</span>
+                        <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+
+    <!-- 合规工作流程 -->
+    <div class="mb-12">
+        <h3 class="text-2xl font-semibold text-neutral mb-6 flex items-center">
+            <i class="fa fa-sitemap text-primary mr-2"></i>
+            合规工作流程
+        </h3>
+        <div class="bg-white border border-darkGray rounded-lg p-6">
+            <!-- 流程步骤 - 水平布局 -->
+            <div class="hidden md:block">
+                <div class="relative py-16">
+                    <!-- 横向连接线 - 精确穿过圆形数字中间 -->
+                    <div class="absolute top-16 left-0 right-0 h-1 bg-gray-300 z-0"></div>
+                    
+                    <div class="flex justify-between">
+                        <!-- 步骤1 -->
+                        <div class="flex-1 text-center">
+                            <div class="w-8 h-8 bg-red-600 rounded-full mx-auto flex items-center justify-center text-white font-bold relative z-10" style="margin-top: -16px;">1</div>
+                            <h4 class="text-lg font-medium text-neutral mt-4 mb-2">合规风险评估</h4>
+                            <p class="text-gray-600">对组织当前合规状况进行全面评估，识别潜在风险点和合规漏洞。</p>
+                        </div>
+                        
+                        <!-- 步骤2 -->
+                        <div class="flex-1 text-center">
+                            <div class="w-8 h-8 bg-red-600 rounded-full mx-auto flex items-center justify-center text-white font-bold relative z-10" style="margin-top: -16px;">2</div>
+                            <h4 class="text-lg font-medium text-neutral mt-4 mb-2">合规制度建设</h4>
+                            <p class="text-gray-600">根据评估结果，建立健全组织各项合规管理制度和操作规范。</p>
+                        </div>
+                        
+                        <!-- 步骤3 -->
+                        <div class="flex-1 text-center">
+                            <div class="w-8 h-8 bg-red-600 rounded-full mx-auto flex items-center justify-center text-white font-bold relative z-10" style="margin-top: -16px;">3</div>
+                            <h4 class="text-lg font-medium text-neutral mt-4 mb-2">合规培训</h4>
+                            <p class="text-gray-600">对组织员工和志愿者进行合规知识培训，提高全员合规意识。</p>
+                        </div>
+                        
+                        <!-- 步骤4 -->
+                        <div class="flex-1 text-center">
+                            <div class="w-8 h-8 bg-red-600 rounded-full mx-auto flex items-center justify-center text-white font-bold relative z-10" style="margin-top: -16px;">4</div>
+                            <h4 class="text-lg font-medium text-neutral mt-4 mb-2">合规执行与监督</h4>
+                            <p class="text-gray-600">在实际运营中严格执行合规制度，建立内部监督机制确保合规要求落实。</p>
+                        </div>
+                        
+                        <!-- 步骤5 -->
+                        <div class="flex-1 text-center">
+                            <div class="w-8 h-8 bg-red-600 rounded-full mx-auto flex items-center justify-center text-white font-bold relative z-10" style="margin-top: -16px;">5</div>
+                            <h4 class="text-lg font-medium text-neutral mt-4 mb-2">合规评估与改进</h4>
+                            <p class="text-gray-600">定期进行合规评估，根据评估结果持续改进合规管理体系。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 移动端垂直布局 -->
+            <div class="md:hidden space-y-6">
+                <!-- 步骤1 -->
+                <div class="border-l-2 border-gray-300 pl-4 pb-6">
+                    <div class="w-8 h-8 bg-red-600 rounded-full -ml-[17px] mb-2 flex items-center justify-center text-white font-bold">1</div>
+                    <h4 class="text-lg font-medium text-neutral mb-2">合规风险评估</h4>
+                    <p class="text-gray-600">对组织当前合规状况进行全面评估，识别潜在风险点和合规漏洞。</p>
+                </div>
+                
+                <!-- 步骤2 -->
+                <div class="border-l-2 border-gray-300 pl-4 pb-6">
+                    <div class="w-8 h-8 bg-red-600 rounded-full -ml-[17px] mb-2 flex items-center justify-center text-white font-bold">2</div>
+                    <h4 class="text-lg font-medium text-neutral mb-2">合规制度建设</h4>
+                    <p class="text-gray-600">根据评估结果，健全组织各项合规管理制度和操作规范。</p>
+                </div>
+                
+                <!-- 步骤3 -->
+                <div class="border-l-2 border-gray-300 pl-4 pb-6">
+                    <div class="w-8 h-8 bg-red-600 rounded-full -ml-[17px] mb-2 flex items-center justify-center text-white font-bold">3</div>
+                    <h4 class="text-lg font-medium text-neutral mb-2">合规培训</h4>
+                    <p class="text-gray-600">对组织员工和志愿者进行合规知识培训，提高全员合规意识。</p>
+                </div>
+                
+                <!-- 步骤4 -->
+                <div class="border-l-2 border-gray-300 pl-4 pb-6">
+                    <div class="w-8 h-8 bg-red-600 rounded-full -ml-[17px] mb-2 flex items-center justify-center text-white font-bold">4</div>
+                    <h4 class="text-lg font-medium text-neutral mb-2">合规执行与监督</h4>
+                    <p class="text-gray-600">在实际运营中严格执行合规制度，建立内部监督机制确保合规要求落实。</p>
+                </div>
+                
+                <!-- 步骤5 -->
+                <div class="border-l-2 border-gray-300 pl-4">
+                    <div class="w-8 h-8 bg-red-600 rounded-full -ml-[17px] mb-2 flex items-center justify-center text-white font-bold">5</div>
+                    <h4 class="text-lg font-medium text-neutral mb-2">合规评估与改进</h4>
+                    <p class="text-gray-600">定期进行合规评估，根据评估结果持续改进合规管理体系。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 常见合规问题 -->
+    <div class="mb-12">
+        <h3 class="text-2xl font-semibold text-neutral mb-6 flex items-center">
+            <i class="fa fa-question-circle text-primary mr-2"></i>
+            常见合规问题解答
+        </h3>
+        <div class="bg-lightGray rounded-lg p-6">
+            <div class="space-y-6">
+                <div class="faq-item">
+                    <h4 class="text-lg font-medium text-neutral mb-2">慈善组织如何申请公益性捐赠税前扣除资格？</h4>
+                    <p class="text-gray-600">慈善组织申请公益性捐赠税前扣除资格需满足《关于公益性捐赠税前扣除有关问题的通知》等相关规定，主要步骤包括：1. 准备申请材料（包括组织证书、章程、财务报告等）；2. 向民政部门提出申请；3. 民政部门审核后报财政、税务部门确认；4. 获得资格后在民政部网站公示。详细操作流程和所需材料可参考本平台提供的专项指南。</p>
+                </div>
+                <div class="faq-item">
+                    <h4 class="text-lg font-medium text-neutral mb-2">慈善组织的行政开支比例有何规定？</h4>
+                    <p class="text-gray-600">根据《慈善法》第六十条规定，慈善组织中具有公开募捐资格的基金会年度慈善活动支出不得低于上一年总收入的百分之七十，年度管理费用不得超过当年总支出的百分之十；其他慈善组织年度慈善活动支出和年度管理费用的标准，由国务院民政部门一同国务院财政、税务酌情部门依照前款规定的原则制定。具体标准因组织类型而异，需按相关规定执行。</p>
+                </div>
+                <div class="faq-item">
+                    <h4 class="text-lg font-medium text-neutral mb-2">慈善项目如何进行信息公开？</h4>
+                    <p class="text-gray-600">慈善组织应当按照《慈善组织信息公开办法》的要求，在统一信息平台和组织官方网站等渠道公开慈善项目的以下信息：1. 项目名称、内容和期限；2. 项目实施情况和资金使用情况；3. 项目评估结果；4. 项目终止情况等。信息公开应当真实、完整、及时，接受社会监督。</p>
+                </div>
+            </div>
+            <div class="mt-6 text-center">
+                <a href="#" class="inline-block px-6 py-3 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors duration-300">
+                    查看更多问题 <i class="fa fa-angle-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+    <script>
+        console.log('合规指南页面JavaScript加载');
+        
+        // 等待DOM完全加载
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM已加载，初始化分类标签功能');
+            
+            // 获取分类标签和指南卡片
+            const tabs = document.querySelectorAll('.category-tab');
+            const cards = document.querySelectorAll('.guide-card');
+            
+            console.log(`找到${tabs.length}个分类标签，${cards.length}个指南卡片`);
+            
+            // 为每个标签添加点击事件
+            tabs.forEach(tab => {
+                console.log(`为标签${tab.textContent.trim()}添加点击事件，分类：${tab.getAttribute('data-category')}`);
+                
+                tab.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    
+                    console.log(`标签被点击: ${this.textContent.trim()}`);
+                    
+                    // 移除所有标签的active类，添加inactive类
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.classList.add('inactive');
+                        console.log(`更新标签${t.textContent.trim()}为非活动状态`);
+                    });
+                    
+                    // 为当前点击的标签添加active类，移除inactive类
+                    this.classList.remove('inactive');
+                    this.classList.add('active');
+                    console.log(`更新标签${this.textContent.trim()}为活动状态`);
+                    
+                    // 获取当前标签的类别
+                    const category = this.getAttribute('data-category');
+                    console.log(`筛选分类: ${category}`);
+                    
+                    // 根据类别筛选卡片
+                    cards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        console.log(`卡片类别: ${cardCategory}`);
+                        
+                        if (category === '全部' || cardCategory === category) {
+                            card.classList.remove('hidden');
+                            console.log(`显示卡片: ${card.textContent.trim().substring(0, 30)}...`);
+                        } else {
+                            card.classList.add('hidden');
+                            console.log(`隐藏卡片: ${card.textContent.trim().substring(0, 30)}...`);
+                        }
+                    });
+                });
+            });
+            
+            // 确保默认选中第一个标签
+            if (tabs.length > 0) {
+                console.log(`激活默认标签: ${tabs[0].textContent.trim()}`);
+                tabs[0].click();
+            }
+        });
+    </script>
+{{ end }}

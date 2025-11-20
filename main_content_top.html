@@ -1,0 +1,100 @@
+﻿<main class="container mx-auto px-4 py-6">
+        
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="mb-4">
+                <div class="banner-container bg-gradient-to-r from-primary to-red-600 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">慈善组织合规自检工具</h1>
+                        <p class="text-lg opacity-90">一键自查6大模块，生成风险报告</p>
+                    </div>
+                    <button id="clearDataBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded text-sm backdrop-blur-sm">
+                        <i class="fas fa-trash-alt mr-2"></i>清除数据
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="step-indicator mt-8">
+                <div class="step active" id="step-indicator-1">
+                    <div class="step-number">1</div>
+                    <span>入口</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-2">
+                    <div class="step-number">2</div>
+                    <span>问卷</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-3">
+                    <div class="step-number">3</div>
+                    <span>报告</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="entry-page" class="fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <div class="text-center mb-8">
+                    <i class="fas fa-shield-alt text-6xl text-primary mb-4"></i>
+                    <h2 class="text-3xl font-bold text-neutral mb-4">慈善组织合规自检工具</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        本工具基于《慈善法》《非营利组织会计制度》等法规，帮助慈善组织进行全面的合规风险自查。
+                        通过6大模块的专业评估，快速识别潜在风险点，获取针对性改进建议。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-registered"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">登记注册模块</h3>
+                        <p class="text-gray-600 text-sm">检查组织登记、年度报告等基础合规情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">财务管理模块</h3>
+                        <p class="text-gray-600 text-sm">评估财务制度、资金使用、审计报告等合规性</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">信息公开模块</h3>
+                        <p class="text-gray-600 text-sm">检查信息披露、年报公示等信息公开情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">项目实施模块</h3>
+                        <p class="text-gray-600 text-sm">评估项目管理、执行效果、资金使用等合规性</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">税务合规模块</h3>
+                        <p class="text-gray-600 text-sm">检查税务申报、票据开具、税收优惠等合规情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">内部治理模块</h3>
+                        <p class="text-gray-600 text-sm">评估组织架构、决策机制、内部制度等合规性</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="startBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                        <i class="fas fa-play-circle mr-2"></i>开始自检
+                    </button>
+                </div>

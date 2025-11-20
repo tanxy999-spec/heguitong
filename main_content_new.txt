@@ -1,0 +1,983 @@
+    <main class="container mx-auto px-4 py-6">
+        
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="mb-4">
+                <div class="banner-container bg-gradient-to-r from-primary to-red-600 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">慈善组织合规自检工具</h1>
+                        <p class="text-lg opacity-90">一键自�?大模块，生成风险报告</p>
+                    </div>
+                    <button id="clearDataBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded text-sm backdrop-blur-sm">
+                        <i class="fas fa-trash-alt mr-2"></i>清除数据
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="step-indicator mt-8">
+                <div class="step active" id="step-indicator-1">
+                    <div class="step-number">1</div>
+                    <span>入口</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-2">
+                    <div class="step-number">2</div>
+                    <span>问卷</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-3">
+                    <div class="step-number">3</div>
+                    <span>报告</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="entry-page" class="fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <div class="text-center mb-8">
+                    <i class="fas fa-shield-alt text-6xl text-primary mb-4"></i>
+                    <h2 class="text-3xl font-bold text-neutral mb-4">慈善组织合规自检工具</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        本工具基于《慈善法》《非营利组织会计制度》等法规，帮助慈善组织进行全面的合规风险自查�?
+                        通过6大模块的专业评估，快速识别潜在风险点，获取针对性改进建议�?
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-registered"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">登记注册模块</h3>
+                        <p class="text-gray-600 text-sm">检查组织登记、年度报告等基础合规情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">财务管理模块</h3>
+                        <p class="text-gray-600 text-sm">评估财务制度、资金使用、审计报告等合规�?/p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">信息公开模块</h3>
+                        <p class="text-gray-600 text-sm">检查信息披露、年报公示等信息公开情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">项目实施模块</h3>
+                        <p class="text-gray-600 text-sm">评估项目管理、执行效果、资金使用等合规�?/p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">税务合规模块</h3>
+                        <p class="text-gray-600 text-sm">检查税务申报、票据开具、税收优惠等合规情况</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">内部治理模块</h3>
+                        <p class="text-gray-600 text-sm">评估组织架构、决策机制、内部制度等合规�?/p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="startBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                        <i class="fas fa-play-circle mr-2"></i>开始自检
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>隐私声明�?/strong>本工具所有数据仅存储在您的本地浏览器中，不会上传至服务器，不收集任何个人信息�?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="questionnaire-page" class="hidden fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-neutral mb-2">合规自检问卷</h2>
+                    <p class="text-gray-600">请根据您的组织实际情况，回答以下问题。所有问题均为必填项�?/p>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-registered mr-2"></i>登记注册模块
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="1">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题1�?/span>
+                                <span>慈善组织完成登记注册后，应在多少日内向民政部门申请公开募捐资格�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="A" class="mr-2">
+                                        <span>A. 30�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="B" class="mr-2">
+                                        <span>B. 60�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="C" class="mr-2">
+                                        <span>C. 90�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="D" class="mr-2">
+                                        <span>D. 无需申请</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="2">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题2�?/span>
+                                <span>慈善组织章程必须载明以下哪项内容�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="A" class="mr-2">
+                                        <span>A. 注册资金</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="B" class="mr-2">
+                                        <span>B. 组织形式</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="C" class="mr-2">
+                                        <span>C. 发起人名�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="D" class="mr-2">
+                                        <span>D. 办公场所面积</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="3">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题3�?/span>
+                                <span>以下哪种情形会导致慈善组织被吊销登记证书�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="A" class="mr-2">
+                                        <span>A. 连续2年未开展慈善活�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="B" class="mr-2">
+                                        <span>B. 未公开年度工作报告</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="C" class="mr-2">
+                                        <span>C. 接受附加违法条件的捐�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="D" class="mr-2">
+                                        <span>D. 以上均是</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-coins mr-2"></i>财务管理模块
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="4">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题4�?/span>
+                                <span>慈善组织年度管理费用不得超过当年总支出的多少�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="A" class="mr-2">
+                                        <span>A. 5%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="B" class="mr-2">
+                                        <span>B. 10%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="C" class="mr-2">
+                                        <span>C. 15%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="D" class="mr-2">
+                                        <span>D. 20%</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="5">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题5�?/span>
+                                <span>以下哪项支出不可计入业务活动成本�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="A" class="mr-2">
+                                        <span>A. 项目执行差旅�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="B" class="mr-2">
+                                        <span>B. 理事会会议场地租赁费</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="C" class="mr-2">
+                                        <span>C. 志愿者培训材料费</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="D" class="mr-2">
+                                        <span>D. 理事个人旅游费用</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="6">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题6�?/span>
+                                <span>慈善组织接受政府购买服务收入是否需要缴纳企业所得税�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="A" class="mr-2">
+                                        <span>A. 需�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="B" class="mr-2">
+                                        <span>B. 免除</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="C" class="mr-2">
+                                        <span>C. 部分免除</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="D" class="mr-2">
+                                        <span>D. 视金额而定</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-cogs mr-2"></i>运营管理模块
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="7">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题7�?/span>
+                                <span>慈善组织重大投资方案需经多少比例决策机构成员同意？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="A" class="mr-2">
+                                        <span>A. 二分之一</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="B" class="mr-2">
+                                        <span>B. 三分之二</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="C" class="mr-2">
+                                        <span>C. 四分之三</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="D" class="mr-2">
+                                        <span>D. 全体一�?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="8">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题8�?/span>
+                                <span>慈善组织负责人能否在关联企业兼职�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="A" class="mr-2">
+                                        <span>A. 可以</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="B" class="mr-2">
+                                        <span>B. 禁止</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="C" class="mr-2">
+                                        <span>C. 需民政部门批准</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="D" class="mr-2">
+                                        <span>D. 无限�?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="9">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题9�?/span>
+                                <span>慈善组织与关联方交易需遵循的原则是�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="A" class="mr-2">
+                                        <span>A. 互利共赢</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="B" class="mr-2">
+                                        <span>B. 公平公允</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="C" class="mr-2">
+                                        <span>C. 利润最大化</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="D" class="mr-2">
+                                        <span>D. 方便快捷</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-project-diagram mr-2"></i>项目实施模块
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="10">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题10�?/span>
+                                <span>慈善项目资金临时用于弥补行政开支缺口的处理方式是？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="A" class="mr-2">
+                                        <span>A. 直接挪用</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="B" class="mr-2">
+                                        <span>B. 提交理事会审议后使用</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="C" class="mr-2">
+                                        <span>C. 禁止使用</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="D" class="mr-2">
+                                        <span>D. 向捐赠人说明后使�?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="11">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题11�?/span>
+                                <span>慈善项目终止后剩余财产应如何处理�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="A" class="mr-2">
+                                        <span>A. 转入发起人账�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="B" class="mr-2">
+                                        <span>B. 按捐赠协议处�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="C" class="mr-2">
+                                        <span>C. 私分给理�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="D" class="mr-2">
+                                        <span>D. 随意处置</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="12">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题12�?/span>
+                                <span>慈善项目周期超过6个月时，需至少多久公开一次进展？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="A" class="mr-2">
+                                        <span>A. 每月</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="B" class="mr-2">
+                                        <span>B. 每季�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="C" class="mr-2">
+                                        <span>C. 每半�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="D" class="mr-2">
+                                        <span>D. 每年</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-info-circle mr-2"></i>信息披露模块
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="13">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题13�?/span>
+                                <span>慈善组织需在哪个平台公开年度工作报告�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="A" class="mr-2">
+                                        <span>A. 自建官网</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="B" class="mr-2">
+                                        <span>B. 民政部指定平台（如慈善中国）</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="C" class="mr-2">
+                                        <span>C. 微信公众�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="D" class="mr-2">
+                                        <span>D. 无需公开</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="14">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题14�?/span>
+                                <span>以下哪项信息不属于必须公开的范畴？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="A" class="mr-2">
+                                        <span>A. 年度财务报告</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="B" class="mr-2">
+                                        <span>B. 决策机构成员信息</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="C" class="mr-2">
+                                        <span>C. 内部管理制度</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="D" class="mr-2">
+                                        <span>D. 受益人名�?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="15">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题15�?/span>
+                                <span>慈善组织发生重大资产变动后需在多少日内公开�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="A" class="mr-2">
+                                        <span>A. 10�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="B" class="mr-2">
+                                        <span>B. 15�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="C" class="mr-2">
+                                        <span>C. 30�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="D" class="mr-2">
+                                        <span>D. 60�?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-balance-scale mr-2"></i>税务合规模块
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="16">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题16�?/span>
+                                <span>企业通过公益性社会组织捐赠可享受的所得税扣除比例是？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="A" class="mr-2">
+                                        <span>A. 8%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="B" class="mr-2">
+                                        <span>B. 12%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="C" class="mr-2">
+                                        <span>C. 15%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="D" class="mr-2">
+                                        <span>D. 20%</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="17">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题17�?/span>
+                                <span>慈善组织接受股权捐赠时需缴纳的税费是�?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="A" class="mr-2">
+                                        <span>A. 增值税</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="B" class="mr-2">
+                                        <span>B. 个人所得税</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="C" class="mr-2">
+                                        <span>C. 企业所得税</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="D" class="mr-2">
+                                        <span>D. 无需缴纳</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="18">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">问题18�?/span>
+                                <span>慈善组织清算后的剩余财产应如何处理？</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">请选择正确答案�?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="A" class="mr-2">
+                                        <span>A. 分配给理�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="B" class="mr-2">
+                                        <span>B. 转给宗旨相近的慈善组�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="C" class="mr-2">
+                                        <span>C. 捐赠给政�?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="D" class="mr-2">
+                                        <span>D. 随意处置</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between mt-8">
+                    <button id="backToEntryBtn" class="bg-lightGray hover:bg-gray-200 text-neutral font-bold py-2 px-6 rounded">
+                        <i class="fas fa-arrow-left mr-2"></i>返回入口
+                    </button>
+                    <button id="generateReportBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+                        <i class="fas fa-chart-bar mr-2"></i>生成报告
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="report-page" class="hidden fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-neutral mb-2">合规自检报告</h2>
+                    <p class="text-gray-600">基于您的回答生成的合规风险评估报�?/p>
+                </div>
+                
+                
+                <div class="bg-lightGray rounded-lg p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">总分</h3>
+                            <div class="text-4xl font-bold text-primary" id="totalScore">78/100</div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">风险等级</h3>
+                            <div class="text-2xl font-bold">
+                                <span id="riskLevel" class="risk-level risk-medium">黄色（中风险�?/span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">完成时间</h3>
+                            <div class="text-xl" id="completionTime">2025-06-18</div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">问卷答案提示</h3>
+                    <div id="wrongAnswersContainer">
+                        
+                    </div>
+                </div>
+                
+
+                
+
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">改进建议</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">立即登录 <a href="https://cszg.mca.gov.cn/补录年度报告" target="_blank" class="text-primary underline">https://cszg.mca.gov.cn/补录年度报告</a></p>
+                                <p class="text-sm text-gray-600 mt-1">补录缺失的年度工作报告，确保信息公开合规</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">联系第三方审计机构完成年度财务审�?/p>
+                                <p class="text-sm text-gray-600 mt-1">选择有资质的会计师事务所进行财务审计，并按规定公示审计报�?/p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">建立内部合规管理制度</p>
+                                <p class="text-sm text-gray-600 mt-1">制定详细的合规管理流程，定期开展内部合规自�?/p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="flex justify-between mt-8">
+                    <button id="backToQuestionnaireBtn" class="bg-lightGray hover:bg-gray-200 text-neutral font-bold py-2 px-6 rounded">
+                        <i class="fas fa-arrow-left mr-2"></i>返回修改
+                    </button>
+                    <button id="downloadPDFBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+                        <i class="fas fa-print mr-2"></i>打印报告
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>

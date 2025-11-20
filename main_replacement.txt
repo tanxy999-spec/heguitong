@@ -1,0 +1,983 @@
+﻿    <main class="container mx-auto px-4 py-6">
+        
+        <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+            <div class="mb-4">
+                <div class="banner-container bg-gradient-to-r from-primary to-red-600 text-white p-6 rounded-lg shadow-lg flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold mb-2">鎱堝杽缁勭粐鍚堣鑷宸ュ叿</h1>
+                        <p class="text-lg opacity-90">涓€閿嚜鏌?澶фā鍧楋紝鐢熸垚椋庨櫓鎶ュ憡</p>
+                    </div>
+                    <button id="clearDataBtn" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-4 py-2 rounded text-sm backdrop-blur-sm">
+                        <i class="fas fa-trash-alt mr-2"></i>娓呴櫎鏁版嵁
+                    </button>
+                </div>
+            </div>
+            
+            
+            <div class="step-indicator mt-8">
+                <div class="step active" id="step-indicator-1">
+                    <div class="step-number">1</div>
+                    <span>鍏ュ彛</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-2">
+                    <div class="step-number">2</div>
+                    <span>闂嵎</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step" id="step-indicator-3">
+                    <div class="step-number">3</div>
+                    <span>鎶ュ憡</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="entry-page" class="fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+                <div class="text-center mb-8">
+                    <i class="fas fa-shield-alt text-6xl text-primary mb-4"></i>
+                    <h2 class="text-3xl font-bold text-neutral mb-4">鎱堝杽缁勭粐鍚堣鑷宸ュ叿</h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        鏈伐鍏峰熀浜庛€婃厛鍠勬硶銆嬨€婇潪钀ュ埄缁勭粐浼氳鍒跺害銆嬬瓑娉曡锛屽府鍔╂厛鍠勭粍缁囪繘琛屽叏闈㈢殑鍚堣椋庨櫓鑷煡銆?
+                        閫氳繃6澶фā鍧楃殑涓撲笟璇勪及锛屽揩閫熻瘑鍒綔鍦ㄩ闄╃偣锛岃幏鍙栭拡瀵规€ф敼杩涘缓璁€?
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-registered"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">鐧昏娉ㄥ唽妯″潡</h3>
+                        <p class="text-gray-600 text-sm">妫€鏌ョ粍缁囩櫥璁般€佸勾搴︽姤鍛婄瓑鍩虹鍚堣鎯呭喌</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">璐㈠姟绠＄悊妯″潡</h3>
+                        <p class="text-gray-600 text-sm">璇勪及璐㈠姟鍒跺害銆佽祫閲戜娇鐢ㄣ€佸璁℃姤鍛婄瓑鍚堣鎬?/p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">淇℃伅鍏紑妯″潡</h3>
+                        <p class="text-gray-600 text-sm">妫€鏌ヤ俊鎭姭闇层€佸勾鎶ュ叕绀虹瓑淇℃伅鍏紑鎯呭喌</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">椤圭洰瀹炴柦妯″潡</h3>
+                        <p class="text-gray-600 text-sm">璇勪及椤圭洰绠＄悊銆佹墽琛屾晥鏋溿€佽祫閲戜娇鐢ㄧ瓑鍚堣鎬?/p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">绋庡姟鍚堣妯″潡</h3>
+                        <p class="text-gray-600 text-sm">妫€鏌ョ◣鍔＄敵鎶ャ€佺エ鎹紑鍏枫€佺◣鏀朵紭鎯犵瓑鍚堣鎯呭喌</p>
+                    </div>
+                    
+                    <div class="bg-lightGray rounded-lg p-6 card-hover">
+                        <div class="text-primary text-2xl mb-3">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-neutral mb-2">鍐呴儴娌荤悊妯″潡</h3>
+                        <p class="text-gray-600 text-sm">璇勪及缁勭粐鏋舵瀯銆佸喅绛栨満鍒躲€佸唴閮ㄥ埗搴︾瓑鍚堣鎬?/p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button id="startBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors">
+                        <i class="fas fa-play-circle mr-2"></i>寮€濮嬭嚜妫€
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-info-circle text-blue-500"></i>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm text-blue-700">
+                            <strong>闅愮澹版槑锛?/strong>鏈伐鍏锋墍鏈夋暟鎹粎瀛樺偍鍦ㄦ偍鐨勬湰鍦版祻瑙堝櫒涓紝涓嶄細涓婁紶鑷虫湇鍔″櫒锛屼笉鏀堕泦浠讳綍涓汉淇℃伅銆?
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="questionnaire-page" class="hidden fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-neutral mb-2">鍚堣鑷闂嵎</h2>
+                    <p class="text-gray-600">璇锋牴鎹偍鐨勭粍缁囧疄闄呮儏鍐碉紝鍥炵瓟浠ヤ笅闂銆傛墍鏈夐棶棰樺潎涓哄繀濉」銆?/p>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-registered mr-2"></i>鐧昏娉ㄥ唽妯″潡
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="1">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂1锛?/span>
+                                <span>鎱堝杽缁勭粐瀹屾垚鐧昏娉ㄥ唽鍚庯紝搴斿湪澶氬皯鏃ュ唴鍚戞皯鏀块儴闂ㄧ敵璇峰叕寮€鍕熸崘璧勬牸锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="A" class="mr-2">
+                                        <span>A. 30鏃?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="B" class="mr-2">
+                                        <span>B. 60鏃?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="C" class="mr-2">
+                                        <span>C. 90鏃?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q1" value="D" class="mr-2">
+                                        <span>D. 鏃犻渶鐢宠</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="2">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂2锛?/span>
+                                <span>鎱堝杽缁勭粐绔犵▼蹇呴』杞芥槑浠ヤ笅鍝」鍐呭锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="A" class="mr-2">
+                                        <span>A. 娉ㄥ唽璧勯噾</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="B" class="mr-2">
+                                        <span>B. 缁勭粐褰㈠紡</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="C" class="mr-2">
+                                        <span>C. 鍙戣捣浜哄悕鍗?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q2" value="D" class="mr-2">
+                                        <span>D. 鍔炲叕鍦烘墍闈㈢Н</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="3">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂3锛?/span>
+                                <span>浠ヤ笅鍝鎯呭舰浼氬鑷存厛鍠勭粍缁囪鍚婇攢鐧昏璇佷功锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="A" class="mr-2">
+                                        <span>A. 杩炵画2骞存湭寮€灞曟厛鍠勬椿鍔?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="B" class="mr-2">
+                                        <span>B. 鏈叕寮€骞村害宸ヤ綔鎶ュ憡</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="C" class="mr-2">
+                                        <span>C. 鎺ュ彈闄勫姞杩濇硶鏉′欢鐨勬崘璧?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q3" value="D" class="mr-2">
+                                        <span>D. 浠ヤ笂鍧囨槸</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-coins mr-2"></i>璐㈠姟绠＄悊妯″潡
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="4">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂4锛?/span>
+                                <span>鎱堝杽缁勭粐骞村害绠＄悊璐圭敤涓嶅緱瓒呰繃褰撳勾鎬绘敮鍑虹殑澶氬皯锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="A" class="mr-2">
+                                        <span>A. 5%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="B" class="mr-2">
+                                        <span>B. 10%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="C" class="mr-2">
+                                        <span>C. 15%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q4" value="D" class="mr-2">
+                                        <span>D. 20%</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="5">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂5锛?/span>
+                                <span>浠ヤ笅鍝」鏀嚭涓嶅彲璁″叆涓氬姟娲诲姩鎴愭湰锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="A" class="mr-2">
+                                        <span>A. 椤圭洰鎵ц宸梾璐?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="B" class="mr-2">
+                                        <span>B. 鐞嗕簨浼氫細璁満鍦扮璧佽垂</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="C" class="mr-2">
+                                        <span>C. 蹇楁効鑰呭煿璁潗鏂欒垂</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q5" value="D" class="mr-2">
+                                        <span>D. 鐞嗕簨涓汉鏃呮父璐圭敤</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="6">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂6锛?/span>
+                                <span>鎱堝杽缁勭粐鎺ュ彈鏀垮簻璐拱鏈嶅姟鏀跺叆鏄惁闇€瑕佺即绾充紒涓氭墍寰楃◣锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="A" class="mr-2">
+                                        <span>A. 闇€瑕?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="B" class="mr-2">
+                                        <span>B. 鍏嶉櫎</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="C" class="mr-2">
+                                        <span>C. 閮ㄥ垎鍏嶉櫎</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q6" value="D" class="mr-2">
+                                        <span>D. 瑙嗛噾棰濊€屽畾</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-cogs mr-2"></i>杩愯惀绠＄悊妯″潡
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="7">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂7锛?/span>
+                                <span>鎱堝杽缁勭粐閲嶅ぇ鎶曡祫鏂规闇€缁忓灏戞瘮渚嬪喅绛栨満鏋勬垚鍛樺悓鎰忥紵</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="A" class="mr-2">
+                                        <span>A. 浜屽垎涔嬩竴</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="B" class="mr-2">
+                                        <span>B. 涓夊垎涔嬩簩</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="C" class="mr-2">
+                                        <span>C. 鍥涘垎涔嬩笁</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q7" value="D" class="mr-2">
+                                        <span>D. 鍏ㄤ綋涓€鑷?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="8">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂8锛?/span>
+                                <span>鎱堝杽缁勭粐璐熻矗浜鸿兘鍚﹀湪鍏宠仈浼佷笟鍏艰亴锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="A" class="mr-2">
+                                        <span>A. 鍙互</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="B" class="mr-2">
+                                        <span>B. 绂佹</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="C" class="mr-2">
+                                        <span>C. 闇€姘戞斂閮ㄩ棬鎵瑰噯</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q8" value="D" class="mr-2">
+                                        <span>D. 鏃犻檺鍒?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="9">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂9锛?/span>
+                                <span>鎱堝杽缁勭粐涓庡叧鑱旀柟浜ゆ槗闇€閬靛惊鐨勫師鍒欐槸锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="A" class="mr-2">
+                                        <span>A. 浜掑埄鍏辫耽</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="B" class="mr-2">
+                                        <span>B. 鍏钩鍏厑</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="C" class="mr-2">
+                                        <span>C. 鍒╂鼎鏈€澶у寲</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q9" value="D" class="mr-2">
+                                        <span>D. 鏂逛究蹇嵎</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-project-diagram mr-2"></i>椤圭洰瀹炴柦妯″潡
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="10">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂10锛?/span>
+                                <span>鎱堝杽椤圭洰璧勯噾涓存椂鐢ㄤ簬寮ヨˉ琛屾斂寮€鏀己鍙ｇ殑澶勭悊鏂瑰紡鏄紵</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="A" class="mr-2">
+                                        <span>A. 鐩存帴鎸敤</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="B" class="mr-2">
+                                        <span>B. 鎻愪氦鐞嗕簨浼氬璁悗浣跨敤</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="C" class="mr-2">
+                                        <span>C. 绂佹浣跨敤</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q10" value="D" class="mr-2">
+                                        <span>D. 鍚戞崘璧犱汉璇存槑鍚庝娇鐢?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="11">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂11锛?/span>
+                                <span>鎱堝杽椤圭洰缁堟鍚庡墿浣欒储浜у簲濡備綍澶勭悊锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="A" class="mr-2">
+                                        <span>A. 杞叆鍙戣捣浜鸿处鎴?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="B" class="mr-2">
+                                        <span>B. 鎸夋崘璧犲崗璁鐞?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="C" class="mr-2">
+                                        <span>C. 绉佸垎缁欑悊浜?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q11" value="D" class="mr-2">
+                                        <span>D. 闅忔剰澶勭疆</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="12">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂12锛?/span>
+                                <span>鎱堝杽椤圭洰鍛ㄦ湡瓒呰繃6涓湀鏃讹紝闇€鑷冲皯澶氫箙鍏紑涓€娆¤繘灞曪紵</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="A" class="mr-2">
+                                        <span>A. 姣忔湀</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="B" class="mr-2">
+                                        <span>B. 姣忓搴?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="C" class="mr-2">
+                                        <span>C. 姣忓崐骞?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q12" value="D" class="mr-2">
+                                        <span>D. 姣忓勾</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-info-circle mr-2"></i>淇℃伅鎶湶妯″潡
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="13">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂13锛?/span>
+                                <span>鎱堝杽缁勭粐闇€鍦ㄥ摢涓钩鍙板叕寮€骞村害宸ヤ綔鎶ュ憡锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="A" class="mr-2">
+                                        <span>A. 鑷缓瀹樼綉</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="B" class="mr-2">
+                                        <span>B. 姘戞斂閮ㄦ寚瀹氬钩鍙帮紙濡傛厛鍠勪腑鍥斤級</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="C" class="mr-2">
+                                        <span>C. 寰俊鍏紬鍙?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q13" value="D" class="mr-2">
+                                        <span>D. 鏃犻渶鍏紑</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="14">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂14锛?/span>
+                                <span>浠ヤ笅鍝」淇℃伅涓嶅睘浜庡繀椤诲叕寮€鐨勮寖鐣达紵</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="A" class="mr-2">
+                                        <span>A. 骞村害璐㈠姟鎶ュ憡</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="B" class="mr-2">
+                                        <span>B. 鍐崇瓥鏈烘瀯鎴愬憳淇℃伅</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="C" class="mr-2">
+                                        <span>C. 鍐呴儴绠＄悊鍒跺害</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q14" value="D" class="mr-2">
+                                        <span>D. 鍙楃泭浜哄悕鍗?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="15">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂15锛?/span>
+                                <span>鎱堝杽缁勭粐鍙戠敓閲嶅ぇ璧勪骇鍙樺姩鍚庨渶鍦ㄥ灏戞棩鍐呭叕寮€锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="A" class="mr-2">
+                                        <span>A. 10鏃?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="B" class="mr-2">
+                                        <span>B. 15鏃?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="C" class="mr-2">
+                                        <span>C. 30鏃?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q15" value="D" class="mr-2">
+                                        <span>D. 60鏃?/span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">
+                        <i class="fas fa-balance-scale mr-2"></i>绋庡姟鍚堣妯″潡
+                    </h3>
+                    
+                    
+                    <div class="question-card" data-question-id="16">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂16锛?/span>
+                                <span>浼佷笟閫氳繃鍏泭鎬хぞ浼氱粍缁囨崘璧犲彲浜彈鐨勬墍寰楃◣鎵ｉ櫎姣斾緥鏄紵</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="A" class="mr-2">
+                                        <span>A. 8%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="B" class="mr-2">
+                                        <span>B. 12%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="C" class="mr-2">
+                                        <span>C. 15%</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q16" value="D" class="mr-2">
+                                        <span>D. 20%</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="17">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂17锛?/span>
+                                <span>鎱堝杽缁勭粐鎺ュ彈鑲℃潈鎹愯禒鏃堕渶缂寸撼鐨勭◣璐规槸锛?/span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="A" class="mr-2">
+                                        <span>A. 澧炲€肩◣</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="B" class="mr-2">
+                                        <span>B. 涓汉鎵€寰楃◣</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="C" class="mr-2">
+                                        <span>C. 浼佷笟鎵€寰楃◣</span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q17" value="D" class="mr-2">
+                                        <span>D. 鏃犻渶缂寸撼</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="question-card" data-question-id="18">
+                        <div class="question-header">
+                            <div>
+                                <span class="font-semibold">闂18锛?/span>
+                                <span>鎱堝杽缁勭粐娓呯畻鍚庣殑鍓╀綑璐骇搴斿浣曞鐞嗭紵</span>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="question-content">
+                            <div class="mb-4">
+                                <p class="font-medium mb-2">璇烽€夋嫨姝ｇ‘绛旀锛?/p>
+                                <div class="option" data-value="A">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="A" class="mr-2">
+                                        <span>A. 鍒嗛厤缁欑悊浜?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="B">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="B" class="mr-2">
+                                        <span>B. 杞粰瀹楁棬鐩歌繎鐨勬厛鍠勭粍缁?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="C">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="C" class="mr-2">
+                                        <span>C. 鎹愯禒缁欐斂搴?/span>
+                                    </label>
+                                </div>
+                                <div class="option" data-value="D">
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="radio" name="q18" value="D" class="mr-2">
+                                        <span>D. 闅忔剰澶勭疆</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between mt-8">
+                    <button id="backToEntryBtn" class="bg-lightGray hover:bg-gray-200 text-neutral font-bold py-2 px-6 rounded">
+                        <i class="fas fa-arrow-left mr-2"></i>杩斿洖鍏ュ彛
+                    </button>
+                    <button id="generateReportBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+                        <i class="fas fa-chart-bar mr-2"></i>鐢熸垚鎶ュ憡
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="report-page" class="hidden fade-in">
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-neutral mb-2">鍚堣鑷鎶ュ憡</h2>
+                    <p class="text-gray-600">鍩轰簬鎮ㄧ殑鍥炵瓟鐢熸垚鐨勫悎瑙勯闄╄瘎浼版姤鍛?/p>
+                </div>
+                
+                
+                <div class="bg-lightGray rounded-lg p-6 mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">鎬诲垎</h3>
+                            <div class="text-4xl font-bold text-primary" id="totalScore">78/100</div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">椋庨櫓绛夌骇</h3>
+                            <div class="text-2xl font-bold">
+                                <span id="riskLevel" class="risk-level risk-medium">榛勮壊锛堜腑椋庨櫓锛?/span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-neutral mb-2">瀹屾垚鏃堕棿</h3>
+                            <div class="text-xl" id="completionTime">2025-06-18</div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">闂嵎绛旀鎻愮ず</h3>
+                    <div id="wrongAnswersContainer">
+                        
+                    </div>
+                </div>
+                
+
+                
+
+                
+                
+                <div class="mb-8">
+                    <h3 class="text-xl font-semibold text-primary mb-4">鏀硅繘寤鸿</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">绔嬪嵆鐧诲綍 <a href="https://cszg.mca.gov.cn/琛ュ綍骞村害鎶ュ憡" target="_blank" class="text-primary underline">https://cszg.mca.gov.cn/琛ュ綍骞村害鎶ュ憡</a></p>
+                                <p class="text-sm text-gray-600 mt-1">琛ュ綍缂哄け鐨勫勾搴﹀伐浣滄姤鍛婏紝纭繚淇℃伅鍏紑鍚堣</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">鑱旂郴绗笁鏂瑰璁℃満鏋勫畬鎴愬勾搴﹁储鍔″璁?/p>
+                                <p class="text-sm text-gray-600 mt-1">閫夋嫨鏈夎祫璐ㄧ殑浼氳甯堜簨鍔℃墍杩涜璐㈠姟瀹¤锛屽苟鎸夎瀹氬叕绀哄璁℃姤鍛?/p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">寤虹珛鍐呴儴鍚堣绠＄悊鍒跺害</p>
+                                <p class="text-sm text-gray-600 mt-1">鍒跺畾璇︾粏鐨勫悎瑙勭鐞嗘祦绋嬶紝瀹氭湡寮€灞曞唴閮ㄥ悎瑙勮嚜鏌?/p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="flex justify-between mt-8">
+                    <button id="backToQuestionnaireBtn" class="bg-lightGray hover:bg-gray-200 text-neutral font-bold py-2 px-6 rounded">
+                        <i class="fas fa-arrow-left mr-2"></i>杩斿洖淇敼
+                    </button>
+                    <button id="downloadPDFBtn" class="bg-primary hover:bg-red-700 text-white font-bold py-2 px-6 rounded">
+                        <i class="fas fa-print mr-2"></i>鎵撳嵃鎶ュ憡
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>

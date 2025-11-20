@@ -1,0 +1,173 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/styles.css">
+<!-- 核心内容区 -->
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 左侧主栏 -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- 页面标题 - Banner -->
+            <div class="relative bg-gradient-to-r from-primary to-red-800 text-white rounded-md p-6 overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-2">行业动态</h2>
+                    <p class="text-white text-opacity-90">及时了解慈善行业最新动态和发展趋势</p>
+                </div>
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa fa-newspaper-o" style="font-size: 120px;"></i>
+                </div>
+            </div>
+            
+            <!-- 行业动态详情内容 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-4">
+                    <h1 class="text-2xl font-bold text-neutral">{{ .Title }}</h1>
+                    <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+                        <span><i class="fa fa-calendar mr-1"></i> 发布日期：{{ .Date.Format "2006年01月02日" }}</span>
+                        <!-- 行业动态分类标签 -->
+                        <span class="inline-flex items-center">
+                            <i class="fa fa-tag mr-1"></i>
+                            分类：
+                            {{ if .Params.categories }}
+                                {{ $first := true }}
+                                {{ range .Params.categories }}
+                                    {{ if $first }}
+                                        {{ $first = false }}
+                                    {{ else }}
+                                        、
+                                    {{ end }}
+                                    {{ if eq . "政策动态" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-sm">{{ . }}</span>
+                                    {{ else if eq . "行业新闻" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-sm">{{ . }}</span>
+                                    {{ else if eq . "活动资讯" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded text-sm">{{ . }}</span>
+                                    {{ else if eq . "处罚公告" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-red-100 text-red-800 rounded text-sm">{{ . }}</span>
+                                    {{ else }}
+                                        <span class="ml-1 px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-sm">{{ . }}</span>
+                                    {{ end }}
+                                {{ end }}
+                            {{ else }}
+                                <span class="ml-1 px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-sm">未分类</span>
+                            {{ end }}
+                        </span>
+                        
+                    </div>
+                </div>
+                
+                <!-- 行业动态正文内容 -->
+                <div class="p-6 bg-lightGray">
+                    {{ .Content }}
+                </div>
+            </div>
+            
+            <!-- 打印与分享 -->
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex space-x-4 mb-4 md:mb-0">
+                        <a href="#" class="inline-flex items-center text-primary hover:text-red-700">
+                            <i class="fa fa-print mr-2"></i> 打印内容
+                        </a>
+                    </div>
+                    <div class="flex space-x-4">
+                        <span class="text-sm text-gray-500">分享到：</span>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weixin"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weibo"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-qq"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 相关行业动态 -->
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-neutral">相关行业动态</h3>
+                    <a href="/industry_news/" class="text-primary hover:text-red-700 font-medium flex items-center">
+                        查看更多 <i class="fa fa-angle-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {{ $related := .Site.RegularPages.Related . | first 4 }}
+                    {{ with $related }}
+                    {{ range . }}
+                    <div class="bg-white border border-darkGray rounded-md p-4 hover:shadow-md transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">
+                            <a href="{{ .Permalink }}" class="hover:text-primary">{{ .Title }}</a>
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ .Params.description | default (plainify (substr .Content 0 100)) }}</p>
+                        <div class="text-sm text-gray-500">
+                            <i class="fa fa-calendar mr-1"></i> {{ .Date.Format "2006-01-02" }}
+                        </div>
+                    </div>
+                    {{ end }}
+                    {{ else }}
+                    <!-- 如果没有相关内容，显示一些默认内容 -->
+                    {{ range first 4 (where (where .Site.RegularPages "Section" "industry_news") ".Params.categories" "!=" nil) }}
+                    <div class="bg-white border border-darkGray rounded-md p-4 hover:shadow-md transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">
+                            <a href="{{ .Permalink }}" class="hover:text-primary">{{ .Title }}</a>
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">{{ .Params.description | default (plainify (substr .Content 0 100)) }}</p>
+                        <div class="text-sm text-gray-500">
+                            <i class="fa fa-calendar mr-1"></i> {{ .Date.Format "2006-01-02" }}
+                        </div>
+                    </div>
+                    {{ end }}
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧边栏 -->
+        <div class="space-y-6">
+            <!-- 最新行业动态 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">最新动态</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        {{ range first 5 (where .Site.RegularPages "Section" "industry_news").ByDate.Reverse }}
+                        <li>
+                            <a href="{{ .Permalink }}" class="text-neutral hover:text-primary line-clamp-1">{{ .Title }}</a>
+                            <div class="text-sm text-gray-500 mt-1">{{ .Date.Format "2006-01-02" }}</div>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 热门分类 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">热门分类</h3>
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-wrap gap-2">
+                        <a href="/industry_news/?category=政策动态" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200">政策动态</a>
+                        <a href="/industry_news/?category=行业新闻" class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200">行业新闻</a>
+                        <a href="/industry_news/?category=活动资讯" class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm hover:bg-yellow-200">活动资讯</a>
+                        <a href="/industry_news/?category=处罚公告" class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm hover:bg-red-200">处罚公告</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 咨询服务 -->
+            <div class="bg-lightGray border border-darkGray rounded-md">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-neutral mb-4">咨询服务</h3>
+                    <div class="text-center mb-4">
+                        <i class="fa fa-phone text-3xl text-primary mb-2"></i>
+                        <div class="text-xl font-bold text-primary">400-888-9999</div>
+                        <div class="text-gray-600 text-sm mt-1">工作日 9:00-17:30</div>
+                    </div>
+                    <a href="/consulting/" class="block w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors text-center">
+                        立即咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{ end }}

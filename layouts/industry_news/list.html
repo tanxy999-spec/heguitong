@@ -1,0 +1,153 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/styles.css">
+<!-- 核心内容区 -->
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 左侧主栏 -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- 页面标题 - Banner -->
+            
+            <!-- 页面标题 - Banner -->
+            <div class="relative bg-gradient-to-r from-primary to-red-800 text-white rounded-md p-6 overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-2">行业动态</h2>
+                    <p class="text-white text-opacity-90">及时了解慈善行业最新动态和发展趋势</p>
+                </div>
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa fa-newspaper-o" style="font-size: 120px;"></i>
+                </div>
+            </div>
+            
+
+            
+            <!-- 行业动态列表 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                {{ if not .Data.Pages }}    <div class="p-6 text-center">
+                    <p class="text-gray-600">暂无行业动态内容</p>
+                </div>
+                {{ else }}
+                <div class="divide-y divide-darkGray">
+                    {{ range .Data.Pages.ByDate.Reverse }}
+                    <div class="p-6 hover:bg-lightGray transition-colors">
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-neutral mb-2">
+                                    <a href="{{ .Permalink }}" class="hover:text-primary">{{ .Title }}</a>
+                                </h3>
+                                <p class="text-gray-600 mb-3 line-clamp-2">{{ .Params.description | default (plainify (substr .Content 0 200)) }}{{ if not .Params.description }}...{{ end }}</p>
+                                <div class="flex flex-wrap justify-between items-center">
+                                    <div class="flex flex-wrap gap-2 text-sm text-gray-500">
+                                        <span><i class="fa fa-calendar mr-1"></i> {{ .Date.Format "2006年01月02日" }}</span>
+                                        {{ if .Params.categories }}
+                                        <span class="inline-flex items-center">
+                                            <i class="fa fa-tag mr-1"></i>
+                                            {{ range .Params.categories }}
+                                            <span class="ml-1">
+                                                {{ if eq . "政策动态" }}
+                                                <span class="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">{{ . }}</span>
+                                                {{ else if eq . "行业新闻" }}
+                                                <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs">{{ . }}</span>
+                                                {{ else if eq . "活动资讯" }}
+                                                <span class="px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded text-xs">{{ . }}</span>
+                                                {{ else if eq . "处罚公告" }}
+                                                <span class="px-2 py-0.5 bg-red-100 text-red-800 rounded text-xs">{{ . }}</span>
+                                                {{ else }}
+                                                <span class="px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-xs">{{ . }}</span>
+                                                {{ end }}
+                                            </span>
+                                            {{ end }}
+                                        </span>
+                                        {{ end }}
+                                    </div>
+                                    <a href="{{ .Permalink }}" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                        查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+            
+            <!-- 分页 -->
+            {{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+            <div class="flex justify-center mt-8">
+                <nav class="inline-flex rounded-md shadow">
+                    {{ if .Paginator.HasPrev }}
+                    <a href="{{ .Paginator.Prev.URL }}" class="px-4 py-2 border border-darkGray text-sm font-medium text-neutral hover:bg-lightGray">
+                        <i class="fa fa-angle-left"></i> 上一页
+                    </a>
+                    {{ else }}
+                    <span class="px-4 py-2 border border-darkGray text-sm font-medium text-gray-400 cursor-not-allowed">
+                        <i class="fa fa-angle-left"></i> 上一页
+                    </span>
+                    {{ end }}
+                    
+                    {{ range .Paginator.Pagers }}
+                    {{ if eq . .Paginator }}
+                    <a href="{{ .URL }}" class="px-4 py-2 border border-darkGray bg-primary text-sm font-medium text-white">
+                        {{ .PageNumber }}
+                    </a>
+                    {{ else }}
+                    <a href="{{ .URL }}" class="px-4 py-2 border border-darkGray text-sm font-medium text-neutral hover:bg-lightGray">
+                        {{ .PageNumber }}
+                    </a>
+                    {{ end }}
+                    {{ end }}
+                    
+                    {{ if .Paginator.HasNext }}
+                    <a href="{{ .Paginator.Next.URL }}" class="px-4 py-2 border border-darkGray text-sm font-medium text-neutral hover:bg-lightGray">
+                        下一页 <i class="fa fa-angle-right"></i>
+                    </a>
+                    {{ else }}
+                    <span class="px-4 py-2 border border-darkGray text-sm font-medium text-gray-400 cursor-not-allowed">
+                        下一页 <i class="fa fa-angle-right"></i>
+                    </span>
+                    {{ end }}
+                </nav>
+            </div>
+            {{ end }}
+        </div>
+        
+        <!-- 右侧边栏 -->
+        <div class="space-y-6">
+
+            
+            <!-- 最新动态 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">最新动态</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        {{ range first 5 (where .Site.RegularPages "Section" "industry_news").ByDate.Reverse }}
+                        <li>
+                            <a href="{{ .Permalink }}" class="text-neutral hover:text-primary line-clamp-1">{{ .Title }}</a>
+                            <div class="text-sm text-gray-500 mt-1">{{ .Date.Format "2006-01-02" }}</div>
+                        </li>
+                        {{ end }}
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 咨询服务 -->
+            <div class="bg-lightGray border border-darkGray rounded-md">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-neutral mb-4">咨询服务</h3>
+                    <div class="text-center mb-4">
+                        <i class="fa fa-phone text-3xl text-primary mb-2"></i>
+                        <div class="text-xl font-bold text-primary">400-888-9999</div>
+                        <div class="text-gray-600 text-sm mt-1">工作日 9:00-17:30</div>
+                    </div>
+                    <a href="/consulting/" class="block w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors text-center">
+                        立即咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{{ end }}

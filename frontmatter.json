@@ -1,0 +1,84 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "previewPath": null,
+      "fields": [
+        {
+          "title": "title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "date",
+          "name": "date",
+          "type": "datetime"
+        },
+        {
+          "title": "preview",
+          "name": "preview",
+          "type": "string"
+        },
+        {
+          "title": "draft",
+          "name": "draft",
+          "type": "draft"
+        },
+        {
+          "title": "tags",
+          "name": "tags",
+          "type": "tags"
+        },
+        {
+          "title": "categories",
+          "name": "categories",
+          "type": "categories"
+        },
+        {
+          "title": "aliases",
+          "name": "aliases",
+          "type": "choice",
+          "choices": [
+            "/cases/2025-11-19-66基金会违规募捐及财务披露不规范案例/"
+          ]
+        }
+      ]
+    }
+  ],
+  "frontMatter.framework.id": "hugo",
+  "frontMatter.content.publicFolder": "static",
+  "frontMatter.preview.host": "http://localhost:1313",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "法规政策",
+      "path": "[[workspace]]/content/regulations"
+    },
+    {
+      "title": "资料下载",
+      "path": "[[workspace]]/content/download"
+    },
+    {
+      "title": "合规指南",
+      "path": "[[workspace]]/content/compliance_guide"
+    },
+    {
+      "title": "典型案例",
+      "path": "[[workspace]]/content/cases"
+    },
+    {
+      "title": "专家库",
+      "path": "[[workspace]]/content/experts"
+    },
+    {
+      "title": "行业动态",
+      "path": "[[workspace]]/content/industry_news"
+    }
+  ]
+}

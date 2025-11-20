@@ -1,0 +1,18 @@
+<!-- 通用内容容器 -->
+<div class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 左侧主栏 -->
+        <div class="lg:col-span-2 space-y-6">
+            {{ block "main-content" . }}
+                {{ .Content }}
+            {{ end }}
+        </div>
+        
+        <!-- 右侧边栏 -->
+        <div class="lg:col-span-1 space-y-6">
+            {{ block "sidebar" . }}
+                <!-- 可在各模板中覆盖 -->
+            {{ end }}
+        </div>
+    </div>
+</div>

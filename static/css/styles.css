@@ -1,0 +1,475 @@
+/* CSS Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 自定义颜色变量 - 与源网站完全匹配 */
+:root {
+    --primary: #C62828; /* 红色 */
+    --secondary: #1565C0;
+    --neutral: #333333;
+    --lightGray: #F5F5F5;
+    --darkGray: #424242; /* 修正为真正的深灰色 */
+    --primary-light: #FFEBEE;
+    --text-color: #212121;
+    --border-radius: 4px;
+}
+
+/* 合规指南页面样式 */
+.compliance-guide-banner {
+    background-color: var(--primary);
+    color: white;
+    padding: 3rem 0;
+    margin-bottom: 3rem;
+}
+
+.compliance-guide-banner h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.compliance-guide-banner p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* 分类标签容器样式 - 统一样式定义 */
+#categoryTabs {
+    display: flex;
+    background-color: white;
+    padding: 0;
+    border-bottom: 2px solid var(--darkGray); /* 加粗边框 */
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    white-space: nowrap;
+    margin-bottom: 0;
+}
+
+/* 分类标签父容器样式 */
+.bg-white.border.border-darkGray.rounded-md {
+    margin-bottom: 1.5rem;
+}
+
+#categoryTabs::-webkit-scrollbar {
+    display: none;
+}
+
+/* 分类标签样式 - 与regulations页面保持一致 */
+.category-tab {
+    padding: 15px 24px;
+    cursor: pointer;
+    color: var(--neutral);
+    font-weight: 500;
+    position: relative;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    margin: 0;
+}
+
+/* 激活状态样式优化 */
+.category-tab.active {
+    color: var(--primary);
+    font-weight: 700;
+    background-color: white;
+}
+
+/* 激活状态下划线 - 确保宽度和位置正确 */
+.category-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; /* 确保与加粗边框对齐 */
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 0;
+}
+
+/* 增强悬浮效果 */
+.category-tab:hover {
+    color: var(--primary);
+    background-color: var(--primary-light);
+}
+
+/* 非激活状态样式 */
+.category-tab.inactive {
+    color: var(--neutral);
+    font-weight: 500;
+}
+
+/* 删除重复的#categoryTabs定义，使用上面更完整的定义 */
+
+.guide-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.guide-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-color: #e0e0e0;
+}
+
+.guide-card .text-primary {
+    color: var(--primary);
+}
+
+.guide-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.guide-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+.guide-card .fa {
+    font-size: 1.5rem;
+}
+
+/* 合规工作流程样式 */
+.compliance-process {
+    margin: 3rem 0;
+}
+
+.compliance-process h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.process-step-number {
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* 常见问题样式 */
+.faq-section {
+    margin: 3rem 0;
+}
+
+.faq-section h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+}
+
+.faq-item h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.faq-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .compliance-guide-banner h1 {
+        font-size: 2rem;
+    }
+    
+    .guide-grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .bg-white.border.border-darkGray.rounded-md {
+        margin: 0 -1rem 1.5rem -1rem;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+    
+    #categoryTabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    #categoryTabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .category-tab {
+        padding: 12px 14px;
+        font-size: 13px;
+        flex: 0 0 auto;
+        min-width: 70px;
+        text-align: center;
+    }
+    
+    .category-tab.active::after {
+        height: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-tab {
+        padding: 10px 12px;
+        font-size: 12px;
+        min-width: 65px;
+    }
+}
+
+/* 法规卡片样式 - 与指南卡片样式保持一致 */
+.regulation-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.regulation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-color: #e0e0e0;
+}
+
+/* 确保法规卡片可以被正确隐藏 */
+.regulation-card.hidden,
+.guide-card.hidden {
+    display: none !important;
+}
+
+/* 法规卡片标题样式 */
+.regulation-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+/* 法规卡片内容样式 */
+.regulation-card p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    font-size: 16px;
+}
+
+/* 案例卡片样式 */
+.case-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--darkGray);
+    transition: all 0.3s ease;
+}
+
+.case-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+.case-card img {
+    width: 100%;
+    height: 192px;
+    object-fit: cover;
+}
+
+.case-card .absolute {
+    position: absolute;
+}
+
+.case-card .top-3 {
+    top: 0.75rem;
+}
+
+.case-card .left-3 {
+    left: 0.75rem;
+}
+
+.case-card .bg-red-500 {
+    background-color: #ef4444;
+}
+
+.case-card .bg-green-500 {
+    background-color: #10b981;
+}
+
+.case-card .bg-blue-500 {
+    background-color: #3b82f6;
+}
+
+.case-card .text-white {
+    color: white;
+}
+
+.case-card .text-xs {
+    font-size: 0.75rem;
+}
+
+.case-card .px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.case-card .py-1 {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+.case-card .rounded {
+    border-radius: 0.25rem;
+}
+
+.case-card .p-5 {
+    padding: 1.25rem;
+}
+
+.case-card .text-lg {
+    font-size: 1.125rem;
+}
+
+.case-card .font-semibold {
+    font-weight: 600;
+}
+
+.case-card .text-neutral {
+    color: var(--neutral);
+}
+
+.case-card .mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.case-card .text-gray-600 {
+    color: #4b5563;
+}
+
+.case-card .text-sm {
+    font-size: 0.875rem;
+}
+
+.case-card .mb-4 {
+    margin-bottom: 1rem;
+}
+
+.case-card .flex {
+    display: flex;
+}
+
+.case-card .justify-between {
+    justify-content: space-between;
+}
+
+.case-card .items-center {
+    align-items: center;
+}
+
+.case-card .text-gray-500 {
+    color: #6b7280;
+}
+
+.case-card .text-primary {
+    color: var(--primary);
+}
+
+.case-card .hover\:text-red-700:hover {
+    color: #b91c1c;
+}
+
+.case-card .font-medium {
+    font-weight: 500;
+}
+
+.case-card .ml-2 {
+    margin-left: 0.5rem;
+}
+
+/* 全局样式 */
+body {
+    font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+}
+
+/* Markdown内容样式 */
+.bg-lightGray h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neutral);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--darkGray);
+}
+
+.bg-lightGray h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--neutral);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.bg-lightGray p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    text-align: justify;
+}
+
+.bg-lightGray ul, .bg-lightGray ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.bg-lightGray li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.bg-lightGray ul li {
+    list-style-type: disc;
+}
+
+.bg-lightGray ol li {
+    list-style-type: decimal;
+}
+
+.bg-lightGray a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.bg-lightGray a:hover {
+    text-decoration: underline;
+    color: #b91c1c;
+}

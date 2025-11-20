@@ -1,0 +1,21 @@
+{
+  "name": "heguitong",
+  "version": "1.0.0",
+  "description": "社会组织合规网网站",
+  "scripts": {
+    "build": "hugo --gc --minify",
+    "dev": "hugo server -D"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tanxy999-spec/heguitong.git"
+  },
+  "keywords": [
+    "charity",
+    "compliance",
+    "hugo"
+  ],
+  "author": "heguitong team",
+  "license": "MIT",
+  "devDependencies": {}
+}

@@ -1,0 +1,215 @@
+{{ define "main" }}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- 左侧主栏 (8/12) -->
+    <div class="lg:col-span-8 space-y-6">
+        <!-- Banner -->
+        <div class="relative bg-primary rounded-md overflow-hidden">
+            <div class="absolute inset-0">
+                <img src="https://picsum.photos/id/1067/1200/400" alt="背景" class="w-full h-full object-cover opacity-20">
+            </div>
+            <div class="relative z-10 p-8 text-white">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">一站式社会组织合规解决方案，助力社会组织规范发展</h2>
+                <div class="flex flex-wrap gap-4 mt-6">
+                    <a href="/compliance_tool/" class="bg-transparent border-2 border-white text-white hover:bg-white hover:bg-opacity-10 px-6 py-2 rounded font-semibold transition-colors">
+                        合规诊断
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 核心内容 -->
+        <div class="bg-white border border-darkGray rounded-md">
+            <!-- 最新法规解读 -->
+            {{ range first 1 (sort (where (where .Site.RegularPages "Section" "regulations") "Params.draft" "ne" true) ".Date" "desc") }}
+            <div class="p-6 border-b border-darkGray">
+                <div class="flex items-start">
+                    <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-primary mb-2">
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </h4>
+                        <p class="text-gray-600 mb-3">{{ .Summary | plainify | truncate 150 }}...</p>
+                        <div class="text-sm text-gray-500">发布时间: {{ .Date.Format "2006-01-02" }}</div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+            
+            <!-- 热门合规指南 -->
+            {{ range first 1 (sort (where (where .Site.RegularPages "Section" "compliance_guide") "Params.draft" "ne" true) ".Date" "desc") }}
+            <div class="p-6 border-b border-darkGray">
+                <div class="flex items-start">
+                    <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-neutral mb-2">
+                            <a href="{{ .RelPermalink }}" class="hover:text-primary">{{ .Title }}</a>
+                        </h4>
+                        <p class="text-gray-600 mb-3">{{ .Summary | plainify | truncate 150 }}...</p>
+                        <div class="text-sm text-gray-500">发布时间: {{ .Date.Format "2006-01-02" }}</div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+            
+            <!-- 典型案例 -->
+            {{ range first 1 (sort (where (where .Site.RegularPages "Section" "cases") "Params.draft" "ne" true) ".Date" "desc") }}
+            <div class="p-6">
+                <div class="flex items-start">
+                    <div class="w-2 h-2 bg-primary rounded-full mt-2 mr-3"></div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-neutral mb-2">
+                            <a href="{{ .RelPermalink }}" class="hover:text-primary">{{ .Title }}</a>
+                        </h4>
+                        <p class="text-gray-600 mb-3">{{ .Summary | plainify | truncate 150 }}...</p>
+                        <div class="text-sm text-gray-500">发布时间: {{ .Date.Format "2006-01-02" }}</div>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+    
+    <!-- 右侧边栏 (4/12) -->
+    <div class="lg:col-span-4 space-y-6">
+
+        
+        <!-- 行业动态简讯 -->
+        <div class="bg-white border border-darkGray rounded-md">
+            <div class="border-b border-darkGray px-6 py-3 bg-lightGray flex justify-between items-center">
+                <h3 class="text-lg font-semibold text-neutral">行业动态</h3>
+                <a href="/industry_news/" class="text-sm text-primary hover:underline">更多</a>
+            </div>
+            <div class="p-6">
+                <ul class="space-y-4">
+                    {{ range first 5 (sort (where (where .Site.RegularPages "Section" "industry_news") "Params.draft" "ne" true) ".Date" "desc") }}
+                    <li>
+                        <a href="{{ .RelPermalink }}" class="text-neutral hover:text-primary line-clamp-1">{{ .Title }}</a>
+                        <div class="text-sm text-gray-500 mt-1">{{ .Date.Format "2006-01-02" }}</div>
+                    </li>
+                    {{ end }}
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 服务热线/在线咨询 -->
+        <div class="bg-lightGray border border-darkGray rounded-md">
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-neutral mb-4">咨询服务</h3>
+                <div class="text-center mb-4">
+                    <i class="fa fa-phone text-3xl text-primary mb-2"></i>
+                    <div class="text-xl font-bold text-primary">13383222137</div>
+                    <div class="text-gray-600 text-sm mt-1">工作日 9:00-17:30</div>
+                </div>
+                <a href="/consulting/" class="block w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors text-center">
+                    立即咨询
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 服务资源Banner -->
+<div class="relative bg-cover bg-center py-10 px-6 rounded-lg mb-8 mt-10" style="background-image: url('https://picsum.photos/id/1035/1200/400');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
+    <div class="relative container mx-auto text-center">
+        <h3 class="text-3xl font-bold text-white mb-4">专业服务资源</h3>
+        <p class="text-white/90 text-lg max-w-2xl mx-auto">为社会组织提供全方位的合规支持与服务，助力公益慈善事业健康发展</p>
+    </div>
+</div>
+
+<!-- 中部区域：细分服务板块 -->
+<div>
+    <div class="border-b border-darkGray pb-3 mb-6">
+        <h3 class="text-xl font-semibold text-neutral">服务资源</h3>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 服务卡片 1 -->
+        <a href="/compliance_tool/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-check-circle"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">合规自查工具</h4>
+            <p class="text-gray-600 text-sm">帮助社会组织进行合规风险自我评估</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 2 -->
+        <a href="/regulations/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-calendar"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">政策法规</h4>
+            <p class="text-gray-600 text-sm">最新政策法律文件，方便随时查阅</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 3 -->
+        <a href="/cases/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-book"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">典型案例解析</h4>
+            <p class="text-gray-600 text-sm">真实案例深度分析，提供合规参考</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 4 -->
+        <a href="/training/" class="block">
+            <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+                <div class="text-primary text-2xl mb-3">
+                    <i class="fa fa-graduation-cap"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-neutral mb-2">培训课程</h4>
+                <p class="text-gray-600 text-sm">专业合规培训课程，提升组织合规能力</p>
+            </div>
+            </a>
+            
+            <!-- 服务卡片 5 -->
+            <a href="/download/" class="block">
+            <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+                <div class="text-primary text-2xl mb-3">
+                    <i class="fa fa-file-text-o"></i>
+                </div>
+                <h4 class="text-lg font-semibold text-neutral mb-2">下载中心</h4>
+                <p class="text-gray-600 text-sm">各类合规文件模板，方便组织使用参考</p>
+            </div>
+            </a>
+        
+        <!-- 服务卡片 6 -->
+        <a href="/experts/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-comments"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">权威专家专栏</h4>
+            <p class="text-gray-600 text-sm">权威专家解答疑难问题，提供专业指导</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 7 -->
+        <a href="/industry_data/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-line-chart"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">行业数据报告</h4>
+            <p class="text-gray-600 text-sm">最新行业发展数据，助力战略决策</p>
+        </div>
+        </a>
+        
+        <!-- 服务卡片 8 -->
+        <a href="/industry_news/" class="block">
+        <div class="bg-white border border-darkGray rounded-md p-5 card-hover">
+            <div class="text-primary text-2xl mb-3">
+                <i class="fa fa-users"></i>
+            </div>
+            <h4 class="text-lg font-semibold text-neutral mb-2">新闻报道</h4>
+            <p class="text-gray-600 text-sm">媒体新闻与报道，提升传播能力</p>
+        </div>
+        </a>
+    </div>
+</div>
+{{ end }}

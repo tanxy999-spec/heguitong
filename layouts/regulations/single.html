@@ -1,0 +1,274 @@
+{{ define "main" }}
+<link rel="stylesheet" href="/css/styles.css">
+<!-- 面包屑导航已删除 -->
+<!-- 核心内容区 -->
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 左侧主栏 -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- 页面标题 - Banner -->
+            <div class="relative bg-gradient-to-r from-primary to-red-800 text-white rounded-md p-6 overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-2">法规政策</h2>
+                    <p class="text-white text-opacity-90">全面收录慈善领域相关法规政策，助力组织合规运营</p>
+                </div>
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa fa-book" style="font-size: 120px;"></i>
+                </div>
+            </div>
+            
+            <!-- 分类标签导航栏已删除 -->
+            
+            <!-- 法规详情内容 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-4">
+                    <h1 class="text-2xl font-bold text-neutral">{{ .Title }}</h1>
+                    <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+                        <span><i class="fa fa-calendar mr-1"></i> 发布日期：{{ .Date.Format "2006年01月02日" }}</span>
+                        <!-- 法规分类标签 -->
+                        <span class="inline-flex items-center">
+                            <i class="fa fa-tag mr-1"></i>
+                            分类：
+                            {{ if .Params.categories }}
+                                {{ $first := true }}
+                                {{ range .Params.categories }}
+                                    {{ if $first }}
+                                        {{ $first = false }}
+                                    {{ else }}
+                                        、
+                                    {{ end }}
+                                    {{ if eq . "国家法规" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-sm">{{ . }}</span>
+                                    {{ else if eq . "地方政策" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-sm">{{ . }}</span>
+                                    {{ else if eq . "政策解读" }}
+                                        <span class="ml-1 px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded text-sm">{{ . }}</span>
+                                    {{ else }}
+                                        <span class="ml-1 px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-sm">{{ . }}</span>
+                                    {{ end }}
+                                {{ end }}
+                            {{ else if .Params.category }}
+                                {{ if eq .Params.category "national" }}
+                                    <span class="ml-1 px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-sm">国家法规</span>
+                                {{ else if eq .Params.category "local" }}
+                                    <span class="ml-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-sm">地方政策</span>
+                                {{ else if eq .Params.category "interpretations" }}
+                                    <span class="ml-1 px-2 py-0.5 bg-yellow-100 text-yellow-800 rounded text-sm">政策解读</span>
+                                {{ else }}
+                                    <span class="ml-1 px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-sm">{{ .Params.category }}</span>
+                                {{ end }}
+                            {{ else }}
+                                <span class="ml-1 px-2 py-0.5 bg-gray-100 text-gray-800 rounded text-sm">未分类</span>
+                            {{ end }}
+                        </span>
+                        {{ with .Params.effectiveDate }}
+                        <span><i class="fa fa-bookmark mr-1"></i> 生效日期：{{ . }}</span>
+                        {{ end }}
+
+                    </div>
+                </div>
+                
+                <!-- 法规正文内容 -->
+                <div class="p-6 bg-lightGray">
+                    {{ .Content }}
+                </div>
+            </div>
+            
+            <!-- 打印与分享 -->
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex space-x-4 mb-4 md:mb-0">
+                        <a href="#" class="inline-flex items-center text-primary hover:text-red-700">
+                            <i class="fa fa-print mr-2"></i> 打印法规
+                        </a>
+                    </div>
+                    <div class="flex space-x-4">
+                        <span class="text-sm text-gray-500">分享到：</span>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weixin"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weibo"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-qq"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右侧边栏 -->
+        <div class="space-y-6">
+            <!-- 快速查询 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">法规搜索</h3>
+                </div>
+                <div class="p-6">
+                    <div class="mb-4">
+                        <div class="relative">
+                            <input type="text" placeholder="输入关键词搜索法规..." 
+                                class="w-full px-4 py-2 border border-darkGray rounded-md focus:outline-none focus:border-primary">
+                            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            慈善法
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            信息公开
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            税收优惠
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            等级评估
+                        </button>
+                        <button class="px-3 py-1 bg-lightGray hover:bg-primary hover:text-white text-sm rounded transition-colors">
+                            募捐管理
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 热门法规 -->
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">热门法规</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">1</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《中华人民共和国慈善法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">2</span>
+                            <a href="/regulations/charity-info-disclosure-detail/" class="text-neutral hover:text-primary line-clamp-2">《慈善组织信息公开办法》2025修订版</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-primary text-white w-5 h-5 flex items-center justify-center rounded-full text-xs">3</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《慈善组织保值增值投资活动管理暂行办法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-gray-300 text-gray-700 w-5 h-5 flex items-center justify-center rounded-full text-xs">4</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《慈善组织认定办法》</a>
+                        </li>
+                        <li class="relative pl-6">
+                            <span class="absolute left-0 top-0 bg-gray-300 text-gray-700 w-5 h-5 flex items-center justify-center rounded-full text-xs">5</span>
+                            <a href="#" class="text-neutral hover:text-primary line-clamp-2">《社会组织评估管理办法》</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 咨询服务 -->
+            <div class="bg-lightGray border border-darkGray rounded-md">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-neutral mb-4">法规咨询</h3>
+                    <p class="text-gray-600 text-sm mb-4">对法规政策有疑问？我们的专业团队为您提供一对一解答</p>
+                    <button class="w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors">
+                        立即咨询
+                    </button>
+                    <div class="text-center mt-4 text-sm text-gray-500">
+                        <i class="fa fa-phone mr-1"></i> 400-888-9999
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+  <!-- 分类标签导航栏相关JavaScript已删除 -->
+  
+  <script>
+    // 法规详情页初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('法规详情页加载完成，准备更新法规列表');
+      
+      // 获取当前法规的信息
+      const regulationInfo = {
+        title: document.title,
+        description: document.querySelector('meta[name="description"]') ? 
+          document.querySelector('meta[name="description"]').content : 
+          '法规详情页面',
+        category: '{{ .Params.category | default "national" }}',
+        url: window.location.href,
+        date: '{{ .Date.Format "2006-01-02" }}'
+      };
+      
+      console.log('获取到的法规信息:', regulationInfo);
+      
+      // 检查是否已经添加过该法规卡片
+      function hasRegulationBeenAdded() {
+        try {
+          const addedRegulations = localStorage.getItem('addedRegulations') || '[]';
+          const regulations = JSON.parse(addedRegulations);
+          return regulations.includes(window.location.href);
+        } catch (e) {
+          console.error('检查已添加法规时出错:', e);
+          return false;
+        }
+      }
+      
+      // 标记法规已添加
+      function markRegulationAsAdded() {
+        try {
+          const addedRegulations = localStorage.getItem('addedRegulations') || '[]';
+          const regulations = JSON.parse(addedRegulations);
+          if (!regulations.includes(window.location.href)) {
+            regulations.push(window.location.href);
+            localStorage.setItem('addedRegulations', JSON.stringify(regulations));
+            console.log('已标记法规为已添加');
+          }
+        } catch (e) {
+          console.error('标记法规为已添加时出错:', e);
+        }
+      }
+      
+      // 自动添加到法规列表
+      function addToRegulationList() {
+        // 如果是从regulations.html页面跳转过来的，不重复添加
+        if (document.referrer && document.referrer.includes('regulations.html')) {
+          console.log('从法规列表页面跳转而来，跳过自动添加');
+          return;
+        }
+        
+        // 如果已经添加过，不重复添加
+        if (hasRegulationBeenAdded()) {
+          console.log('该法规已存在于列表中，跳过添加');
+          return;
+        }
+        
+        console.log('准备添加法规到列表');
+        
+        // 方法1：通过localStorage存储待添加的法规信息
+        try {
+          localStorage.setItem('pendingRegulation', JSON.stringify(regulationInfo));
+          console.log('已存储法规信息到localStorage');
+          
+          // 标记为已添加
+          markRegulationAsAdded();
+          
+          // 如果用户之后访问regulations.html，那里的代码会检查并添加这个法规
+          console.log('法规信息已保存，下次访问法规列表页时将自动添加');
+        } catch (e) {
+          console.error('存储法规信息时出错:', e);
+          
+          // 备用方法：显示提示，让用户手动点击添加
+          const addToListButton = document.createElement('button');
+          addToListButton.className = 'fixed bottom-4 right-4 bg-primary text-white px-4 py-2 rounded shadow-lg z-50';
+          addToListButton.innerHTML = '<i class="fa fa-plus mr-1"></i> 添加到法规列表';
+          addToListButton.onclick = function() {
+            // 直接跳转到regulations.html并传递法规信息
+            const encodedData = encodeURIComponent(JSON.stringify(regulationInfo));
+            window.location.href = '/regulations/?newRegulation=' + encodedData;
+          };
+          document.body.appendChild(addToListButton);
+          console.log('已添加手动添加按钮');
+        }
+      }
+      
+      // 执行自动添加
+      addToRegulationList();
+    });
+  </script>
+{{ end }}
