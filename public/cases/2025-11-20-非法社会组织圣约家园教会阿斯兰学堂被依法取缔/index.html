@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=3457&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>社会组织合规网 - 一站式社会组织合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">社会组织合规网</h1>
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 13383222137</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<div class="container mx-auto px-4 py-8">
+    <nav class="mb-6 text-sm">
+        <a href="/" class="text-gray-500 hover:text-primary">首页</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <a href="/cases/" class="text-gray-500 hover:text-primary">案例库</a>
+        <span class="mx-2 text-gray-500">/</span>
+        <span class="text-neutral">非法社会组织“圣约家园教会”、“阿斯兰学堂”被依法取缔</span>
+    </nav>
+    
+    <div class="bg-white rounded-md border border-darkGray overflow-hidden">
+        <div class="relative">
+            <img src="https://picsum.photos/seed/%e9%9d%9e%e6%b3%95%e7%a4%be%e4%bc%9a%e7%bb%84%e7%bb%87%e2%80%9c%e5%9c%a3%e7%ba%a6%e5%ae%b6%e5%9b%ad%e6%95%99%e4%bc%9a%e2%80%9d%e3%80%81%e2%80%9c%e9%98%bf%e6%96%af%e5%85%b0%e5%ad%a6%e5%a0%82%e2%80%9d%e8%a2%ab%e4%be%9d%e6%b3%95%e5%8f%96%e7%bc%94/1200/400" alt="非法社会组织“圣约家园教会”、“阿斯兰学堂”被依法取缔" class="w-full h-64 md:h-96 object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                <div class="text-center text-white px-4">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">非法社会组织“圣约家园教会”、“阿斯兰学堂”被依法取缔</h1>
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        
+                        
+                        <span class="bg-red-500 text-white text-sm px-3 py-1 rounded-full">行政处罚案例</span>
+                        
+                        
+                    </div>
+                    <div class="text-white opacity-90">
+                        <i class="fa fa-calendar mr-2"></i> 2025年11月20日
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="p-6 md:p-10 bg-gradient-to-br from-white to-gray-50">
+            <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8 md:p-10">
+                <p>【基本案情】2017年2月以来，李某、韩某某等人在山西省临汾市尧都区成立非法社会组织“圣约家园教会”，擅自发展教徒，组织聚会，收取奉献金。期间，李某、韩某某等人又依托“圣约家园教会”建立“阿斯兰学堂”，招收多名教徒子女接受以基督教神学为基础的幼儿、小学教育并收取学费，蛊惑教徒不让子女接受国家义务教育。</p>
+<p>【处理结果】2022年8月，尧都区民政局根据民政部《取缔非法民间组织暂行办法》有关规定，将“圣约家园教会”、“阿斯兰学堂”依法取缔。</p>
+<p>【典型意义】国家依法保护正常的宗教活动，宗教团体应当依照国家社团管理的规定办理登记。本案中，“圣约家园教会”、“阿斯兰学堂”未经登记以社会组织名义开展宗教活动，违反了宗教事务管理和社会组织登记管理法规的规定，属于非法社会组织开展的非法宗教活动，存在较大的政治风险。登记管理机关依法将其取缔，维护了辖区社会组织和宗教活动秩序，维护了国家教育制度和未成年人合法权益。</p>
+
+                
+                <div class="mt-10 pt-8 border-t border-darkGray">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold text-neutral">相关案例</h3>
+                        <a href="/cases/" class="text-primary hover:text-red-700 font-medium flex items-center">
+                            查看更多案例 <i class="fa fa-angle-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        
+                        
+                        
+                        <div class="bg-white border border-darkGray rounded-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/%e9%9d%9e%e6%b3%95%e7%a4%be%e4%bc%9a%e7%bb%84%e7%bb%87%e2%80%9c%e5%9c%a3%e7%ba%a6%e5%ae%b6%e5%9b%ad%e6%95%99%e4%bc%9a%e2%80%9d%e3%80%81%e2%80%9c%e9%98%bf%e6%96%af%e5%85%b0%e5%ad%a6%e5%a0%82%e2%80%9d%e8%a2%ab%e4%be%9d%e6%b3%95%e5%8f%96%e7%bc%94/600/400" alt="非法社会组织“圣约家园教会”、“阿斯兰学堂”被依法取缔" class="w-full h-40 object-cover">
+                                
+                                
+                                
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">非法社会组织“圣约家园教会”、“阿斯兰学堂”被依法取缔</h4>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">2017年2月以来，李某、韩某某等人在山西省临汾市尧都区成立非法社会组织“圣约家园教会”，擅自发展教徒，组织聚会，收取奉献金。</p>
+                                <a href="//localhost:3457/cases/2025-11-20-%E9%9D%9E%E6%B3%95%E7%A4%BE%E4%BC%9A%E7%BB%84%E7%BB%87%E5%9C%A3%E7%BA%A6%E5%AE%B6%E5%9B%AD%E6%95%99%E4%BC%9A%E9%98%BF%E6%96%AF%E5%85%B0%E5%AD%A6%E5%A0%82%E8%A2%AB%E4%BE%9D%E6%B3%95%E5%8F%96%E7%BC%94/" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                    查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-darkGray rounded-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/%e6%b2%b3%e5%8c%97%e6%9f%90%e8%81%8c%e4%b8%9a%e5%9f%b9%e8%ae%ad%e5%ad%a6%e6%a0%a1%e7%a7%81%e8%87%aa%e8%bd%ac%e8%ae%a9%e6%b3%95%e4%ba%ba%e7%99%bb%e8%ae%b0%e8%af%81%e4%b9%a6%e3%80%81%e5%8d%b0%e7%ab%a0%e8%a2%ab%e8%a1%8c%e6%94%bf%e5%a4%84%e7%bd%9a/600/400" alt="河北某职业培训学校私自转让法人登记证书、印章被行政处罚" class="w-full h-40 object-cover">
+                                
+                                
+                                
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">河北某职业培训学校私自转让法人登记证书、印章被行政处罚</h4>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">2020年5月，未经学校理事会决议同意，牛某以学校名义与张某签订了《学校（法人）转让合同书》，注明“牛某将经营的河北省某职业培训学校所有权变更为张某”，包括“学校名称、法定代表人、权力机构、学校证照及章程等相关文件、材料、证件等”全部变更、移交给张某名下。</p>
+                                <a href="//localhost:3457/cases/%E6%B2%B3%E5%8C%97%E6%9F%90%E8%81%8C%E4%B8%9A%E5%9F%B9%E8%AE%AD%E5%AD%A6%E6%A0%A1%E7%A7%81%E8%87%AA%E8%BD%AC%E8%AE%A9%E6%B3%95%E4%BA%BA%E7%99%BB%E8%AE%B0%E8%AF%81%E4%B9%A6%E5%8D%B0%E7%AB%A0%E8%A2%AB%E8%A1%8C%E6%94%BF%E5%A4%84%E7%BD%9A/" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                    查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white border border-darkGray rounded-md overflow-hidden hover:shadow-lg transition-all duration-300">
+                            <div class="relative">
+                                <img src="https://picsum.photos/seed/%e6%b5%99%e6%b1%9f%e6%9f%90%e4%b8%ad%e8%a5%bf%e5%8c%bb%e7%bb%93%e5%90%88%e9%97%a8%e8%af%8a%e9%83%a8%e6%a0%b9%e6%8d%ae%e6%9c%89%e5%85%b3%e5%9b%bd%e5%ae%b6%e6%9c%ba%e5%85%b3%e6%84%8f%e8%a7%81%e8%a2%ab%e6%92%a4%e9%94%80%e7%99%bb%e8%ae%b0/600/400" alt="浙江某中西医结合门诊部根据有关国家机关意见被撤销登记" class="w-full h-40 object-cover">
+                                
+                                
+                                
+                            </div>
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">浙江某中西医结合门诊部根据有关国家机关意见被撤销登记</h4>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-2">2019年6月，浙江省杭州市余杭区民政局在日常监督检查中发现，某中西医结合门诊部（民办非企业单位）因违反医疗领域相关法律法规规定，被卫生健康行政主管部门吊销了《医疗机构执业许可证》，该中西医结合门诊部已不再具备《民办非企业单位登记管理暂行条例》第八条规定的成立条件。</p>
+                                <a href="//localhost:3457/cases/%E6%B5%99%E6%B1%9F%E6%9F%90%E4%B8%AD%E8%A5%BF%E5%8C%BB%E7%BB%93%E5%90%88%E9%97%A8%E8%AF%8A%E9%83%A8%E6%A0%B9%E6%8D%AE%E6%9C%89%E5%85%B3%E5%9B%BD%E5%AE%B6%E6%9C%BA%E5%85%B3%E6%84%8F%E8%A7%81%E8%A2%AB%E6%92%A4%E9%94%80%E7%99%BB%E8%AE%B0/" class="text-primary hover:text-red-700 font-medium flex items-center text-sm">
+                                    查看详情 <i class="fa fa-angle-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-between">
+                    <a href="/cases/" class="inline-flex items-center px-4 py-2 border border-darkGray text-sm font-medium rounded-md text-neutral bg-white hover:bg-gray-50">
+                        <i class="fa fa-arrow-left mr-2"></i> 返回案例列表
+                    </a>
+                    <button onclick="window.print()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-red-700">
+                        <i class="fa fa-print mr-2"></i> 打印案例
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+    }
+    
+     
+    .max-w-4xl.mx-auto {
+        line-height: 1.6;
+        color: #333;
+    }
+    
+     
+    .max-w-4xl.mx-auto h1 {
+        color: #2c3e50;
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+    
+    .max-w-4xl.mx-auto h2 {
+        color: #34495e;
+        font-size: 1.8rem;
+        margin-top: 2.5rem;
+        margin-bottom: 1.2rem;
+        font-weight: 600;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 0.5rem;
+    }
+    
+    .max-w-4xl.mx-auto h3 {
+        color: #34495e;
+        font-size: 1.4rem;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+    
+     
+    .max-w-4xl.mx-auto p {
+        margin-bottom: 1.2rem;
+        text-align: justify;
+        color: #555;
+    }
+    
+     
+        .max-w-4xl.mx-auto p:first-of-type {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #444;
+        }
+        
+         
+        .max-w-4xl.mx-auto ul,
+        .max-w-4xl.mx-auto ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .max-w-4xl.mx-auto ul li {
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-left: 1.2rem;
+        }
+        
+        .max-w-4xl.mx-auto ul li::before {
+            content: "•";
+            color: #007bff;
+            font-weight: bold;
+            position: absolute;
+            left: -1.2rem;
+            font-size: 1.2em;
+        }
+        
+        .max-w-4xl.mx-auto ol li {
+            margin-bottom: 0.6rem;
+        }
+        
+         
+        .max-w-4xl.mx-auto blockquote {
+            margin: 2rem 0;
+            padding: 1.5rem 2rem;
+            border-left: 4px solid #007bff;
+            background-color: #f8f9fa;
+            font-style: italic;
+            color: #555;
+            border-radius: 0 6px 6px 0;
+        }
+        
+        .max-w-4xl.mx-auto blockquote p {
+            margin: 0;
+        }
+        
+         
+        .max-w-4xl.mx-auto table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .max-w-4xl.mx-auto th,
+        .max-w-4xl.mx-auto td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .max-w-4xl.mx-auto th {
+            background-color: #007bff;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .max-w-4xl.mx-auto tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .max-w-4xl.mx-auto tr:hover {
+            background-color: #f0f0f0;
+        }
+</style>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    社会组织合规网是专业的社会组织合规服务平台，致力于为各类社会组织提供政策解读、合规指导、风险管理等全方位服务，助力社会组织健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市西城区百万庄北街3号院</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>13383222137</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>comsense2020@foxmail.com</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP</li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 社会组织合规网 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>

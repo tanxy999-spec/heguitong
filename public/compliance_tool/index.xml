@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>慈善组织合规自检工具 on 社会组织合规网</title>
+    <link>//localhost:5411/compliance_tool/</link>
+    <description>Recent content in 慈善组织合规自检工具 on 社会组织合规网</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate></lastBuildDate>
+    <atom:link href="//localhost:5411/compliance_tool/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

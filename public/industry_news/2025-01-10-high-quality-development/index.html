@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=11819&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国慈善组织合规通 - 一站式慈善合规解决方案</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#C62828', 
+                        secondary: '#1565C0', 
+                        neutral: '#333333',
+                        lightGray: '#F5F5F5',
+                        darkGray: '#E0E0E0',
+                    },
+                    fontFamily: {
+                        sans: ['Microsoft YaHei', 'Noto Sans SC', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .card-hover {
+                @apply transition-all duration-300 hover:shadow-md hover:border-primary;
+            }
+            .nav-dropdown {
+                @apply absolute left-0 mt-2 w-64 bg-white border border-gray-200 shadow-lg z-50 hidden;
+            }
+            .nav-dropdown-item {
+                @apply block px-4 py-2 text-sm text-gray-700 hover:bg-lightGray hover:text-primary;
+            }
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+        }
+        .nav-item:hover .nav-dropdown {
+            display: block;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:hover {
+            color: #FFFFFF;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #C62828;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    
+<header class="bg-white text-primary border-b border-darkGray">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center space-x-3 hover:opacity-90 transition-opacity duration-300">
+                <div class="w-10 h-10 bg-primary text-white rounded flex items-center justify-center">
+                    <i class="fa fa-shield text-xl"></i>
+                    <i class="fa fa-heart text-xl absolute text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">中国慈善组织合规通</h1>
+            </a>
+            <div class="hidden md:flex items-center space-x-6">
+                <span class="text-neutral"><i class="fa fa-phone mr-1"></i> 400-888-9999</span>
+                <a href="/" class="text-primary hover:text-secondary transition-colors duration-300"><i class="fa fa-home mr-1"></i> 返回首页</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<nav class="bg-primary text-white border-b border-darkGray sticky top-0 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <div class="nav-item">
+                    <a href="/regulations/" class="nav-link px-5 py-2 text-white font-medium inline-block">法规政策</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_guide/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规指南</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/cases/" class="nav-link px-5 py-2 text-white font-medium inline-block">典型案例</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/consulting/" class="nav-link px-5 py-2 text-white font-medium inline-block">咨询服务</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/compliance_tool/" class="nav-link px-5 py-2 text-white font-medium inline-block">合规工具</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/experts/" class="nav-link px-5 py-2 text-white font-medium inline-block">专家库</a>
+                </div>
+                <div class="nav-item">
+                    <a href="/about/" class="nav-link px-5 py-2 text-white font-medium inline-block">关于我们</a>
+                </div>
+            </div>
+            
+            
+            <button id="menuBtn" class="md:hidden text-white text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+        
+        
+        <div id="mobileMenu" class="md:hidden hidden py-3 bg-white border-t border-darkGray">
+            <div class="flex flex-col space-y-2">
+                <a href="/regulations/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">法规政策</a>
+                <a href="/compliance_guide/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规指南</a>
+                <a href="/cases/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">典型案例</a>
+                <a href="/consulting/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">咨询服务</a>
+                <a href="/compliance_tool/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">合规工具</a>
+                <a href="/experts/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">专家库</a>
+                <a href="/about/" class="text-primary font-medium hover:text-red-700 transition-colors py-2 px-4">关于我们</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    
+    <main class="container mx-auto px-4 py-6">
+        
+<link rel="stylesheet" href="/css/styles.css">
+
+<main class="container mx-auto px-4 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 space-y-6">
+            
+            
+            <div class="relative bg-gradient-to-r from-primary to-red-800 text-white rounded-md p-6 overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-2xl font-bold mb-2">行业动态</h2>
+                    <p class="text-white text-opacity-90">及时了解慈善行业最新动态和发展趋势</p>
+                </div>
+                <div class="absolute top-0 right-0 opacity-10">
+                    <i class="fa fa-newspaper-o" style="font-size: 120px;"></i>
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-4">
+                    <h1 class="text-2xl font-bold text-neutral">五部门联合发布《关于促进慈善事业高质量发展的指导意见》</h1>
+                    <div class="flex flex-wrap gap-4 mt-3 text-sm text-gray-500">
+                        <span><i class="fa fa-calendar mr-1"></i> 发布日期：2025年01月10日</span>
+                        
+                        <span class="inline-flex items-center">
+                            <i class="fa fa-tag mr-1"></i>
+                            分类：
+                            
+                                
+                                
+                                    
+                                        
+                                    
+                                    
+                                        <span class="ml-1 px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-sm">政策动态</span>
+                                    
+                                
+                                    
+                                        、
+                                    
+                                    
+                                        <span class="ml-1 px-2 py-0.5 bg-green-100 text-green-800 rounded text-sm">行业新闻</span>
+                                    
+                                
+                            
+                        </span>
+                        <span><i class="fa fa-eye mr-1"></i> 浏览次数：2567</span>
+                    </div>
+                </div>
+                
+                
+                <div class="p-6 bg-lightGray">
+                    <h2 id="政策发布背景">政策发布背景</h2>
+<p>为深入贯彻落实党的二十大精神，推动慈善事业高质量发展，充分发挥慈善在第三次分配中的作用，近日，民政部、财政部、国家税务总局、中央网信办、银保监会等五部门联合发布了《关于促进慈善事业高质量发展的指导意见》（以下简称《指导意见》）。</p>
+<h2 id="主要政策内容">主要政策内容</h2>
+<p>《指导意见》共分为六个部分，提出了20项具体措施，主要包括：</p>
+<h3 id="1-优化慈善组织发展环境">1. 优化慈善组织发展环境</h3>
+<ul>
+<li>简化慈善组织登记程序，缩短审批时限</li>
+<li>完善慈善组织内部治理结构指引</li>
+<li>建立慈善组织分类监管机制</li>
+</ul>
+<h3 id="2-加大财税支持力度">2. 加大财税支持力度</h3>
+<ul>
+<li>完善慈善捐赠税收优惠政策</li>
+<li>扩大税前扣除范围，提高扣除比例</li>
+<li>对符合条件的慈善组织给予政府购买服务支持</li>
+</ul>
+<h3 id="3-推动慈善创新发展">3. 推动慈善创新发展</h3>
+<ul>
+<li>支持发展网络慈善、数字慈善等新型慈善形态</li>
+<li>鼓励慈善组织与科技、教育、医疗等领域深度融合</li>
+<li>推动慈善信托、慈善基金等多元化慈善形式发展</li>
+</ul>
+<h3 id="4-加强慈善人才队伍建设">4. 加强慈善人才队伍建设</h3>
+<ul>
+<li>建立慈善人才培养体系</li>
+<li>推动高校开设慈善相关专业和课程</li>
+<li>完善慈善从业人员职称评定制度</li>
+</ul>
+<h3 id="5-提升慈善透明度">5. 提升慈善透明度</h3>
+<ul>
+<li>完善慈善信息公开制度</li>
+<li>建立全国统一的慈善信息平台</li>
+<li>加强慈善信用体系建设</li>
+</ul>
+<h3 id="6-强化监督管理">6. 强化监督管理</h3>
+<ul>
+<li>建立多部门协同监管机制</li>
+<li>加大对慈善领域违法违规行为的查处力度</li>
+<li>鼓励社会力量参与监督</li>
+</ul>
+<h2 id="政策解读">政策解读</h2>
+<p>业内专家认为，《指导意见》的出台具有重要意义：</p>
+<ul>
+<li><strong>系统性</strong>：全面覆盖慈善事业发展的各个方面，形成了完整的政策支持体系</li>
+<li><strong>针对性</strong>：针对当前慈善事业发展中存在的突出问题，提出了具体解决方案</li>
+<li><strong>前瞻性</strong>：着眼于慈善事业未来发展趋势，为新型慈善形态提供了政策支持</li>
+</ul>
+<h2 id="行业反响">行业反响</h2>
+<p>《指导意见》发布后，在慈善行业引起强烈反响。多家慈善组织表示，这一政策的出台将为慈善事业发展创造更加良好的环境，有助于激发社会慈善活力，推动慈善事业高质量发展。</p>
+<p>我们将继续关注政策的具体落实情况，及时为会员单位提供政策解读和咨询服务。</p>
+
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex flex-wrap justify-between items-center">
+                    <div class="flex space-x-4 mb-4 md:mb-0">
+                        <a href="#" class="inline-flex items-center text-primary hover:text-red-700">
+                            <i class="fa fa-print mr-2"></i> 打印内容
+                        </a>
+                    </div>
+                    <div class="flex space-x-4">
+                        <span class="text-sm text-gray-500">分享到：</span>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weixin"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-weibo"></i></a>
+                        <a href="#" class="text-primary hover:text-red-700"><i class="fa fa-qq"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-semibold text-neutral">相关行业动态</h3>
+                    <a href="/industry_news/" class="text-primary hover:text-red-700 font-medium flex items-center">
+                        查看更多 <i class="fa fa-angle-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    
+                    
+                    
+                    <div class="bg-white border border-darkGray rounded-md p-4 hover:shadow-md transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">
+                            <a href="//localhost:11819/industry_news/2025-11-19-%E8%A5%BF%E5%AE%89%E5%B8%82%E6%B0%91%E6%94%BF%E5%B1%80%E7%BD%91%E7%AB%99%E5%8F%91%E5%B8%83%E8%A1%8C%E6%94%BF%E5%A4%84%E7%BD%9A%E5%85%AC%E5%91%8A/" class="hover:text-primary">西安市民政局网站发布行政处罚公告</a>
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">日前，西安市民政局网站发布《西安市民政局对西安市河北商会等11家社会团体作出撤销登记的行政处罚公告》，具体内容如下：
+</p>
+                        <div class="text-sm text-gray-500">
+                            <i class="fa fa-calendar mr-1"></i> 2025-11-19
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-darkGray rounded-md p-4 hover:shadow-md transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">
+                            <a href="//localhost:11819/industry_news/2025-11-19-%E5%9B%9B%E5%B7%9D%E7%9C%81%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%8F%90%E5%8D%87%E9%9D%9E%E6%B3%95%E7%A4%BE%E4%BC%9A%E7%BB%84%E7%BB%87%E6%9F%A5%E5%A4%84%E5%B7%A5%E4%BD%9C%E8%A7%84%E8%8C%83%E5%8C%96%E6%B0%B4%E5%B9%B3/" class="hover:text-primary">四川省进一步提升非法社会组织查处工作规范化水平</a>
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">日前，四川省民政厅正式印发《四川省查处非法社会组织工作指引》（以下简称《指引》）。此举旨在通过完善执法程序、明确监管职责、强化协同机制，常态化推动打击整治非法社会组织工作走深走实，为全省社会组织健康发展营造清朗环境。</p>
+                        <div class="text-sm text-gray-500">
+                            <i class="fa fa-calendar mr-1"></i> 2025-11-19
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-darkGray rounded-md p-4 hover:shadow-md transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">
+                            <a href="//localhost:11819/industry_news/2025-01-12-illegal-fundraising-penalty/" class="hover:text-primary">某基金会因募捐不合规被处罚</a>
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">近期，某知名基金会因未按规定进行募捐备案，违规开展公开募捐活动，被民政部门处以行政处罚。</p>
+                        <div class="text-sm text-gray-500">
+                            <i class="fa fa-calendar mr-1"></i> 2025-01-12
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white border border-darkGray rounded-md p-4 hover:shadow-md transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-neutral mb-2 line-clamp-2">
+                            <a href="//localhost:11819/industry_news/2025-01-10-high-quality-development/" class="hover:text-primary">五部门联合发布《关于促进慈善事业高质量发展的指导意见》</a>
+                        </h4>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-2">近日，民政部、财政部、国家税务总局等五部门联合发布《关于促进慈善事业高质量发展的指导意见》，提出多项支持措施。</p>
+                        <div class="text-sm text-gray-500">
+                            <i class="fa fa-calendar mr-1"></i> 2025-01-10
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="space-y-6">
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">最新动态</h3>
+                </div>
+                <div class="p-6">
+                    <ul class="space-y-4">
+                        
+                        <li>
+                            <a href="//localhost:11819/industry_news/2025-11-19-%E8%A5%BF%E5%AE%89%E5%B8%82%E6%B0%91%E6%94%BF%E5%B1%80%E7%BD%91%E7%AB%99%E5%8F%91%E5%B8%83%E8%A1%8C%E6%94%BF%E5%A4%84%E7%BD%9A%E5%85%AC%E5%91%8A/" class="text-neutral hover:text-primary line-clamp-1">西安市民政局网站发布行政处罚公告</a>
+                            <div class="text-sm text-gray-500 mt-1">2025-11-19</div>
+                        </li>
+                        
+                        <li>
+                            <a href="//localhost:11819/industry_news/2025-11-19-%E5%9B%9B%E5%B7%9D%E7%9C%81%E8%BF%9B%E4%B8%80%E6%AD%A5%E6%8F%90%E5%8D%87%E9%9D%9E%E6%B3%95%E7%A4%BE%E4%BC%9A%E7%BB%84%E7%BB%87%E6%9F%A5%E5%A4%84%E5%B7%A5%E4%BD%9C%E8%A7%84%E8%8C%83%E5%8C%96%E6%B0%B4%E5%B9%B3/" class="text-neutral hover:text-primary line-clamp-1">四川省进一步提升非法社会组织查处工作规范化水平</a>
+                            <div class="text-sm text-gray-500 mt-1">2025-11-19</div>
+                        </li>
+                        
+                        <li>
+                            <a href="//localhost:11819/industry_news/2025-01-12-illegal-fundraising-penalty/" class="text-neutral hover:text-primary line-clamp-1">某基金会因募捐不合规被处罚</a>
+                            <div class="text-sm text-gray-500 mt-1">2025-01-12</div>
+                        </li>
+                        
+                        <li>
+                            <a href="//localhost:11819/industry_news/2025-01-10-high-quality-development/" class="text-neutral hover:text-primary line-clamp-1">五部门联合发布《关于促进慈善事业高质量发展的指导意见》</a>
+                            <div class="text-sm text-gray-500 mt-1">2025-01-10</div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            
+            <div class="bg-white border border-darkGray rounded-md">
+                <div class="border-b border-darkGray px-6 py-3 bg-lightGray">
+                    <h3 class="text-lg font-semibold text-neutral">热门分类</h3>
+                </div>
+                <div class="p-6">
+                    <div class="flex flex-wrap gap-2">
+                        <a href="/industry_news/?category=政策动态" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200">政策动态</a>
+                        <a href="/industry_news/?category=行业新闻" class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200">行业新闻</a>
+                        <a href="/industry_news/?category=活动资讯" class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm hover:bg-yellow-200">活动资讯</a>
+                        <a href="/industry_news/?category=处罚公告" class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-sm hover:bg-red-200">处罚公告</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="bg-lightGray border border-darkGray rounded-md">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-neutral mb-4">咨询服务</h3>
+                    <div class="text-center mb-4">
+                        <i class="fa fa-phone text-3xl text-primary mb-2"></i>
+                        <div class="text-xl font-bold text-primary">400-888-9999</div>
+                        <div class="text-gray-600 text-sm mt-1">工作日 9:00-17:30</div>
+                    </div>
+                    <a href="/consulting/" class="block w-full bg-primary hover:bg-red-700 text-white py-3 rounded-md font-semibold transition-colors text-center">
+                        立即咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    </main>
+
+    
+    <footer class="bg-neutral text-white py-8">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">平台介绍</h4>
+                <p class="text-gray-300 text-sm">
+                    中国慈善组织合规通是专业的慈善组织合规服务平台，致力于为各类慈善组织提供政策解读、合规指导、风险管理等全方位服务，助力慈善事业健康发展。
+                </p>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/" class="text-gray-300 hover:text-white">首页</a></li>
+                    <li><a href="/regulations/" class="text-gray-300 hover:text-white">政策法规</a></li>
+                    <li><a href="/compliance_guide/" class="text-gray-300 hover:text-white">合规指南</a></li>
+                    <li><a href="/cases/" class="text-gray-300 hover:text-white">典型案例</a></li>
+                    <li><a href="/training/" class="text-gray-300 hover:text-white">培训课程</a></li>
+                    <li><a href="/download/" class="text-gray-300 hover:text-white">下载中心</a></li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-start">
+                        <i class="fa fa-map-marker mt-1 mr-2"></i>
+                        <span>北京市海淀区中关村南大街5号</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone mr-2"></i>
+                        <span>400-888-9999</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope mr-2"></i>
+                        <span>contact@hegui.org.cn</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+            <div>
+                <h4 class="text-lg font-semibold mb-4">备案信息</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li>ICP备案号：京ICP备12345678号</li>
+                    <li>公安备案号：京公网安备11010802020123号</li>
+                </ul>
+            </div>
+        </div>
+        
+        
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm text-gray-400">
+            <p>© 2025 中国慈善组织合规通 版权所有</p>
+        </div>
+    </div>
+</footer>
+
+    
+    <script src="/js/common.js"></script>
+</body>
+</html>
